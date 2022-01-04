@@ -5,7 +5,7 @@ services:
     image: postgres:13
     environment:
       - POSTGRES_DB=project_fintech
-      - POSTGRES_USER=g59
+      - POSTGRES_USER=ncg59
       - POSTGRES_PASSWORD=admin123
     ports:
       - 5432:5432

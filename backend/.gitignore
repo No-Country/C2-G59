@@ -194,4 +194,7 @@ $RECYCLE.BIN/
 
 postgres_data
 mysql_data
+
+.docker-compose.yml
 # End of https://www.toptal.com/developers/gitignore/api/node,windows,linux,macos
+
