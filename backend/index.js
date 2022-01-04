@@ -2,7 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
-const { options } = require('./config/configCors') //Setup of cors
+const { config } = require('./config/config')
+
 const routerApi = require('./routes')
 const {
   logErrors,
@@ -30,7 +31,7 @@ app.use(boomErrorHandler)
 app.use(errorHandler)
 
 // Setting
-const port = process.env.PORT || 3000
+const port = config.port || 3000
 app.set('port', port)
 
 // Init Server
