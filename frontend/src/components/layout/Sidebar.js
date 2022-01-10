@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const Sidebar = ({ ...rest }) => {
   return (
     <aside {...rest}>
-      <div className="d-flex flex-column flex-shrink-0 p-3" style={{ minHeight: '100%' }}>
+      <div className="d-flex flex-column flex-shrink-0 p-3" style={{ minHeight: '100%' }} >
         <a
           href="/"
           className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
