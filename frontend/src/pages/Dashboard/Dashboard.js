@@ -3,6 +3,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import PartOne from './PartOne'
 import PartTwo from './PartTwo'
 import PartThree from './PartThree'
+import Chart from 'chart.js/auto'
 
 function Dashboard() {
   return (
