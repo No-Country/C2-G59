@@ -1,3 +1,6 @@
+import { Dropdown, Nav } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+
 const Sidebar = ({ ...rest }) => {
   return (
     <aside {...rest}>
@@ -9,40 +12,42 @@ const Sidebar = ({ ...rest }) => {
           <span className="fs-4">Sidebar</span>
         </a>
         <hr />
-        <ul className="nav nav-pills flex-column mb-auto">
+
+        <Nav defaultActiveKey="/" variant="pills" className="flex-column mb-auto">
+          {/* <Link to="/">
+            <Nav.Link href="/home">Active</Nav.Link>
+          </Link> */}
           <li className="nav-item">
-            <a href="#s" className="nav-link active" aria-current="page">
+            <NavLink to="/" className="nav-link link-dark">
               {/* icon */}
               Dashboard
-            </a>
+            </NavLink>
           </li>
-          <li>
-            <a href="#s" className="nav-link link-dark">
+          <li className="nav-item">
+            <NavLink to="/transactions" className="nav-link link-dark">
               {/* icon */}
-              Orders
-            </a>
+              Transactions
+            </NavLink>
           </li>
-          <li>
-            <a href="#s" className="nav-link link-dark">
+          <li className="nav-item">
+            <NavLink to="/products" className="nav-link link-dark">
               {/* icon */}
               Products
-            </a>
+            </NavLink>
           </li>
-          <li>
-            <a href="#s" className="nav-link link-dark">
+          <li className="nav-item">
+            <NavLink to="/customers" className="nav-link link-dark">
               {/* icon */}
               Customers
-            </a>
+            </NavLink>
           </li>
-        </ul>
+        </Nav>
         <hr />
-        <div className="dropdown">
-          <a
-            href="#s"
-            className="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-            id="dropdownUser2"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
+        <Dropdown>
+          <Dropdown.Toggle
+            variant="warning"
+            id="dropdown-basic2"
+            className="d-flex align-items-center link-dark text-decoration-none w-100"
           >
             <img
               src="https://github.com/mdo.png"
@@ -51,34 +56,16 @@ const Sidebar = ({ ...rest }) => {
               height="32"
               className="rounded-circle me-2"
             />
-            <strong>mdo</strong>
-          </a>
-          <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-            <li>
-              <a className="dropdown-item" href="#s">
-                New project...
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#s">
-                Settings
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#s">
-                Profile
-              </a>
-            </li>
-            <li>
-              <hr className="dropdown-divider" />
-            </li>
-            <li>
-              <a className="dropdown-item" href="#s">
-                Sign out
-              </a>
-            </li>
-          </ul>
-        </div>
+            <strong>Usuario</strong>
+          </Dropdown.Toggle>
+          <Dropdown.Menu className="text-small shadow">
+            <Dropdown.Item href="#/action-1">New product...</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Profile</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </div>
     </aside>
   );
