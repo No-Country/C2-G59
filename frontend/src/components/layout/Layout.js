@@ -12,7 +12,7 @@ const Layout = () => {
       <div className="p-0 d-flex flex-column wrapper">
         {/* <!-- Header --> */}
         <Header />
-        <div className="px-md-4 content">
+        <div className="px-4 mt-4 content">
           {/* <!-- Content Page --> */}
           <Outlet />
         </div>
