@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // pages
-import { Home, NotFound } from './pages';
+import { Dashboard, Transactions, Products, Customers, NotFound } from './pages';
 // components
 import Layout from './components/layout/Layout';
 
@@ -9,11 +9,13 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" index element={<Home />} />
-          {/* <Route path="/panel" index element={<Dashboard />} /> */}
-          {/* <Route path="/user/:id" index element={<UserDetails />} /> */}
-          {/* <Route path="/transactions" index element={<Transactions />} /> */}
+          <Route path="/" index element={<Dashboard />} />
+          {/* <Route path="/user/:id" element={<UserDetails />} /> */}
+          <Route path="/transactions" element={<Transactions />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/customers" element={<Customers />} />
         </Route>
+        {/* <Route path="/login" element={<Login />} /> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
