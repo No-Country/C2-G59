@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // pages
-import { Dashboard, Transactions, Products, Customers, NotFound } from './pages';
+import { Dashboard, Transactions, Products, Customers, Login, NotFound } from './pages';
 // components
 import Layout from './components/layout/Layout';
 
@@ -15,7 +15,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/customers" element={<Customers />} />
         </Route>
-        {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
