@@ -3,80 +3,103 @@ const { request, response } = require('express');
 const bcrypt = require('bcryptjs');
 
 // Mis imports
-// const User = require('../models/user');
+const { User } = require('../db/models/user.model');
 
 // GET
-const usersGet = async(req = request, res = response) => {
+const getUsers = async (req = request, res = response) => {
+ 
+	const users = await User.findAll({ where: { status: 1 } })
+  res.status(200).json({ users })
 
-    // const { limit = 5, from = 0 } = req.query;
-    // const query = { status: true };
+};
 
-    // const [ totalResults, users ] = await Promise.all([
-    //     User.countDocuments( query ),
-    //     User.find( query ) // Para regresar todos los users
-    //         .skip(Number( from )) // Desde que numero lo regresa
-    //         .limit(Number( limit )) // Cantidad de resultados
-    // ]);
-    
-    // res.status(200).json({ 
-    //     totalResults,
-    //     users
-    // });
+// GET
+const getUserById = async (req = request, res = response) => {
+	
+	const { id } = req.params
+
+	const user = await User.findOne({ where: { id } })
+  res.status(200).json({ user })
+
 };
 
 // POST
-const usersPost = async (req = request, res = response) => {
+const createUser = async (req = request, res = response) => {
+  const { name, email, password, role, branch_id } = req.body;
 
-    const { name, email, password, role } = req.body;
-    // const user = new User( { name, email, role } );
+  // Encriptar password
+  const salt = bcrypt.genSaltSync();
+  bcryptPassword = bcrypt.hashSync(password, salt);
 
-    // // Encriptar password
-    // const salt = bcrypt.genSaltSync();
-    // user.password = bcrypt.hashSync(password, salt);
+  try {
+    
+    // Define and save in DB
+    const user = await User.create({
+      name,
+      email,
+      role,
+      branch_id,
+      password: bcryptPassword,
+    });
 
-    // // Guardar en DB
-    // await user.save();
+    res.status(200).json({ user });
 
-    // res.status(200).json({ user });
+  } catch (error) {
+    res.status(500).json({
+      msg: 'Talk with the admin',
+      error: error.errors[0].message,
+    });
+  }
 };
 
 // PUT
-const usersPut = async(req = request, res = response) => {
+const updateUser = async (req = request, res = response) => {
+  const { id } = req.params;
+  const { id:_id, email, password, ...restUser } = req.body;
+  
+  if ( password ) {
+      // Encriptar password
+      const salt = bcrypt.genSaltSync();
+      restUser.password = bcrypt.hashSync(password, salt);
+  }
 
-    // const { id } = req.params;
-    // const { _id, password, google, email, ...restUser } = req.body;
+  // Esto regresa el user antes de cambiar los valores
+  await User.update(restUser, { where: { id } }).catch((error) => {
+		res.status(400).json({
+			msg: 'Talk with the admin',
+			error
+		});
+	});
+  
+	res.status(200).json({
+		msg: 'User updated successfully'
+	});
 
-    // // TODO: validar contra DB
-
-    // if ( password ) {
-    //     // Encriptar password
-    //     const salt = bcrypt.genSaltSync();
-    //     restUser.password = bcrypt.hashSync(password, salt);
-    // }
-
-    // // Esto regresa el user antes de cambiar los valores
-    // const user = await User.findByIdAndUpdate(id, restUser);
-
-    // res.status(200).json({ user });
 };
 
 // DELETE
-const usersDelete = async(req = request, res = response) => {
-    
-    const { id } = req.params;
-
-    // Borrar fisicamente
-    // const user = await User.findByIdAndDelete( id );
-
-    // Cambiar el status para que no aparezca activo
-    // const user = await User.findByIdAndUpdate(id, { status: false });
-
-    // res.status(200).json({ user });
+const deleteUser = async (req = request, res = response) => {
+  
+	const { id } = req.params;
+	const statusDelete = { status: 0 };
+  
+  // Esto regresa el user antes de cambiar los valores
+  await User.update(statusDelete, { where: { id } }).catch((error) => {
+		res.status(400).json({
+			msg: 'Talk with the admin',
+			error
+		});
+	});
+  
+	res.status(200).json({
+		msg: 'User deleted successfully'
+	});
 };
 
 module.exports = {
-    usersGet,
-    usersPost,
-    usersPut,
-    usersDelete,
+  getUsers,
+  getUserById,
+  createUser,
+	updateUser,
+	deleteUser,
 };
