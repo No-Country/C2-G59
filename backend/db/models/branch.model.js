@@ -13,11 +13,10 @@ const BranchSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
-//   manager_id: {
-//     allowNull: false,
-//     type: DataTypes.STRING,
-//     unique: true
-//   }
+  manager_id: {
+    type: DataTypes.STRING,
+    unique: true,
+  }
 }
 
 class Branch extends Model {
