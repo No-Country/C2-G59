@@ -1,10 +1,10 @@
 import { Dropdown, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
-const Sidebar = ({ ...rest }) => {
+const Sidebar = () => {
   return (
-    <aside {...rest}>
-      <div className="d-flex flex-column flex-shrink-0 p-3" style={{ minHeight: '100%' }} >
+    <aside className="sidebar">
+      <div className="d-flex flex-column flex-shrink-0 p-3" style={{ minHeight: '100%' }}>
         <a
           href="/"
           className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"

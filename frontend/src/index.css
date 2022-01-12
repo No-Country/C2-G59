@@ -33,3 +33,19 @@ code {
   z-index: 100;
   padding: 80px 0 0;
 }
+
+@media (max-width: 992px) {
+  .sidebar {
+    display: none;
+  }
+  .wrapper {
+    margin-left: 0;
+  }
+}
+
+.sidebar-on .sidebar {
+  display: block;
+}
+.sidebar-on .wrapper {
+  margin-left: 260px;
+}
