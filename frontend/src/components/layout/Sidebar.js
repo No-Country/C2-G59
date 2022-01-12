@@ -45,9 +45,9 @@ const Sidebar = ({ ...rest }) => {
         <hr />
         <Dropdown>
           <Dropdown.Toggle
-            variant="warning"
+            variant="primary"
             id="dropdown-basic2"
-            className="d-flex align-items-center link-dark text-decoration-none w-100"
+            className="d-flex align-items-center text-white link-dark text-decoration-none w-100"
           >
             <img
               src="https://github.com/mdo.png"
