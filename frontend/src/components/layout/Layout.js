@@ -1,4 +1,6 @@
 import { Outlet } from 'react-router-dom';
+
+import Header from './Header';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 
@@ -9,7 +11,7 @@ const Layout = () => {
       <Sidebar className="sidebar" />
       <div className="p-0 d-flex flex-column wrapper">
         {/* <!-- Header --> */}
-        {/* <NavBar /> */}
+        <Header />
         <div className="px-4 mt-4 content">
           {/* <!-- Content Page --> */}
           <Outlet />

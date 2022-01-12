@@ -4,9 +4,9 @@ import {
   Container,
   Nav,
   NavDropdown,
-  FormControl,
-  Figure,
-  Dropdown,
+  // FormControl,
+  // Figure,
+  // Dropdown,
 } from 'react-bootstrap';
 
 export default function NavBar() {

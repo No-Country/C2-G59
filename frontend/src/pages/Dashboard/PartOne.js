@@ -105,7 +105,7 @@ function PartOne() {
         <div className="col">
           <div className="card">
             <div className="card-body">
-              <h4 className="card-title">Line Chart</h4>
+              <h4 className="card-title">Bar Chart</h4>
               <Bar data={{
                 labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
                 datasets: [
