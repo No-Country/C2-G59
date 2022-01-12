@@ -1,5 +1,5 @@
-const { Model, DataTypes, Sequelize } = require('sequelize')
-const {Product} = require('./product.model')
+const { Model, DataTypes } = require('sequelize')
+const { Branch } = require('./branch.model')
 const RETAIL_SALES_TABLE = 'retail_sales'
 
 const RetailSaleSchema = {
@@ -21,10 +21,10 @@ const RetailSaleSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  product_id: {
+  branch_id: {
     type: DataTypes.INTEGER,
     references: {
-      model: Product,
+      model: Branch,
       key: 'id'
     },
   }

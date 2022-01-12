@@ -1,5 +1,7 @@
-const { Model, DataTypes, Sequelize } = require('sequelize')
-const {Product} = require('./product.model')
+const { Model, DataTypes } = require('sequelize')
+const { Product } = require('./product.model')
+const { RetailSale } = require('./sales.model')
+
 const SALE_TRX_TABLE = 'sale_trx'
 
 const SaleTransactionSchema = {
@@ -9,13 +11,20 @@ const SaleTransactionSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  cost: {
+  price: {
     allowNull: false,
-    type: DataTypes.NUMBER,
+    type: DataTypes.DECIMAL(13, 2),
   },
   count: {
     allowNull: false,
     type: DataTypes.INTEGER,
+  },
+  retail_sale_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: RetailSale,
+      key: 'id'
+    },
   },
   product_id: {
     type: DataTypes.INTEGER,

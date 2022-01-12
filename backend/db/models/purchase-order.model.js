@@ -1,5 +1,6 @@
-const { Model, DataTypes, Sequelize } = require('sequelize')
-const {Product} = require('./product.model')
+const { Model, DataTypes } = require('sequelize')
+const { Branch } = require('./branch.model')
+const { BranchSupplier } = require('./branch-supplier.model')
 
 const PURCHASE_ORDERS_TABLE = 'purchase_orders'
 
@@ -22,10 +23,17 @@ const PurchaseOrderSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  product_id: {
+  branch_id: {
     type: DataTypes.INTEGER,
     references: {
-      model: Product,
+      model: Branch,
+      key: 'id'
+    },
+  },
+  supplier_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: BranchSupplier,
       key: 'id'
     },
   }

@@ -1,5 +1,7 @@
-const { Model, DataTypes, Sequelize } = require('sequelize')
-const {Product} = require('./product.model')
+const { Model, DataTypes } = require('sequelize')
+const { Product } = require('./product.model')
+const { PurchaseOrder } = require('./purchase-order.model')
+
 const PURCHASE_TRX_TABLE = 'purchase_trx'
 
 const PurchaseTransactionSchema = {
@@ -11,7 +13,7 @@ const PurchaseTransactionSchema = {
   },
   cost: {
     allowNull: false,
-    type: DataTypes.NUMBER,
+    type: DataTypes.DECIMAL(13, 2),
   },
   count: {
     allowNull: false,
@@ -23,18 +25,16 @@ const PurchaseTransactionSchema = {
       model: Product,
       key: 'id'
     },
+  },
+  purchase_order_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: PurchaseOrder,
+      key: 'id'
+    },
   }
 }
 
-//purchase-order   poduct id
-
-// product_id: {
-//   type: DataTypes.INTEGER,
-//   references: {
-//     model: Product,
-//     key: 'id'
-//   },
-// }
 class PurchaseTransaction extends Model {
   static associate (models) {}
 

@@ -16,15 +16,15 @@ const sequelize = new Sequelize(database, dbUser, dbPassword ,{
 
 try {
   setupModels(sequelize)
-
 } catch(error) {
-  console.error('Error in setupModels,', error)
+  console.error('Error in setupModels')
 }
 
 //Synchronization, create table with schema , it is not the better form. We must make migrations
 // sequelize.sync({ force: true })
 // sequelize.sync({ alter: true })
 sequelize.sync()
+.catch( (error) => console.log(error))
 
 const dbConnection = async() => {
   try {
