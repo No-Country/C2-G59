@@ -1,4 +1,7 @@
 import React from 'react'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Tooltip from 'react-bootstrap/Tooltip'
+import { Button, Image } from 'react-bootstrap';
 import { Doughnut } from 'react-chartjs-2'
 
 const PartThree = () => {
@@ -31,18 +34,36 @@ const PartThree = () => {
   return (
     <div>
       <div className="row m-3">
-        <div className="col-5">
-          <div className="card">
+        <div className="col-4">
+          <div className="card shadow mb-2">
             <div className="card-body">
-              <h4 className="card-title">Pie Chart</h4>
-              <Doughnut data={data}
-                height={150} width={150}
-              />
+              <h4 className="card-title">Pie Chart
+                <OverlayTrigger
+                  placement="bottom"
+                  overlay={<Tooltip id="button-tooltip-2">Productos mas vendidos en los ultimos 6 meses en nuestras sedes.</Tooltip>}
+                >
+                  {({ ref, ...triggerHandler }) => (
+                    <Button
+                      variant="white"
+                      {...triggerHandler}
+                      className="d-inline-flex align-items-center"
+                    >
+                      <Image
+                        ref={ref}
+                        roundedCircle
+                        src="https://img.icons8.com/fluency/48/000000/info.png"
+                        height={20} width={20}
+                      />
+                    </Button>
+                  )}
+                </OverlayTrigger>
+              </h4>
+              <Doughnut data={data} height={150} width={150} />
             </div>
           </div>
         </div>
-        <div className="col-7">
-          <div className="card">
+        <div className="col-8">
+          <div className="card shadow mb-2">
             <div className="card-body">
               <h4 className="card-title">Notification</h4>
             </div>
