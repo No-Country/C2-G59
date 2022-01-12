@@ -3,10 +3,7 @@ import {
   Navbar,
   Container,
   Nav,
-  NavDropdown,
-  // FormControl,
-  // Figure,
-  // Dropdown,
+  NavDropdown
 } from 'react-bootstrap';
 
 export default function NavBar() {
@@ -15,12 +12,6 @@ export default function NavBar() {
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container >
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          {/* <FormControl
-            type="search"
-            placeholder="Search"
-            className="me-3 w-50"
-            aria-label="Search"
-          /> */}
           <form className="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
             <input type="text" className="form-control" placeholder="Search" />
           </form>
@@ -52,33 +43,19 @@ export default function NavBar() {
               <NavDropdown.Item href="#action/3.3">Launch admin </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-
-          {/* <Navbar.Collapse id="responsive-navbar-nav"></Navbar.Collapse> */}
-
-          {/* <Figure className="navBar-profile">
-            <Figure.Image width={171} height={180} alt="171x180" src="holder.js/171x180" />
-            <Figure.Caption>Nulla vitae elit libero</Figure.Caption>
-          </Figure> */}
-
-              <div className="navbar-profile d-flex">
-                <img
-                  className="img-xs rounded-circle"
-                  src='https://github.com/mdo.png'
-                  alt="profile"
-                  width="40"
-                  height="40"
-                />
-                 <NavDropdown title="Usuario" id="collasible-nav-dropdown navbar-profile-name">
-                 <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
+          <div className="navbar-profile d-flex">
+            <img
+              className="img-xs rounded-circle"
+              src='https://github.com/mdo.png'
+              alt="profile"
+              width="40"
+              height="40"
+            />
+            <NavDropdown title="Usuario" id="collasible-nav-dropdown navbar-profile-name">
+              <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Log out</NavDropdown.Item>
-                 </NavDropdown>
-                {/* <p className="mb-0 d-none d-sm-block navbar-profile-name justify-content-center">
-                  <h6>Samantha Smith</h6>
-                </p> */}
-                {/* <i className="mdi mdi-menu-down d-none d-sm-block"></i> */}
-          
-              </div>
-          
+            </NavDropdown>
+          </div>
         </Container>
       </Navbar>
     </div>
