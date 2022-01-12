@@ -17,12 +17,19 @@ const SaleTransactionSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
   },
+  product_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Product,
+      key: 'id'
+    },
+  }
 }
 
 class SaleTransaction extends Model {
-  static associate (models) {}
+  static associate(models) { }
 
-  static config (sequelize) {
+  static config(sequelize) {
     return {
       sequelize,
       tableName: SALE_TRX_TABLE,

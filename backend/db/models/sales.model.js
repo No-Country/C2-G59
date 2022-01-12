@@ -21,12 +21,19 @@ const RetailSaleSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
+  product_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Product,
+      key: 'id'
+    },
+  }
 }
 
 class RetailSale extends Model {
-  static associate (models) {}
+  static associate(models) { }
 
-  static config (sequelize) {
+  static config(sequelize) {
     return {
       sequelize,
       tableName: RETAIL_SALES_TABLE,

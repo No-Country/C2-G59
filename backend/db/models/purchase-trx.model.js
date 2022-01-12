@@ -17,8 +17,24 @@ const PurchaseTransactionSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
   },
+  product_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Product,
+      key: 'id'
+    },
+  }
 }
 
+//purchase-order   poduct id
+
+// product_id: {
+//   type: DataTypes.INTEGER,
+//   references: {
+//     model: Product,
+//     key: 'id'
+//   },
+// }
 class PurchaseTransaction extends Model {
   static associate (models) {}
 
