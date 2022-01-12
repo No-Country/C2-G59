@@ -19,25 +19,25 @@ const Sidebar = () => {
           </Link> */}
           <li className="nav-item">
             <NavLink to="/" className="nav-link link-dark">
-              {/* icon */}
+            <i class="bi bi-kanban m-3"></i>
               Dashboard
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink to="/transactions" className="nav-link link-dark">
-              {/* icon */}
+              <i className="bi bi-cash-stack m-3"></i>
               Transactions
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink to="/products" className="nav-link link-dark">
-              {/* icon */}
+              <i class="bi bi-bag-check-fill m-3"></i>
               Products
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink to="/customers" className="nav-link link-dark">
-              {/* icon */}
+            <i class="bi bi-activity m-3"></i>
               Customers
             </NavLink>
           </li>
