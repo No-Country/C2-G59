@@ -1,5 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize')
-
+const {Product} = require('./product.model')
 const RETAIL_SALES_TABLE = 'retail_sales'
 
 const RetailSaleSchema = {

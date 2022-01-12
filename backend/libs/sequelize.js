@@ -2,15 +2,6 @@ const { Sequelize } = require('sequelize')
 const { config } = require('../config/config')
 const setupModels = require('../db/models')
 
-// const USER = encodeURIComponent(config.dbUser)
-// const PASSWORD = encodeURIComponent(config.dbPassword)
-// const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
-
-// const sequelize = new Sequelize(URI, {
-//   dialect: 'postgres',
-//   logging: true
-// })
-
 const database = config.dbName
 const dbUser = config.dbUser
 const dbPassword = config.dbPassword
@@ -22,10 +13,18 @@ const sequelize = new Sequelize(database, dbUser, dbPassword ,{
 })
 
 //Setup and Init Models
-setupModels(sequelize)
+
+try {
+  setupModels(sequelize)
+
+} catch(error) {
+  console.error('Error in setupModels,', error)
+}
 
 //Synchronization, create table with schema , it is not the better form. We must make migrations
-sequelize.sync({ alter: true })
+// sequelize.sync({ force: true })
+// sequelize.sync({ alter: true })
+sequelize.sync()
 
 const dbConnection = async() => {
   try {
@@ -36,5 +35,4 @@ const dbConnection = async() => {
   }
 }
 
-// module.exports = sequelize
 module.exports = dbConnection
