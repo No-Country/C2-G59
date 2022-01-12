@@ -54,7 +54,7 @@ export default function NavBar() {
               width="40"
               height="40"
             />
-            <NavDropdown title="Usuario" id="collasible-nav-dropdown navbar-profile-name">
+            <NavDropdown title="Usuario" id="collasible-nav-dropdown navbar-profile-name" className='text-white'>
               <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Log out</NavDropdown.Item>
             </NavDropdown>
