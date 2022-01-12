@@ -1,13 +1,13 @@
 import { Table } from 'react-bootstrap';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-import {dataProjects} from './data'
+import {dataProjects} from '../../services/data'
 
 const Products = () => {
   const data = dataProjects.map((item) => {
     return (
       <>
         <tbody>
-          <tr>
+          <tr className='table-light'>
             <td>{item.id}</td>
             <td>{item.product}</td>
             <td>{item.description}</td>
@@ -30,7 +30,7 @@ const Products = () => {
       </p>
       <div className="d-flex justify-content-end">
         <ReactHTMLTableToExcel
-          className="btn btn-warning mb-3 "
+          className="btn btn-primary mb-3 "
           table="data table"
           filename="Product - Table"
           sheet="tablexls"
@@ -39,7 +39,7 @@ const Products = () => {
       </div>
       <Table striped bordered hover id="data table">
       <thead>
-          <tr>
+          <tr className='table-primary'>
             <th>#</th>
             <th>Product</th>
             <th>Description</th>
