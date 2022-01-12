@@ -1,4 +1,5 @@
 import { Table } from 'react-bootstrap';
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 const Products = () => {
   return (
@@ -9,7 +10,7 @@ const Products = () => {
         dolor non, saepe tempora soluta eveniet distinctio ut doloribus perferendis asperiores porro
         odio cumque blanditiis ad, aut deleniti.
       </p>
-      <Table striped bordered hover>
+      <Table striped bordered hover id="data table">
         <thead>
           <tr>
             <th>#</th>
@@ -43,6 +44,15 @@ const Products = () => {
           </tr>
         </tbody>
       </Table>
+
+      <ReactHTMLTableToExcel
+        className="btn btn-info"
+        table="data table"
+        filename="Product - Table"
+        sheet="tablexls"
+        buttonText="Export to Excel"
+      />
+
     </div>
   );
 };
