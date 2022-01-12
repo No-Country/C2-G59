@@ -1,0 +1,30 @@
+const { Role } = require('../db/models/role.model');
+const { User } = require('../db/models/user.model');
+
+// Validate if exist a User with this email
+const emailExist = async (email = '') => {
+  const emailExist = await User.findOne({ where: { email } });
+  if (emailExist) {
+    throw new Error(`The email '${email}' already exist`);
+  }
+};
+
+const isRoleValid = async (role = 'USER_ROLE') => {
+  const roleExist = await Role.findOne({ where: { role } });
+  if (!roleExist) {
+    throw new Error(`The role '${role}' doesn't exist`);
+  }
+};
+
+const userExistById = async (id = '') => {
+  const userExist = await User.findOne({ where: { id } });
+	if (!userExist) {
+    throw new Error(`The user with id '${id}' doesn't exist`);
+  }
+};
+
+module.exports = {
+  emailExist,
+  isRoleValid,
+	userExistById,
+};

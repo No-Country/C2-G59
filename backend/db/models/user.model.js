@@ -1,4 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize')
+const { Branch } = require('./branch.model')
+const { Role } = require('./role.model')
 
 const USER_TABLE = 'users'
 
@@ -25,22 +27,25 @@ const UserSchema = {
   role: {
     allowNull: false,
     type: DataTypes.STRING,
-    // defaultValue: 'customer'
+    references: {
+      model: Role,
+      key: 'role'
+    },
+    defaultValue: 'USER_ROLE'
   },
-  state: {
+  status: {
     allowNull: false,
-    type: DataTypes.BOOLEAN
+    type: DataTypes.TINYINT,
+    defaultValue: 1
   },
-  // branch_id: {
-  //   allowNull: true,
-  //   type: DataTypes.INTEGER,
-  // }
-  // createdAt: {
-  //   allowNull: false,
-  //   type: DataTypes.DATE,
-  //   field: 'created_at',
-  //   defaultValue: Sequelize.NOW
-  // }
+  branch_id: {
+    allowNull: true,
+    type: DataTypes.INTEGER,
+    references: {
+      model: Branch,
+      key: 'id'
+    },
+  }
 }
 
 class User extends Model {
