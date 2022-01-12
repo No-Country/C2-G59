@@ -1,27 +1,27 @@
 const { User, UserSchema } = require('./user.model')
 const { Branch, BranchSchema } = require('./branch.model')
 const { CategoryTree, CategoryTreeSchema} = require('./category-tree.model')
-const { Category, CategorySchema } = require('./categoy.model')
+const { Category, CategorySchema } = require('./category.model')
 const { BranchSupplier, BranchSupplierSchema } = require('./branch-supplier.model')
 const { Product, ProductSchema } = require('./product.model')
 const { PurchaseOrder, PurchaseOrderSchema } = require('./purchase-order.model')
 const { PurchaseTransaction, PurchaseTransactionSchema } = require('./purchase-trx.model')
-const { SaleTransaction, SaleTransactionSchema } = require('./sale-trx.model')
+const { SaleTransaction, SaleTransactionSchema } = require('./sales-trx.model')
 const { RetailSale, RetailSaleSchema } = require('./sales.model')
 
 
 function setupModels(sequelize) {
 
-  // Users table
+  //Users table
   // User.init(UserSchema, User.config(sequelize))
   // User.associate(sequelize.models)
 
-  // Branches table
+  //Branches table
   // Branch.init(BranchSchema, Branch.config(sequelize))
   // Branch.associate(sequelize.models)
 
   // TODO: Inicializar los modelos
-  CategoryTree.init(CategoryTreeSchema, CategoyTree.config(sequelize))
+  CategoryTree.init(CategoryTreeSchema,CategoryTree.config(sequelize))
   CategoryTree.associate(sequelize.models)
 
   Category.init(CategorySchema, Category.config(sequelize))
