@@ -12,27 +12,17 @@ const sequelize = new Sequelize(database, dbUser, dbPassword ,{
   port: config.dbPort
 })
 
-//Setup and Init Models
-
-try {
-  setupModels(sequelize)
-} catch(error) {
-  console.error('Error in setupModels')
-}
-
-//Synchronization, create table with schema , it is not the better form. We must make migrations
-// sequelize.sync({ force: true })
-// sequelize.sync({ alter: true })
-sequelize.sync()
-.catch( (error) => console.log(error))
-
 const dbConnection = async() => {
+  //Setup and Init Models
   try {
-    await sequelize.authenticate()
-    console.log('Connection has been established successfully.')
-  } catch (error) {
-    console.error('Unable to connect to the database:', error)
+    setupModels(sequelize)
+  } catch(error) {
+    console.error('Error in setupModels')
   }
+
+  //Synchronization, create table with schema , it is not the better form. We must make migrations
+  sequelize.sync().catch( (error) => console.log(error))
+
 }
 
 module.exports = dbConnection

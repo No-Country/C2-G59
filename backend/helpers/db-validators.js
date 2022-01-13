@@ -1,3 +1,4 @@
+const { Branch } = require('../db/models/branch.model');
 const { Role } = require('../db/models/role.model');
 const { User } = require('../db/models/user.model');
 
@@ -23,8 +24,16 @@ const userExistById = async (id = '') => {
   }
 };
 
+const branchExistById = async (id = '') => {
+  const branchExist = await Branch.findOne({ where: { id } });
+	if (!branchExist) {
+    throw new Error(`The branch with id '${id}' doesn't exist`);
+  }
+};
+
 module.exports = {
   emailExist,
   isRoleValid,
 	userExistById,
+  branchExistById,
 };
