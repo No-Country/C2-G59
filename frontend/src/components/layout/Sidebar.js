@@ -5,14 +5,13 @@ const Sidebar = () => {
   return (
     <aside className="sidebar">
       <div className="d-flex flex-column flex-shrink-0 p-3" style={{ minHeight: '100%' }}>
-        <a
+        {/* <a
           href="/"
           className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
         >
           <span className="fs-4">Sidebar</span>
         </a>
-        <hr />
-
+        <hr /> */}
         <Nav defaultActiveKey="/" variant="pills" className="flex-column mb-auto">
           {/* <Link to="/">
             <Nav.Link href="/home">Active</Nav.Link>
@@ -24,25 +23,38 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/transactions" className="nav-link link-dark">
-              <i className="bi bi-cash-stack m-3"></i>
-              Transactions
-            </NavLink>
-          </li>
-          <li className="nav-item">
             <NavLink to="/products" className="nav-link link-dark">
               <i class="bi bi-bag-check-fill m-3"></i>
               Products
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/customers" className="nav-link link-dark">
-            <i class="bi bi-activity m-3"></i>
-              Customers
+            <NavLink to="/transactions" className="nav-link link-dark">
+              <i className="bi bi-cash-stack m-3"></i>
+              Transactions
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/suppliers" className="nav-link link-dark disabled">
+              <i class="bi bi-bag-check-fill m-3"></i>
+              Suppliers
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/sales" className="nav-link link-dark disabled">
+              <i class="bi bi-bag-check-fill m-3"></i>
+              Sales
+            </NavLink>
+          </li>
+          <hr />
+          <li className="nav-item">
+            <NavLink to="/new-user" className="nav-link link-dark">
+              <i class="bi bi-activity m-3"></i>
+              New User
             </NavLink>
           </li>
         </Nav>
-        <hr />
+        {/* <hr />
         <Dropdown>
           <Dropdown.Toggle
             variant="primary"
@@ -65,7 +77,7 @@ const Sidebar = () => {
             <Dropdown.Divider />
             <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
           </Dropdown.Menu>
-        </Dropdown>
+        </Dropdown> */}
       </div>
     </aside>
   );
