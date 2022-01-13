@@ -9,7 +9,7 @@ const PartThree = () => {
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [
       {
-        label: '# of Votes',
+        label: '# of sales',
         data: [12, 19, 3, 5, 2, 3],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -37,7 +37,7 @@ const PartThree = () => {
         <div className="col-4">
           <div className="card shadow mb-2">
             <div className="card-body">
-              <h4 className="card-title">Pie Chart
+              <h4 className="card-title">Top Products
                 <OverlayTrigger
                   placement="bottom"
                   overlay={<Tooltip id="button-tooltip-2">Productos mas vendidos en los ultimos 6 meses en nuestras sedes.</Tooltip>}
