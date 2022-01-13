@@ -49,7 +49,7 @@ const Sidebar = () => {
           <hr />
           <li className="nav-item">
             <NavLink to="/new-user" className="nav-link link-dark">
-              <i class="bi bi-activity m-3"></i>
+              <i class="bi bi-person-circle m-3"></i>
               New User
             </NavLink>
           </li>
