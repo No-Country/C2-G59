@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Navbar,
-  Container,
-  Nav,
-  NavDropdown
-} from 'react-bootstrap';
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 
 export default function NavBar({handleSidebar}) {
   return (
@@ -13,7 +8,6 @@ export default function NavBar({handleSidebar}) {
         <Container fluid>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick = {handleSidebar} />
           <div className='d-flex justify-content-end'><h1 className='text-white'>FINTECH</h1></div>
-
           <form className="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
             <input type="text" className="form-control" placeholder="Search" />
           </form>
@@ -48,7 +42,7 @@ export default function NavBar({handleSidebar}) {
           <div className="navbar-profile d-flex">
             <img
               className="img-xs rounded-circle"
-              src='https://github.com/mdo.png'
+              src="https://github.com/mdo.png"
               alt="profile"
               width="40"
               height="40"

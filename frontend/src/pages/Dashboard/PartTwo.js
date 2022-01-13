@@ -10,7 +10,7 @@ const PartTwo = () => {
     labels: ['Rubber', 'Volumizer' , 'Jogger', 'Tasty ', 'Humidifier ', 'Eyelashes'],
     datasets: [
       {
-        label: '# de Productos',
+        label: '# of products',
         data: [ 54, 43, 32, 29, 11, 8],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -55,7 +55,7 @@ const PartTwo = () => {
         <div className="col-md-4">
           <div className="card shadow mb-2">
             <div className="card-body">
-              <h4 className="card-title">Productos Top
+              <h4 className="card-title">Top Products
                 <OverlayTrigger
                   placement="bottom"
                   overlay={<Tooltip id="button-tooltip-2">Productos mas vendidos en los ultimos 6 meses en nuestras sedes.</Tooltip>}
