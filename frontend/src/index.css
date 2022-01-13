@@ -49,3 +49,9 @@ code {
 .sidebar-on .wrapper {
   margin-left: 260px;
 }
+
+/** Header */
+.iconNav {
+  padding: 4px;
+  padding-right: 10px;
+}
