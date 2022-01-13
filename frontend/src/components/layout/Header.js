@@ -1,17 +1,13 @@
 import React from 'react';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 
-export default function NavBar({ handleSidebar }) {
+export default function NavBar({handleSidebar}) {
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
-        {/* className='fixed-top' */}
         <Container fluid>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleSidebar} />
-          <div className="d-flex justify-content-end">
-            <h1 className="text-white">FINTECH</h1>
-          </div>
-
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick = {handleSidebar} />
+          <div className='d-flex justify-content-end'><h1 className='text-white'>FINTECH</h1></div>
           <form className="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
             <input type="text" className="form-control" placeholder="Search" />
           </form>
