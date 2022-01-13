@@ -23,10 +23,20 @@ const getBranches = async(req = request, res = response) => {
 
 const getBranchById = async(req = request, res = response) => {
 
-	const { id } = req.params
+	const { id:_id } = req.params
+	
 
-	const branches = await Branch.findOne({ where: { id } })
-  res.status(200).json({ branches })
+	const { 
+		id, 
+		branch_name, 
+		manager_id 
+	} = await Branch.findOne({ where: { id:_id } })
+  
+	let manager = manager_id !== null
+								? await User.findOne({ where: { id: manager_id  } })
+								: null
+
+	res.status(200).json({ id, branch_name, manager })
 
 }
 
