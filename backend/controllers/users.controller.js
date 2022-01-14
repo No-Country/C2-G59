@@ -4,21 +4,49 @@ const bcrypt = require('bcryptjs');
 
 // Mis imports
 const { User } = require('../db/models/user.model');
+const { Branch } = require('../db/models/branch.model');
 
 // GET
 const getUsers = async (req = request, res = response) => {
  
 	const users = await User.findAll({ where: { status: 1 } })
-  res.status(200).json({ users })
+  const newUsers = []
+
+
+	for (let i = 0; i < users.length; i++){
+		let { id, name, email,password, role, status, branch_id } = users[i];
+		let branch = branch_id !== null
+                  ? await Branch.findOne({ where: { id: branch_id  } })
+                  : null
+
+    newUsers.push({ id, name, email, password, role, status, branch })
+	}
+
+  res.status(200).json( newUsers )
 
 };
 
 // GET
 const getUserById = async (req = request, res = response) => {
 	
-	const { id } = req.params
+	const { id:_id } = req.params
 
-	const user = await User.findOne({ where: { id } })
+	const { 
+    id, 
+    name, 
+    email,
+    password, 
+    role, 
+    status, 
+    branch_id 
+  } = await User.findOne({ where: { id:_id } })
+  
+  let branch = branch_id !== null
+                  ? await Branch.findOne({ where: { id: branch_id  } })
+                  : null
+
+  const user = { id, name, email, password, role, status, branch }
+
   res.status(200).json({ user })
 
 };

@@ -7,7 +7,6 @@ const getBranches = async(req = request, res = response) => {
 	const branches = await Branch.findAll()
 	const newBranches = []
 
-
 	for (let i = 0; i < branches.length; i++){
 		let { id, branch_name, manager_id } = branches[i];
 		let manager = manager_id !== null
@@ -23,10 +22,19 @@ const getBranches = async(req = request, res = response) => {
 
 const getBranchById = async(req = request, res = response) => {
 
-	const { id } = req.params
+	const { id:_id } = req.params
 
-	const branches = await Branch.findOne({ where: { id } })
-  res.status(200).json({ branches })
+	const { 
+		id, 
+		branch_name, 
+		manager_id 
+	} = await Branch.findOne({ where: { id:_id } })
+  
+	let manager = manager_id !== null
+								? await User.findOne({ where: { id: manager_id  } })
+								: null
+
+	res.status(200).json({ id, branch_name, manager })
 
 }
 
@@ -35,7 +43,6 @@ const createBranch = async(req = request, res = response) => {
   const { name, manager_id = null } = req.body;
 
   try {
-    
     // Define and save in DB
     const branch = await Branch.create({
       branch_name: name,
@@ -68,7 +75,6 @@ const updateBranch = async(req = request, res = response) => {
 			}
 		}
 
-
 		await Branch.update({ branch_name: name, manager_id }, { where: { id } })
 			.catch((error) => {
 				res.status(400).json({
@@ -93,7 +99,6 @@ const deleteBranch = async(req = request, res = response) => {
 
 	const { id } = req.params;
 
-	// Esto regresa el user antes de cambiar los valores
 	await Branch.destroy({ where: { id } }).catch((error) => {
 		return res.status(400).json({
 			msg: 'Talk with the admin',

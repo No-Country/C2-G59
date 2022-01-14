@@ -1,6 +1,8 @@
 const { Branch } = require('../db/models/branch.model');
 const { Role } = require('../db/models/role.model');
 const { User } = require('../db/models/user.model');
+const { Product } = require('../db/models/product.model');
+
 
 // Validate if exist a User with this email
 const emailExist = async (email = '') => {
@@ -31,9 +33,17 @@ const branchExistById = async (id = '') => {
   }
 };
 
+const productExistById = async (id = '') => {
+  const productExist = await Product.findOne({ where: { id } });
+	if (!productExist) {
+    throw new Error(`The product with id '${id}' doesn't exist`);
+  }
+};
+
 module.exports = {
   emailExist,
   isRoleValid,
 	userExistById,
   branchExistById,
+  productExistById,
 };
