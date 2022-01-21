@@ -58,3 +58,9 @@ code {
   height: 40px;
   color: #fff;
 }
+
+/** Header */
+.iconNav {
+  padding: 4px;
+  padding-right: 10px;
+}

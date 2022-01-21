@@ -17,44 +17,44 @@ const Sidebar = () => {
           </Link> */}
           <li className="nav-item">
             <NavLink to="/" className="nav-link link-dark">
-              {/* icon */}
+            <i className="bi bi-kanban m-3"></i>
               Dashboard
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink to="/products" className="nav-link link-dark">
-              {/* icon */}
+              <i className="bi bi-bag-check-fill m-3"></i>
               Products
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/customers" className="nav-link link-dark">
-              {/* icon */}
+            <NavLink to="/suppliers" className="nav-link link-dark disabled">
+              <i className="bi bi-bag-check-fill m-3"></i>
               Suppliers
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink to="/transactions" className="nav-link link-dark disabled">
-              {/* icon */}
+              <i className="bi bi-cash-stack m-3"></i>
               Transactions
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink to="/sales" className="nav-link link-dark">
-              {/* icon */}
+              <i className="bi bi-bag-check-fill m-3"></i>
               Sales
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink to="/shopping" className="nav-link link-dark">
-              {/* icon */}
+              <i className="bi bi-bag-check-fill m-3"></i>
               Shopping
             </NavLink>
           </li>
           <hr />
           <li className="nav-item">
             <NavLink to="/new-user" className="nav-link link-dark">
-              {/* icon */}
+              <i className="bi bi-person-circle m-3"></i>
               New User
             </NavLink>
           </li>

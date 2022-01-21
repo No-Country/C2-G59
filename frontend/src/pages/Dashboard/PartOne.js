@@ -9,7 +9,7 @@ const PartOne = () => {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
     datasets: [
       {
-        label: '# de ventas',
+        label: '# of sales',
         data: [12, 19, 3, 5, 12, 3, 15],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -36,7 +36,7 @@ const PartOne = () => {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
     datasets: [
       {
-        label: '# Ventas',
+        label: '# of sales',
         data: ['15', '20', '15', '20', '25', '5'],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -66,7 +66,7 @@ const PartOne = () => {
         <div className="col">
           <div className="card shadow mb-2" >
             <div className="card-body">
-              <h5 className="card-title">Venta Semestral
+              <h5 className="card-title">Year Sale
                 <OverlayTrigger
                   placement="bottom"
                   overlay={<Tooltip id="button-tooltip-2">Productos mas vendidos en los ultimos 6 meses en nuestras sedes.</Tooltip>}
@@ -96,7 +96,7 @@ const PartOne = () => {
         <div className="col">
           <div className="card shadow mb-2">
             <div className="card-body">
-              <h5 className="card-title">Ventas Mensual
+              <h5 className="card-title">Monthly Sale
                 <OverlayTrigger
                   placement="bottom"
                   overlay={<Tooltip id="button-tooltip-2">Productos mas vendidos en los ultimos 6 meses en nuestras sedes.</Tooltip>}
@@ -126,7 +126,7 @@ const PartOne = () => {
         <div className="col">
           <div className="card shadow mb-2">
             <div className="card-body">
-              <h5 className="card-title">Top vendidos
+              <h5 className="card-title">Top sellers
                 <OverlayTrigger
                   placement="bottom"
                   overlay={<Tooltip id="button-tooltip-2">Productos mas vendidos en los ultimos 6 meses en nuestras sedes.</Tooltip>}
@@ -156,7 +156,7 @@ const PartOne = () => {
         <div className="col">
           <div className="card shadow mb-2">
             <div className="card-body">
-              <h5 className="card-title">Porcentajes
+              <h5 className="card-title">Percent
                 <OverlayTrigger
                   placement="bottom"
                   overlay={<Tooltip id="button-tooltip-2">Productos mas vendidos en los ultimos 6 meses en nuestras sedes.</Tooltip>}
