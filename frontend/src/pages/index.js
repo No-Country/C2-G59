@@ -4,4 +4,6 @@ export { default as Products } from './Products/Products';
 export { default as Login } from './Login/Login';
 export { default as Customers } from './Customers/Customers';
 export { default as NewUser } from './UserDetails/newUser';
+export { default as Sales } from './Sales/Sales';
+export { default as Shopping } from './Shopping/Shopping';
 export { default as NotFound } from './NotFound';
