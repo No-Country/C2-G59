@@ -596,6 +596,6 @@ export const getAllProducts = () => {
   return data;
 };
 
-export const getProductByID = id => {
+export const getProductById = id => {
   return data.find(item => Number(item.id) === id);
 };
