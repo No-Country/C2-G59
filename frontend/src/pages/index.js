@@ -5,5 +5,6 @@ export { default as Login } from './Login/Login';
 export { default as Customers } from './Customers/Customers';
 export { default as NewUser } from './UserDetails/newUser';
 export { default as Sales } from './Sales/Sales';
-export { default as Shopping } from './Shopping/Shopping';
+export { default as Purchases } from './Purchases/Purchases';
+export { default as PurchaseDetails } from './Purchases/PurchaseDetails';
 export { default as NotFound } from './NotFound';
