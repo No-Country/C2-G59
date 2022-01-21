@@ -1,17 +1,16 @@
-import { Dropdown, Nav } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
+import { Link, NavLink } from 'react-router-dom';
+import logo from '../../logo.svg';
 
 const Sidebar = () => {
   return (
     <aside className="sidebar">
+      <div className="logo bg-primary">
+        <Link to="/" className="d-flex align-items-center">
+          <img src={logo} alt="" className="w-75" />
+        </Link>
+      </div>
       <div className="d-flex flex-column flex-shrink-0 p-3" style={{ minHeight: '100%' }}>
-        {/* <a
-          href="/"
-          className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
-        >
-          <span className="fs-4">Sidebar</span>
-        </a>
-        <hr /> */}
         <Nav defaultActiveKey="/" variant="pills" className="flex-column mb-auto">
           {/* <Link to="/">
             <Nav.Link href="/home">Active</Nav.Link>
@@ -20,12 +19,6 @@ const Sidebar = () => {
             <NavLink to="/" className="nav-link link-dark">
               {/* icon */}
               Dashboard
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/transactions" className="nav-link link-dark">
-              {/* icon */}
-              Transactions
             </NavLink>
           </li>
           <li className="nav-item">
@@ -41,9 +34,21 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/sales" className="nav-link link-dark disabled">
+            <NavLink to="/transactions" className="nav-link link-dark disabled">
+              {/* icon */}
+              Transactions
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/sales" className="nav-link link-dark">
               {/* icon */}
               Sales
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/shopping" className="nav-link link-dark">
+              {/* icon */}
+              Shopping
             </NavLink>
           </li>
           <hr />
