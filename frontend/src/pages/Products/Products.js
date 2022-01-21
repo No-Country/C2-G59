@@ -1,7 +1,25 @@
 import { Table } from 'react-bootstrap';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import {dataProjects} from '../../services/data'
 
 const Products = () => {
+  const data = dataProjects.map((item) => {
+    return (
+      <>
+        <tbody>
+          <tr className='table-light'>
+            <td>{item.id}</td>
+            <td>{item.product}</td>
+            <td>{item.description}</td>
+            <td>${item.price} </td>
+            <td>{item.stock}</td>
+            <td>{item.sales}</td>
+          </tr>
+        </tbody>
+      </>
+    );
+  });
+
   return (
     <div>
       <h1>Products</h1>
@@ -10,49 +28,28 @@ const Products = () => {
         dolor non, saepe tempora soluta eveniet distinctio ut doloribus perferendis asperiores porro
         odio cumque blanditiis ad, aut deleniti.
       </p>
+      <div className="d-flex justify-content-end">
+        <ReactHTMLTableToExcel
+          className="btn btn-primary mb-3 "
+          table="data table"
+          filename="Product - Table"
+          sheet="tablexls"
+          buttonText="Export to Excel"
+        />
+      </div>
       <Table striped bordered hover id="data table">
-        <thead>
-          <tr>
+      <thead>
+          <tr className='table-primary'>
             <th>#</th>
-            <th>Producto</th>
+            <th>Product</th>
+            <th>Description</th>
             <th>Price</th>
             <th>Stock</th>
             <th>Sales</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Gorgeous Rubber Gloves</td>
-            <td>$ 165</td>
-            <td>+32</td>
-            <td>65</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Gorgeous Plastic Tuna</td>
-            <td>$ 432</td>
-            <td>-3</td>
-            <td>145</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Tasty Concrete Hat</td>
-            <td>$ 334</td>
-            <td>98</td>
-            <td>33</td>
-          </tr>
-        </tbody>
+        {data}
       </Table>
-
-      <ReactHTMLTableToExcel
-        className="btn btn-info"
-        table="data table"
-        filename="Product - Table"
-        sheet="tablexls"
-        buttonText="Export to Excel"
-      />
-
     </div>
   );
 };

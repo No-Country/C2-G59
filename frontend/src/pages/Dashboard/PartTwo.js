@@ -1,4 +1,5 @@
 import React from 'react'
+import { dataTable } from '../../services/dataTable'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
 import { Table, Button, Image } from 'react-bootstrap';
@@ -6,11 +7,11 @@ import { Line } from 'react-chartjs-2'
 
 const PartTwo = () => {
   const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: ['Rubber', 'Volumizer' , 'Jogger', 'Tasty ', 'Humidifier ', 'Eyelashes'],
     datasets: [
       {
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        label: '# of products',
+        data: [ 54, 43, 32, 29, 11, 8],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -31,27 +32,45 @@ const PartTwo = () => {
       },
     ],
   };
+
+  const dataTables = dataTable.map((item) => {
+    return (
+      <>
+        <tbody className='table light'>
+          <tr>
+            <td>{item.id}</td>
+            <td>{item.product}</td>
+            <td>${item.price} </td>
+            <td>{item.stock}</td>
+            <td>{item.sales}</td>
+          </tr>
+        </tbody>
+      </>
+    );
+  });
+
   return (
     <div>
       <div className="row m-3">
         <div className="col-md-4">
-          <div className="card">
+          <div className="card shadow mb-2">
             <div className="card-body">
-              <h4 className="card-title">Line Chart
+              <h4 className="card-title">Top Products
                 <OverlayTrigger
                   placement="bottom"
-                  overlay={<Tooltip id="button-tooltip-2">Informacion relevante</Tooltip>}
+                  overlay={<Tooltip id="button-tooltip-2">Productos mas vendidos en los ultimos 6 meses en nuestras sedes.</Tooltip>}
                 >
                   {({ ref, ...triggerHandler }) => (
                     <Button
-                      variant="light"
+                      variant="white"
                       {...triggerHandler}
                       className="d-inline-flex align-items-center"
                     >
                       <Image
                         ref={ref}
                         roundedCircle
-                        src="as"
+                        src="https://img.icons8.com/fluency/48/000000/info.png"
+                        height={20} width={20}
                       />
                     </Button>
                   )}
@@ -64,71 +83,20 @@ const PartTwo = () => {
           </div>
         </div>
         <div className="col-md-8">
-          <div className="card">
+          <div className="card shadow mb-2">
             <div className="card-body">
               <h4 className="card-title">Table</h4>
               <Table striped bordered hover size="sm">
                 <thead>
-                  <tr>
+                  <tr className='table-dark'>
                     <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Sales</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td colSpan={2}>Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td colSpan={2}>Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td colSpan={2}>Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
+                {dataTables}
               </Table>
             </div>
           </div>
