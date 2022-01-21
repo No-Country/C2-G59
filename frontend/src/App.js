@@ -1,22 +1,30 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// pages
-import { Dashboard, Transactions, Products, Customers, Login, NotFound } from './pages';
 // components
-import Layout from './components/layout/Layout';
+import PrivateRoute from './router/PrivateRoute';
+import PublicRoute from './router/PublicRoute';
+import DashboardRoutes from './router/DashboardRoutes';
+import { Login } from './pages';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/" index element={<Dashboard />} />
-          {/* <Route path="/user/:id" element={<UserDetails />} /> */}
-          <Route path="/transactions" element={<Transactions />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/customers" element={<Customers />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/*"
+          element={
+            <PrivateRoute>
+              <DashboardRoutes />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
