@@ -17,7 +17,7 @@ const Sidebar = () => {
           </Link> */}
           <li className="nav-item">
             <NavLink to="/" className="nav-link link-dark">
-            <i className="bi bi-kanban m-3"></i>
+              <i className="bi bi-kanban m-3"></i>
               Dashboard
             </NavLink>
           </li>
@@ -46,9 +46,9 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink to="/shopping" className="nav-link link-dark">
+            <NavLink to="/purchases" className="nav-link link-dark">
               <i className="bi bi-bag-check-fill m-3"></i>
-              Shopping
+              Purchases
             </NavLink>
           </li>
           <hr />
