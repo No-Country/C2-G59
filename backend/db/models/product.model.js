@@ -17,6 +17,10 @@ const ProductSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
+  category: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
   price: {
     allowNull: false,
     type: DataTypes.DECIMAL(13,2),
