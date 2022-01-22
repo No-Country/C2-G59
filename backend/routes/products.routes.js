@@ -13,6 +13,7 @@ const {
 	getProductById,
 	createProduct,
 	updateProduct,
+    updateProductStock,
 	deleteProduct
 } = require('../controllers/products.controller');
 
@@ -38,9 +39,15 @@ router.post('/', [
 // Update Product [Public]
 router.put('/:id', [
     check('id').custom( productExistById ),
-	check('product_name', 'The product_name is obligatory').not().isEmpty(),
     validateInputs
 ], updateProduct );
+
+// Update Product stock [Public]
+// /:id/stock/:count?action=decrement  or increment
+router.put('/:id/stock/:count', [
+    check('id').custom( productExistById ),
+    validateInputs
+], updateProductStock );
 
 // Delete Product [Public]
 router.delete('/:id', [
