@@ -32,12 +32,14 @@ const createProduct = async (req = request, res = response) => {
     product_name,
     description = '',
     price = 0,
+    category
   } = req.body;
 
   const product = await Product.create({
     product_name,
     description,
-    price
+    price,
+    category
   });
 
   res.status(200).json({ product });
