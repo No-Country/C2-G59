@@ -9,7 +9,7 @@ function Footer() {
   return (
     <footer className='text-center p-3'>
       <div className='text-center'>
-        <p>&#169; {getCurrentYear()} – Todos los derechos reservados</p>
+        <p>Copyright {getCurrentYear()} &#169; – All Rights Reserved.</p>
       </div>
     </footer>
   )
