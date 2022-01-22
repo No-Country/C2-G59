@@ -1,17 +1,17 @@
-import React from 'react'
-import { dataTable } from '../../services/dataTable'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import Tooltip from 'react-bootstrap/Tooltip'
+import React from 'react';
+import { dataTable } from '../../services/dataTable';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 import { Table, Button, Image } from 'react-bootstrap';
-import { Line } from 'react-chartjs-2'
+import { Line } from 'react-chartjs-2';
 
 const PartTwo = () => {
   const data = {
-    labels: ['Rubber', 'Volumizer' , 'Jogger', 'Tasty ', 'Humidifier ', 'Eyelashes'],
+    labels: ['Rubber', 'Volumizer', 'Jogger', 'Tasty ', 'Humidifier ', 'Eyelashes'],
     datasets: [
       {
         label: '# of products',
-        data: [ 54, 43, 32, 29, 11, 8],
+        data: [54, 43, 32, 29, 11, 8],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -33,19 +33,17 @@ const PartTwo = () => {
     ],
   };
 
-  const dataTables = dataTable.map((item) => {
+  const dataTables = dataTable.map(item => {
     return (
-      <>
-        <tbody className='table light'>
-          <tr>
-            <td>{item.id}</td>
-            <td>{item.product}</td>
-            <td>${item.price} </td>
-            <td>{item.stock}</td>
-            <td>{item.sales}</td>
-          </tr>
-        </tbody>
-      </>
+      <tbody className="table light" key={item.id}>
+        <tr>
+          <td>{item.id}</td>
+          <td>{item.product}</td>
+          <td>${item.price} </td>
+          <td>{item.stock}</td>
+          <td>{item.sales}</td>
+        </tr>
+      </tbody>
     );
   });
 
@@ -55,10 +53,15 @@ const PartTwo = () => {
         <div className="col-md-4">
           <div className="card shadow mb-2">
             <div className="card-body">
-              <h4 className="card-title">Top Products
+              <h4 className="card-title">
+                Top Products
                 <OverlayTrigger
                   placement="bottom"
-                  overlay={<Tooltip id="button-tooltip-2">Productos mas vendidos en los ultimos 6 meses en nuestras sedes.</Tooltip>}
+                  overlay={
+                    <Tooltip id="button-tooltip-2">
+                      Productos mas vendidos en los ultimos 6 meses en nuestras sedes.
+                    </Tooltip>
+                  }
                 >
                   {({ ref, ...triggerHandler }) => (
                     <Button
@@ -70,15 +73,14 @@ const PartTwo = () => {
                         ref={ref}
                         roundedCircle
                         src="https://img.icons8.com/fluency/48/000000/info.png"
-                        height={20} width={20}
+                        height={20}
+                        width={20}
                       />
                     </Button>
                   )}
                 </OverlayTrigger>
               </h4>
-              <Line data={data}
-                height={150} width={150}
-              />
+              <Line data={data} height={150} width={150} />
             </div>
           </div>
         </div>
@@ -88,7 +90,7 @@ const PartTwo = () => {
               <h4 className="card-title">Table</h4>
               <Table striped bordered hover size="sm">
                 <thead>
-                  <tr className='table-dark'>
+                  <tr className="table-dark">
                     <th>#</th>
                     <th>Product</th>
                     <th>Price</th>
@@ -103,7 +105,7 @@ const PartTwo = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PartTwo
+export default PartTwo;
