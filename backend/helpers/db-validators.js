@@ -7,7 +7,7 @@ const { PurchaseOrder } = require('../db/models/purchase-order.model')
 const { PurchaseTransaction } = require('../db/models/purchase-trx.model')
 const { RetailSale } = require('../db/models/sales.model')
 const { SaleTransaction } = require('../db/models/sales-trx.model')
-
+const { BranchSupplier } = require('../db/models/branch-supplier.model')
 
 // Validate if exist a User with this email
 const emailExist = async (email = '') => {
@@ -80,6 +80,13 @@ const saleTransactionExistById = async (id = '') => {
   }
 };
 
+const supplierExistById = async (id = '') => {
+  const supplierExist = await BranchSupplier.findOne({ where: { id } });
+  if (!supplierExist) {
+    throw new Error(`The supplier with id '${id}' doesn't exist`)
+  }
+}
+
 module.exports = {
   emailExist,
   isRoleValid,
@@ -91,4 +98,5 @@ module.exports = {
   purchaseTransactionExistById,
   retailSaleExistById,
   saleTransactionExistById,
+  supplierExistById
 };
