@@ -13,6 +13,14 @@ const ProductSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
+  description: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
+  price: {
+    allowNull: false,
+    type: DataTypes.DECIMAL(13,2),
+  },
 }
 
 class Product extends Model {

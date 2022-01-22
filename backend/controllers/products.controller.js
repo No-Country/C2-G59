@@ -28,17 +28,25 @@ const getProductById = async (req = request, res = response) => {
 };
 
 const createProduct = async (req = request, res = response) => {
-  const { product_name } = req.body;
+  const {
+    product_name,
+    description = '',
+    price = 0,
+  } = req.body;
 
-  const product = await Product.create({ product_name });
+  const product = await Product.create({
+    product_name,
+    description,
+    price
+  });
+
   res.status(200).json({ product });
 };
 
 const updateProduct = async (req = request, res = response) => {
   const { id } = req.params;
-  const { product_name } = req.body;
 
-  await Product.update({ product_name }, { where: { id } })
+  await Product.update(req.body, { where: { id } })
 		.catch( (error) => {
 			res.status(400).json({
 				msg: 'Talk with the admin',
@@ -53,7 +61,7 @@ const updateProduct = async (req = request, res = response) => {
 
 const deleteProduct = async (req = request, res = response) => {
 
-	const { id } = req.params
+	const { id } = req.params;
 
   await Product.destroy({ where: { id } }).catch((error) => {
 		return res.status(400).json({
