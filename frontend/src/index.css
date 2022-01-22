@@ -31,7 +31,7 @@ code {
   bottom: 0;
   left: 0;
   z-index: 100;
-  padding: 80px 0 0;
+  padding: 0;
 }
 
 @media (max-width: 992px) {
@@ -50,8 +50,54 @@ code {
   margin-left: 260px;
 }
 
+/** Logo */
+.logo {
+  padding: 0.5rem 1rem;
+}
+
+.logo img {
+  height: 40px;
+  color: #fff;
+}
+
 /** Header */
 .iconNav {
   padding: 4px;
   padding-right: 10px;
+}
+
+.loading::before {
+  content: '';
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  margin-top: -20px;
+  left: 50%;
+  margin-left: -20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+fieldset {
+  transition: 0.15s;
+}
+fieldset[disabled] {
+  filter: blur(4px);
+  opacity: 0.7;
+}
+form {
+  position: relative;
 }
