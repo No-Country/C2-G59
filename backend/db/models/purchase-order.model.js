@@ -11,6 +11,14 @@ const PurchaseOrderSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
+  invoice: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
+  amount: {
+    allowNull: false,
+    type: DataTypes.DECIMAL(13,2),
+  },
   purchase_date: {
     allowNull: false,
     type: DataTypes.DATE,
