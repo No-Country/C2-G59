@@ -29,17 +29,17 @@ const getProductById = async (req = request, res = response) => {
 
 const createProduct = async (req = request, res = response) => {
   const {
-    product_name,
-    description = '',
     price = 0,
-    category
+    stock = 0,
+    ...restProduct
   } = req.body;
 
   const product = await Product.create({
-    product_name,
-    description,
     price,
-    category
+    stock,
+    ...restProduct
+  }).catch((error) => {
+    return res.status(500).json({ error });
   });
 
   res.status(200).json({ product });
