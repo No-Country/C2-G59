@@ -1,22 +1,20 @@
 import { Table } from 'react-bootstrap';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-import {dataProjects} from '../../services/data'
+import { dataProjects } from '../../services/data';
 
 const Products = () => {
-  const data = dataProjects.map((item) => {
+  const data = dataProjects.map(item => {
     return (
-      <>
-        <tbody>
-          <tr className='table-light'>
-            <td>{item.id}</td>
-            <td>{item.product}</td>
-            <td>{item.description}</td>
-            <td>${item.price} </td>
-            <td>{item.stock}</td>
-            <td>{item.sales}</td>
-          </tr>
-        </tbody>
-      </>
+      <tbody key={item.id}>
+        <tr className="table-light">
+          <td>{item.id}</td>
+          <td>{item.product}</td>
+          <td>{item.description}</td>
+          <td>${item.price} </td>
+          <td>{item.stock}</td>
+          <td>{item.sales}</td>
+        </tr>
+      </tbody>
     );
   });
 
@@ -38,8 +36,8 @@ const Products = () => {
         />
       </div>
       <Table striped bordered hover id="data table">
-      <thead>
-          <tr className='table-primary'>
+        <thead>
+          <tr className="table-primary">
             <th>#</th>
             <th>Product</th>
             <th>Description</th>

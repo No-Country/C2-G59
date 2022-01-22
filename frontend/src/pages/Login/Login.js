@@ -1,119 +1,88 @@
 import React, { useState } from 'react';
-import { Alert, Form } from 'react-bootstrap';
+import { Alert, Button, FloatingLabel, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 import { adminLogin } from '../../store/actions/authActions';
+
+const loginSchema = yup.object().shape({
+  email: yup.string().required().email(),
+  password: yup.string().required().min(6),
+});
 
 export default function Login() {
   const {
     register,
     handleSubmit,
-    // formState: { errors },
-    // setError,
-  } = useForm();
+    formState: { errors },
+    setError,
+    clearErrors,
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
 
   // to handle redux
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let location = useLocation();
-
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  // const [success, setSuccess] = useState('');
 
   // to handle redirect location
   let from = location.state?.from?.pathname || '/';
 
   const onSubmit = dataBody => {
     setLoading(true);
+    clearErrors('server');
     dispatch(adminLogin(dataBody))
-      .then(data => {
-        // setSuccess(data);
-        setError('');
+      .then(() => {
         setLoading(false);
         navigate(from, { replace: true });
       })
       .catch(err => {
-        setError(err);
+        setError('server', {
+          type: 'manual',
+          message: err.msg,
+        });
         setLoading(false);
       });
   };
 
-  console.log(error);
-
-  const ShowErrors = () => {
-    if (Array.isArray(error.errors)) {
-      return (
-        <>
-          {error.errors.map((item, index) => (
-            <p key={index}>{item.msg}</p>
-          ))}
-        </>
-      );
-    } else {
-      return <>{error.msg}</>;
-    }
-  };
-
   return (
-    <div>
-      <div className="d-flex align-items-center auth px-0 mt-5">
-        <div className="row w-100 mx-0">
-          <div className="col-lg-4 mx-auto">
-            <div className="card text-left py-5 px-4 px-sm-5">
-              <h4 className="d-flex justify-content-center">Dashboard Retail</h4>
-              <h6 className="font-weight-light d-flex justify-content-center">
-                Enter your email and password below.
-              </h6>
-              <div className="pt-3">
-                {error && (
-                  <Alert variant="danger">
-                    <ShowErrors />
-                  </Alert>
-                )}
+    <div className="d-flex align-items-center px-0 mt-5">
+      <div className="row w-100 mx-0">
+        <div className="col-lg-4 mx-auto">
+          <div className="card text-left py-5 px-4 px-sm-5">
+            <h4 className="d-flex justify-content-center">Dashboard Retail</h4>
+            <h6 className="font-weight-light d-flex justify-content-center">
+              Enter your email and password below.
+            </h6>
+            <div className="pt-3">
+              {Object.keys(errors).length !== 0 && (
+                <Alert variant="danger">
+                  <ShowErrors errors={errors} />
+                </Alert>
+              )}
 
-                {/* {success && (
-                  <Alert variant="success">
-                    <pre>{JSON.stringify(success, null, ' ')}</pre>
-                  </Alert>
-                )} */}
+              <Form onSubmit={handleSubmit(onSubmit)} className={loading && 'loading'}>
+                <fieldset disabled={loading}>
+                  <FloatingLabel controlId="floatingEmail" label="Email address" className="mb-3">
+                    <Form.Control type="email" {...register('email')} />
+                  </FloatingLabel>
 
-                <Form onSubmit={handleSubmit(onSubmit)} className={loading && 'loading'}>
-                  <fieldset disabled={loading}>
-                    <Form.Group className=" search-field pb-3">
-                      <Form.Label>EMAIL</Form.Label>
-                      <Form.Control
-                        type="email"
-                        {...register('email', { required: true })}
-                        placeholder="email"
-                        size="lg"
-                        className="h-auto"
-                      />
-                    </Form.Group>
-                    <Form.Group className="search-field">
-                      <Form.Label>PASSWORD</Form.Label>
-                      <Form.Control
-                        type="password"
-                        {...register('password', { required: true, minLength: 6 })}
-                        placeholder="Password"
-                        size="lg"
-                        className="h-auto"
-                      />
-                    </Form.Group>
-                    <div className="mt-3 d-flex justify-content-center">
-                      <button
-                        type="submit"
-                        className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
-                        disabled={loading}
-                      >
-                        SIGN IN
-                      </button>
-                    </div>
-                  </fieldset>
-                </Form>
-              </div>
+                  <FloatingLabel controlId="floatingPassword" label="Password">
+                    <Form.Control type="password" {...register('password')} />
+                  </FloatingLabel>
+
+                  <div className="mt-3 d-flex justify-content-center">
+                    <Button type="submit" disabled={loading}>
+                      Sign In
+                    </Button>
+                  </div>
+                </fieldset>
+              </Form>
             </div>
           </div>
         </div>
@@ -121,3 +90,19 @@ export default function Login() {
     </div>
   );
 }
+
+const convertObjectsToArray = Objects => {
+  return Object.keys(Objects).map(key => ({
+    name: key,
+    message: Objects[key].message,
+  }));
+};
+
+const ShowErrors = ({ errors }) => {
+  // const allErrors = ;
+  return convertObjectsToArray(errors).map(({ name, message }, idx) => (
+    <p key={idx} style={{ margin: 0 }}>
+      <strong>{name}</strong>: {message}
+    </p>
+  ));
+};

@@ -1,15 +1,24 @@
 import React from 'react';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { adminLogout } from '../../store/actions/authActions';
 
 export default function NavBar({ handleSidebar }) {
+  const { name } = useSelector(state => state.auth.user);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(adminLogout());
+  };
+
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
         <Container fluid>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleSidebar} />
-          <div className="d-flex justify-content-end">
+          {/* <div className="d-flex justify-content-end">
             <h1 className="text-white">FINTECH</h1>
-          </div>
+          </div> */}
           {/* <form className="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
             <input type="text" className="form-control" placeholder="Search" />
           </form> */}
@@ -20,9 +29,10 @@ export default function NavBar({ handleSidebar }) {
               <NavDropdown.Item href="#action/3.3">Another language</NavDropdown.Item>
             </NavDropdown>
           </Nav> */}
-          <div className="d-flex justify-content-betwen">
-            <Nav className="mr-5">
-              <NavDropdown className='iconNav'
+          {/* <div className="d-flex justify-content-betwen" style={{ marginLeft: 'auto' }}> */}
+          {/* <Nav className="mr-5">
+              <NavDropdown
+                className="iconNav"
                 title={
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -41,8 +51,8 @@ export default function NavBar({ handleSidebar }) {
                 <NavDropdown.Item href="#action/3.2">Settings</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Launch admin </NavDropdown.Item>
               </NavDropdown>
-            </Nav>
-            <div className="navbar-profile d-flex ">
+            </Nav> */}
+          {/* <div className="navbar-profile d-flex ">
               <NavDropdown
                 title={
                   <img
@@ -53,7 +63,7 @@ export default function NavBar({ handleSidebar }) {
                     height="40"
                   />
                 }
-                id="collasible-nav-dropdown navbar-profile-name"
+                id="collasible-nav-dropdown"
                 className="text-white"
               >
                 <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
@@ -64,8 +74,24 @@ export default function NavBar({ handleSidebar }) {
               <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Log out</NavDropdown.Item>
             </NavDropdown> */}
+          {/* </div> */}
+          <Nav style={{ marginLeft: 'auto' }}>
+            <div className="d-flex">
+              <img
+                className="rounded-circle"
+                src="https://github.com/mdo.png"
+                alt="profile"
+                width="40"
+                height="40"
+                style={{ marginRight: '0.25rem' }}
+              />
+              <NavDropdown title={name} id="collasible-nav-dropdown">
+                <NavDropdown.Item href="#a">Settings</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogout}>Log out</NavDropdown.Item>
+              </NavDropdown>
             </div>
-          </div>
+          </Nav>
+          {/* </div> */}
         </Container>
       </Navbar>
     </div>
