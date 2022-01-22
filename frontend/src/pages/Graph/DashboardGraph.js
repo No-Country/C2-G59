@@ -1,6 +1,7 @@
 import React from 'react'
 import Graph from './Graph'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
+import CardGroup from './CardGroup';
 
 
 function DashboardGraph() {
@@ -31,10 +32,9 @@ function DashboardGraph() {
     ],
   };
 
-
-
   return (
     <>
+
       <div className="d-flex justify-content-between m-4">
         <h3> Analytics </h3>
         <Breadcrumb>
@@ -46,39 +46,56 @@ function DashboardGraph() {
         </Breadcrumb>
       </div>
 
+      <div class="card-group mb-3">
+        <div class="card border-right">
+          <CardGroup title="New Clients" numberTitle="241" porcentText="234" iconImg={<i className="bi bi-person-plus-fill"></i>} />
+        </div>
+        <div class="card border-right">
+          <CardGroup title="Earnings of Month" numberTitle="145" porcentText="64" iconImg={<i className="bi bi-coin"></i>} />
+        </div>
+        <div class="card border-right">
+          <CardGroup title="New Projects" numberTitle="565" porcentText="34" iconImg={<i className="bi bi-apple"></i>} />
+        </div>
+        <div class="card border-right">
+          <CardGroup title="Projects" numberTitle="61" porcentText="54" iconImg={<i className="bi bi-person-plus-fill"></i>} />
+        </div>
+      </div>
+
       <div className="row">
-        <div className="col-3">
+        <div className="col-lg-4 col-md-12">
+          <Graph data={data} type="line" title="New Clients" description="Ejemplo 1"/>
+        </div>
+        <div className="col-lg-4 col-md-12">
+          <Graph data={data} type="bar" title="Earnings of Month" description="Ejemplo 1" />
+        </div>
+        <div className="col-lg-4 col-md-12" >
+          <Graph data={data} type="bar" title="New Projects" description="Ejemplo 1" />
+      </div>
+
+      <div className="row">
+        <div className="col-lg-6 col-md-6">
           <Graph data={data} type="line" title="Titulo" description="Ejemplo 1" />
         </div>
-        <div className="col-3">
-          <Graph data={data} type="doughnut" title="Titulo" description="Ejemplo 1" />
-        </div>
-        <div className="col-3">
-          <Graph data={data} type="bar" title="Titulo" description="Ejemplo 1" />
-        </div>
-        <div className="col-3">
-          <Graph data={data} type="doughnut" title="Titulo" description="Ejemplo 1" />
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-4">
-          <Graph data={data} type="line" title="Titulo" description="Ejemplo 1" />
-        </div>
-        <div className="col-8">
+        <div className="col-lg-6 col-md-6" >
           <Graph data={data} type="bar" title="Titulo" description="Ejemplo 1" />
         </div>
       </div>
 
       <div className="row">
-        <div className="col-4">
+        <div className="col-lg-4 col-md-8">
           <Graph data={data} type="bar" title="Titulo" description="Ejemplo 1" />
         </div>
-        <div className="col-8">
-        <Graph type="table" title="Titulo" description="Ejemplo 1" />
+        <div className="col-lg-8 col-md-4">
+          <Graph type="table" title="Titulo" description="Ejemplo 1" />
         </div>
       </div>
 
+      <div className="row">
+        <div className="col-12">
+          <Graph type="table" title="Titulo" description="Ejemplo 1" />
+        </div>
+      </div>
+    </div>
     </>
   )
 }
