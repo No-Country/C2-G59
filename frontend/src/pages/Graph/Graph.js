@@ -1,16 +1,16 @@
-import React from 'react'
+import React from 'react';
 import { Bar, Line, Doughnut, Pie } from 'react-chartjs-2';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import Tooltip from 'react-bootstrap/Tooltip'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 import { Table, Button, Image } from 'react-bootstrap';
-import { dataTable } from '../../services/dataTable'
+import { dataTable } from '../../services/dataTable';
 
 function Graph({ data, type, title, description }) {
 
-  const dataTables = dataTable.map((item) => {
+  const dataTables = dataTable.map(item => {
     return (
       <>
-        <tbody className='table light'>
+        <tbody className="table light" key={item.id}>
           <tr>
             <td>{item.id}</td>
             <td>{item.product}</td>
@@ -36,7 +36,7 @@ function Graph({ data, type, title, description }) {
   } else if (type === "table") {
     GraphDiv = <Table striped bordered hover size="sm">
       <thead>
-        <tr className='table-dark'>
+        <tr className="table-dark">
           <th>#</th>
           <th>Product</th>
           <th>Price</th>
