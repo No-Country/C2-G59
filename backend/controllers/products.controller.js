@@ -1,90 +1,84 @@
-const { request, response } = require("express")
+const { request, response } = require('express');
+const { Product } = require('../db/models/product.model');
 
-const getProducts = async(req = request, res = response) => {
+const getProducts = async (req = request, res = response) => {
+  try {
+    const products = await Product.findAll();
+    res.status(200).json({ products });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      msg: 'Talk to the admin',
+    });
+  }
+};
+
+const getProductById = async (req = request, res = response) => {
+  const { id } = req.params;
 
   try {
-		res.status(200).json({
-			ok: true,
-			msg: 'getProducts',
+    const product = await Product.findOne({ where: { id } });
+    res.status(200).json({ product });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      msg: 'Talk to the admin',
+    });
+  }
+};
+
+const createProduct = async (req = request, res = response) => {
+  const {
+    product_name,
+    description = '',
+    price = 0,
+  } = req.body;
+
+  const product = await Product.create({
+    product_name,
+    description,
+    price
+  });
+
+  res.status(200).json({ product });
+};
+
+const updateProduct = async (req = request, res = response) => {
+  const { id } = req.params;
+
+  await Product.update(req.body, { where: { id } })
+		.catch( (error) => {
+			res.status(400).json({
+				msg: 'Talk with the admin',
+				error,
+			});
 		});
 
-	} catch(error) {
-		console.log(error);
-		res.status(500).json({
-      msg: 'Talk to the admin'
+  res.status(200).json({
+    msg: 'Product updated successfully',
+  });
+};
+
+const deleteProduct = async (req = request, res = response) => {
+
+	const { id } = req.params;
+
+  await Product.destroy({ where: { id } }).catch((error) => {
+		return res.status(400).json({
+			msg: 'Talk with the admin',
+			error
 		});
-	}
-}
+	});
 
-const getProductById = async(req = request, res = response) => {
-
-  try {
-		res.status(200).json({
-			ok: true,
-			msg: 'getProductById',
-		});
-
-	} catch(error) {
-		console.log(error);
-		res.status(500).json({
-      msg: 'Talk to the admin'
-		});
-	}
-}
-
-const createProduct = async(req = request, res = response) => {
-
-  try {
-		res.status(200).json({
-			ok: true,
-			msg: 'createProduct',
-		});
-
-	} catch(error) {
-		console.log(error);
-		res.status(500).json({
-      msg: 'Talk to the admin'
-		});
-	}
-}
-
-const updateProduct = async(req = request, res = response) => {
-
-  try {
-		res.status(200).json({
-			ok: true,
-			msg: 'updateProduct',
-		});
-
-	} catch(error) {
-		console.log(error);
-		res.status(500).json({
-      msg: 'Talk to the admin'
-		});
-	}
-}
-
-const deleteProduct = async(req = request, res = response) => {
-
-  try {
-		res.status(200).json({
-			ok: true,
-			msg: 'deleteProduct',
-		});
-
-	} catch(error) {
-		console.log(error);
-		res.status(500).json({
-      msg: 'Talk to the admin'
-		});
-	}
-}
-
+	res.status(200).json({
+		msg: 'Product deleted successfully'
+	});
+};
 
 module.exports = {
-	getProducts,
-	getProductById,
-	createProduct,
-	updateProduct,
-	deleteProduct,
-}
+  getProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+};
