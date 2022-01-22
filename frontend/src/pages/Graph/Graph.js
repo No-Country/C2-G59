@@ -35,23 +35,23 @@ function Graph({ data, type, title, description }) {
     GraphDiv = <Doughnut data={data} />
   } else if (type === "table") {
     GraphDiv = <Table striped bordered hover size="sm">
-    <thead>
-      <tr className='table-dark'>
-        <th>#</th>
-        <th>Product</th>
-        <th>Price</th>
-        <th>Stock</th>
-        <th>Sales</th>
-      </tr>
-    </thead>
-    {dataTables}
-  </Table>
+      <thead>
+        <tr className='table-dark'>
+          <th>#</th>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Sales</th>
+        </tr>
+      </thead>
+      {dataTables}
+    </Table>
   }
 
   return (
     <div >
       <div className="card shadow mb-2" style={{ height: "100%" }}>
-        <div className="card-body" style={{ height: "100%" }}>
+        <div className="card-body">
           <h5 className="card-title">{title}
             <OverlayTrigger
               placement="bottom"
@@ -73,7 +73,9 @@ function Graph({ data, type, title, description }) {
               )}
             </OverlayTrigger>
           </h5>
-          {GraphDiv }
+          <div>
+            {GraphDiv}
+          </div>
         </div>
       </div>
     </div>
