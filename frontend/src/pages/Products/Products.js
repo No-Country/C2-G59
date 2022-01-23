@@ -1,22 +1,23 @@
-import { Table } from 'react-bootstrap';
+// import { Table } from 'react-bootstrap';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-import { dataProjects } from '../../services/data';
+// import { dataProjects } from '../../services/data';
+import { BasicTable } from './BasicTable';
 
 const Products = () => {
-  const data = dataProjects.map(item => {
-    return (
-      <tbody key={item.id}>
-        <tr className="table-light">
-          <td>{item.id}</td>
-          <td>{item.product}</td>
-          <td>{item.description}</td>
-          <td>${item.price} </td>
-          <td>{item.stock}</td>
-          <td>{item.sales}</td>
-        </tr>
-      </tbody>
-    );
-  });
+  // const data = dataProjects.map(item => {
+  //   return (
+  //     <tbody key={item.id}>
+  //       <tr className="table-light">
+  //         <td>{item.id}</td>
+  //         <td>{item.product}</td>
+  //         <td>{item.description}</td>
+  //         <td>${item.price} </td>
+  //         <td>{item.stock}</td>
+  //         <td>{item.sales}</td>
+  //       </tr>
+  //     </tbody>
+  //   );
+  // });
 
   return (
     <div>
@@ -35,7 +36,7 @@ const Products = () => {
           buttonText="Export to Excel"
         />
       </div>
-      <Table striped bordered hover id="data table">
+      {/* <Table striped bordered hover id="data table">
         <thead>
           <tr className="table-primary">
             <th>#</th>
@@ -47,7 +48,9 @@ const Products = () => {
           </tr>
         </thead>
         {data}
-      </Table>
+      </Table> */}
+
+      <BasicTable/>
     </div>
   );
 };
