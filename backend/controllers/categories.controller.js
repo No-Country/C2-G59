@@ -1,90 +1,53 @@
-const { request, response } = require("express")
+const { request, response } = require("express");
+const { Category } = require("../db/models/category.model");
 
 const getCategories = async(req = request, res = response) => {
 
-  try {
-		res.status(200).json({
-			ok: true,
-			msg: 'getCategories',
+	const categories = await Category.findAll()
+		.catch((resp) => {
+			return res.status(500).json({ msg: 'Tak with the admin' });
 		});
-
-	} catch(error) {
-		console.log(error);
-		res.status(500).json({
-      msg: 'Talk to the admin'
-		});
-	}
-}
+    res.status(200).json({ categories });
+};
 
 const getCategoryById = async(req = request, res = response) => {
 
-  try {
-		res.status(200).json({
-			ok: true,
-			msg: 'getCategoryById',
-		});
+	const { id } = req.params;
 
-	} catch(error) {
-		console.log(error);
-		res.status(500).json({
-      msg: 'Talk to the admin'
-		});
+	try {
+	  const category = await Category.findOne({ where: { id } });
+	  res.status(200).json({ category });
+	} catch (error) {
+	  console.log(error);
+	  res.status(500).json({
+		msg: 'Talk to the admin',
+	  });
 	}
-}
+};
 
 const createCategory = async(req = request, res = response) => {
-
-  try {
-		res.status(200).json({
-			ok: true,
-			msg: 'createCategory',
-		});
-
-	} catch(error) {
-		console.log(error);
-		res.status(500).json({
-      msg: 'Talk to the admin'
-		});
-	}
-}
-
-const updateCategory = async(req = request, res = response) => {
-
-  try {
-		res.status(200).json({
-			ok: true,
-			msg: 'updateCategory',
-		});
-
-	} catch(error) {
-		console.log(error);
-		res.status(500).json({
-      msg: 'Talk to the admin'
-		});
-	}
-}
+	const { category_name } = req.body;
+	const category = await Category.create({category_name});
+	res.status(200).json({ category });
+};
 
 const deleteCategory = async(req = request, res = response) => {
-
-  try {
-		res.status(200).json({
-			ok: true,
-			msg: 'deleteCategory',
+	const { id } = req.params;
+	await Category.destroy({ where: { id } }).catch((error) => {
+		return res.status(400).json({
+			msg: 'Talk with the admin',
+			error
 		});
-
-	} catch(error) {
-		console.log(error);
-		res.status(500).json({
-      msg: 'Talk to the admin'
-		});
-	}
-}
+	});
+	res.status(200).json({
+		msg: 'Category deleted successfully'
+	});
+};
 
 
 module.exports = {
 	getCategories,
 	getCategoryById,
 	createCategory,
-	updateCategory,
 	deleteCategory,
-}
+};
