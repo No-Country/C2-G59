@@ -1,5 +1,4 @@
 import React from 'react';
-import dayjs from 'dayjs';
 import { Table } from 'react-bootstrap';
 import logoBlack from '../../components/assets/logoBlack.svg';
 
