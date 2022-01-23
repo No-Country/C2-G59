@@ -62,13 +62,13 @@ function Dashboard() {
       </div>
 
       <div className="row">
-        <div className="col-lg-4 col-md-12">
+        <div className="col-lg-4 col-md-6">
           <Graph data={data} type="line" title="New Clients" description="Ejemplo 1" />
         </div>
-        <div className="col-lg-4 col-md-12">
+        <div className="col-lg-4 col-md-6">
           <Graph data={data} type="bar" title="Earnings of Month" description="Ejemplo 1" />
         </div>
-        <div className="col-lg-4 col-md-12" >
+        <div className="col-lg-4 col-md-6" >
           <Graph data={data} type="bar" title="New Projects" description="Ejemplo 1" />
         </div>
 
@@ -96,6 +96,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
+
     </>
   )
 }
