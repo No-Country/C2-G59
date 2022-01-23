@@ -4,6 +4,7 @@ import { Button, Row, Col, Form, Table, Modal, Container } from 'react-bootstrap
 
 // data example
 import { getAllProducts, getProductById } from '../../utils/dataProducts';
+import Bill from '../Bill/Bill';
 
 const listProductsInit = [
   {
@@ -138,6 +139,8 @@ const Sales = () => {
             eaque possimus sequi porro, necessitatibus esse dolorem enim aperiam dolore dolorum non
             doloremque! Dolore error officia nostrum autem corrupti?
           </p>
+
+          <Bill/>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
