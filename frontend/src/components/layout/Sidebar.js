@@ -1,6 +1,6 @@
 import { Nav } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
-import logo from '../../logo.svg';
+import logo from '../assets/logo.svg';
 
 const Sidebar = () => {
   return (
