@@ -81,7 +81,7 @@ function Bill() {
                 <th>Reference</th>
                 <th>Product</th>
                 <th>Unit Price</th>
-                <th>Quanty</th>
+                <th>Quantity</th>
                 <th>Total</th>
               </tr>
             </thead>
