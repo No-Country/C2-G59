@@ -46,17 +46,17 @@ function Dashboard() {
         </Breadcrumb>
       </div>
 
-      <div class="card-group mb-3">
-        <div class="card border-right">
+      <div className="card-group mb-3">
+        <div className="card border-right">
           <CardGroup title="New Clients" numberTitle="241" porcentText="234" iconImg={<i className="bi bi-person-plus-fill"></i>} />
         </div>
-        <div class="card border-right">
+        <div className="card border-right">
           <CardGroup title="Earnings of Month" numberTitle="145" porcentText="64" iconImg={<i className="bi bi-coin"></i>} />
         </div>
-        <div class="card border-right">
+        <div className="card border-right">
           <CardGroup title="New Projects" numberTitle="565" porcentText="34" iconImg={<i className="bi bi-apple"></i>} />
         </div>
-        <div class="card border-right">
+        <div className="card border-right">
           <CardGroup title="Projects" numberTitle="61" porcentText="54" iconImg={<i className="bi bi-person-plus-fill"></i>} />
         </div>
       </div>
