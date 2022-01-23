@@ -53,13 +53,19 @@ const getPurchaseOrderById = async (req = request, res = response) => {
 };
 
 const createPurchaseOrder = async (req = request, res = response) => {
-  const { products, ...restPurchaseOrder } = req.body;
+  const { products, purchase_date, pay_date, ...restPurchaseOrder } = req.body;
+
+  const newPayDate = !pay_date ? purchase_date : pay_date;
 
   // Agregar datos a la tabla purchase-order
-  const purchaseOrder = await PurchaseOrder.create({ ...restPurchaseOrder })
-    .catch( (error) => {
-      return res.status(500).json({ ok: false, msg: 'Talk with de admin', error });
-    });
+  const purchaseOrder = await PurchaseOrder.create({ 
+    ...restPurchaseOrder,
+    purchase_date,
+    pay_date: newPayDate
+  })
+  .catch( (error) => {
+    return res.status(500).json({ ok: false, msg: 'Talk with de admin', error });
+  });
 
   const { id:purchase_order_id } = purchaseOrder;
 
@@ -73,6 +79,20 @@ const createPurchaseOrder = async (req = request, res = response) => {
     }).catch((error) => {
       return res.status(500).json({ ok: false, msg: 'Talk with de admin', error });
     });
+
+    const productTemp = await Product.findOne({ where: { id: product.product_id }});
+
+    const newStock = Number(product.count) + Number(productTemp.stock);
+
+    await Product.update({ stock: newStock }, { where: { id: product.product_id } })
+      .catch( (error) => {
+        res.status(400).json({
+          msg: 'Talk with the admin',
+          error,
+        });
+      });
+
+
   }
 
   // Agregar datos a la tabla de products
@@ -81,25 +101,35 @@ const createPurchaseOrder = async (req = request, res = response) => {
 
 const deletePurchaseOrder = async (req = request, res = response) => {
   const { id } = req.params;
+  const products = [];
 
-  await PurchaseTransaction.destroy({ where: { purchase_order_id: id }})
-      .catch((error) => {
-        return res.status(500).json({ ok: false, msg: 'Talk with de admin', error });
-      });
-
-  await PurchaseOrder.destroy({ where: { id } })
-    .catch((error) => {
-      return res.status(400).json({
-        msg: 'Talk with the admin',
-        error,
-      });
+  try {
+    const purchaseTrxs = await PurchaseTransaction.findAll({
+      where: { purchase_order_id: id }
     });
+
+    // Update stock when delete purchase order
+    for(let trx of purchaseTrxs) {
+      const product = await Product.findOne({ where: { id: trx.product_id }});
+      const newStock = product.stock - trx.count;
+      await Product.update({ stock: newStock }, { where: { id: trx.product_id } })
+    }
+
+    await PurchaseTransaction.destroy({ where: { purchase_order_id: id }});
+    await PurchaseOrder.destroy({ where: { id } });
+
+    res.status(200).json({
+      msg: 'Purchase Order deleted successfully',
+    });
+
+  } catch(error) {
+    return res.status(500).json({ ok: false, msg: 'Talk with de admin', error });
+  }
+  
 
   
 
-  res.status(200).json({
-    msg: 'Product deleted successfully',
-  });
+  
 };
 
 module.exports = {
