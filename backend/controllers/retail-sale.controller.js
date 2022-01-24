@@ -6,50 +6,60 @@ const { SaleTransaction } = require('../db/models/sales-trx.model');
 
 const getRetailSale = async (req = request, res = response) => {
 
-  const retailSales = await RetailSale.findAll();
-  const newRetailSales = [];
-  
-  // Code to include list of products
-  for(const sale of retailSales) {
-    const products = await SaleTransaction.findAll({
-      where: {
-        retail_sale_id: sale.id
+  const { show_products = false } = req.query;
+
+  try {
+    const retailSales = await RetailSale.findAll();
+    const newRetailSales = [];
+
+    if (!JSON.parse(show_products)) {
+      return res.status(200).json({ retail_sales: retailSales });
+    }
+    
+    // Code to include list of products
+    for(const sale of retailSales) {
+      const products = [];
+      const saleTrxs = await SaleTransaction.findAll({ 
+        where: { retail_sale_id: sale.id }
+      });
+      
+      for (const trx of saleTrxs) {
+        const product = await Product.findOne({ where: { id: trx.product_id }});
+        delete product.dataValues.stock;
+        products.push({ ...product.dataValues, count: trx.count });
       }
-    }).catch((error) => {
-      return res.status(500).json({ ok: false, msg: 'Talk with de admin', error });
-    });
-    newRetailSales.push({...sale.dataValues, products});
+      
+      newRetailSales.push({...sale.dataValues, products});
+    }
+    res.status(200).json({ retail_sales: newRetailSales });
+
+  } catch (error) {
+    return res.status(500).json({ ok: false, msg: 'Talk with de admin', error });
   }
-  res.status(200).json({ retail_sales: newRetailSales });
 
 };
 
 const getRetailSaleById = async (req = request, res = response) => {
   const { id } = req.params;
 
-  const retailSale = await RetailSale.findOne({ where: { id }});
-
-  const products = await SaleTransaction.findAll({
-    where: {
-      retail_sale_id: retailSale.id
-    }
-  }).catch((error) => {
-    return res.status(500).json({ ok: false, msg: 'Talk with de admin', error });
-  });
-
-  // Asign name to the products
-  let productsWithName = [];
-  for(const product of products) {
-    const productObj = await Product.findOne({ where: { id: product.id }})
-      .catch((error) => {
-        return res.status(500).json({ ok: false, msg: 'Talk with de admin', error });
-      });
+  try {
+    const products = [];
+    const retailSale = await RetailSale.findOne({ where: { id }});
     
-    productsWithName.push({...product.dataValues, ...productObj.dataValues });
+    const saleTrx = await SaleTransaction.findAll({
+      where: { retail_sale_id: retailSale.id }
+    });
+
+    for (const trx of saleTrx) {
+      const product = await Product.findOne({ where: { id: trx.product_id }});
+      delete product.dataValues.stock;
+      products.push({ ...product.dataValues, count: trx.count });
+    }
+    
+    res.status(200).json({...retailSale.dataValues, products });
+  } catch(error) {
+    return res.status(500).json({ ok: false, msg: 'Talk with de admin', error });
   }
-
-  res.status(200).json({...retailSale.dataValues, products: productsWithName});
-
 
 };
 
