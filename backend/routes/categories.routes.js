@@ -8,9 +8,6 @@ const { validateInputs } = require('../middlewares/validate-inputs');
 // Helpers
 const { categoryExistById } = require('../helpers/db-validators');
 
-// Helper
-const { categoryExistById } = require('../helpers/db-validators');
-
 // Controllers
 const { 
   getCategories,
