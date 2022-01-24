@@ -1,46 +1,42 @@
-const { Router } = require('express')
-const { check } = require('express-validator')
+const { Router } = require('express');
+const { check } = require('express-validator');
+
 
 // Middlewares
-const { validateInputs } = require('../middlewares/validate-inputs')
+const { validateInputs } = require('../middlewares/validate-inputs');
+
+// Helpers
+const { categoryExistById } = require('../helpers/db-validators');
 
 // Helper
 const { categoryExistById } = require('../helpers/db-validators');
 
 // Controllers
 const { 
-    getCategories,
+  getCategories,
 	getCategoryById,
 	createCategory,
-	updateCategory,
 	deleteCategory,
-} = require('../controllers/categories.controller')
+} = require('../controllers/categories.controller');
 
 // Rutas
 const router = Router();
 // /api/categories
 
-// Get an Category by id [Public]
+// Get all Categories [Public]
 router.get('/', getCategories );
 
-// Get an Category by id [Public]
+// Get a Category by id [Public]
 router.get('/:id', [
     check('id').custom( categoryExistById ),
     validateInputs
 ], getCategoryById );
 
-// Create Category [Public]
+// Create a Category [Public]
 router.post('/', [
     check('category_name', 'The category_name is obligatory').not().isEmpty(),
     validateInputs
 ], createCategory );
-
-// Update Category [Public]
-router.put('/:id', [
-    check('id').custom( categoryExistById ),
-	check('category_name', 'The category_name is obligatory').not().isEmpty(),
-    validateInputs
-], updateCategory );
 
 // Delete Category [Public]
 router.delete('/:id', [

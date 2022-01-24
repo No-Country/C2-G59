@@ -7,7 +7,8 @@ const randomIn = (options) => {
 const getAmountTotal = (products) => {
     let total = 0;
     for(let product of products) {
-        total += ( product.cost * product.count );
+        let money = product.cost || product.price;
+        total += ( money * product.count );
     }
     // return Number(total.toFixed(2));
     return total.toFixed(2);

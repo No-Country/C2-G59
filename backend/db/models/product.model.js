@@ -14,12 +14,23 @@ const ProductSchema = {
     type: DataTypes.STRING,
   },
   description: {
+    allowNull: true,
+    type: DataTypes.STRING,
+    default: null,
+  },
+  category: {
     allowNull: false,
     type: DataTypes.STRING,
   },
   price: {
     allowNull: false,
     type: DataTypes.DECIMAL(13,2),
+    default: 0,
+  },
+  stock: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    default: 0,
   },
 }
 
