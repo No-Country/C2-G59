@@ -1,15 +1,19 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
+
 // Middlewares
 const { validateInputs } = require('../middlewares/validate-inputs');
 
 // Helpers
 const { categoryExistById } = require('../helpers/db-validators');
 
+// Helper
+const { categoryExistById } = require('../helpers/db-validators');
+
 // Controllers
 const { 
-    getCategories,
+  getCategories,
 	getCategoryById,
 	createCategory,
 	deleteCategory,
@@ -34,8 +38,8 @@ router.post('/', [
     validateInputs
 ], createCategory );
 
-// Delete a Category by id [Public]
-router.get('/:id', [
+// Delete Category [Public]
+router.delete('/:id', [
     check('id').custom( categoryExistById ),
     validateInputs
 ], deleteCategory );
