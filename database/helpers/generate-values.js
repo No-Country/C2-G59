@@ -49,16 +49,16 @@ const getCostOfProduct = (price) => {
     return (price * randomPercent).toFixed(2);
 };
 
-const randomPurchaseOrderDate = () => {
+const randomTransactionDate = () => {
     const start = new Date('2019-06-01');
     const end = new Date();
     const random = Math.random();
 
-    const purchase_date = new Date(start.getTime() + random * (end.getTime() - start.getTime()));
+    const trx_date = new Date(start.getTime() + random * (end.getTime() - start.getTime()));
     const pay_date =  new Date(start.getTime() + random * (end.getTime() - start.getTime()));
     pay_date.setDate(pay_date.getDate() + randomIn([0, 7, 15, 30]));
 
-    return { purchase_date, pay_date };
+    return { trx_date, pay_date };
 };
 
 module.exports = {
@@ -69,5 +69,5 @@ module.exports = {
     randomSupplierInvoice,
     randomDozen,
     getCostOfProduct,
-    randomPurchaseOrderDate,
+    randomTransactionDate,
 };
