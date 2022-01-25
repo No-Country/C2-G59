@@ -5,7 +5,11 @@ export const COLUMNS = [
   },
   {
     Header: 'Product',
-    accessor: 'product'
+    accessor: 'product_name'
+  },
+  {
+    Header: 'Category',
+    accessor: 'category'
   },
   {
     Header: 'Description',
@@ -19,8 +23,5 @@ export const COLUMNS = [
     Header: 'Stock',
     accessor: 'stock'
   },
-  {
-    Header: 'Sales',
-    accessor: 'sales'
-  },
+  
 ]
