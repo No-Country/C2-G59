@@ -1,12 +1,11 @@
 import React, { useMemo } from 'react';
 import { useTable, useSortBy, usePagination } from 'react-table';
-import DATA from './DATA.json';
 import { COLUMNS } from './Columns';
 import { Button, Table } from 'react-bootstrap';
 
-export const BasicTable = () => {
+export const BasicTable = ({data:dataProducts}) => {
   const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => DATA, []);
+  const data = useMemo(() => dataProducts, [dataProducts]);
 
   const {
     getTableProps,
