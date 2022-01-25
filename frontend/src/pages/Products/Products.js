@@ -23,7 +23,7 @@ const Products = () => {
   return (
     <div className="page-content">
       <Container fluid>
-        <Breadcrumbs title="Products" breadcrumbItems={breadcrumbItems} />
+        <Breadcrumbs title="List Products" breadcrumbItems={breadcrumbItems} />
         <Row>
           <Col>
             <Card>
