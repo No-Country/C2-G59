@@ -14,5 +14,6 @@ export { default as Purchases } from './Purchases/Purchases';
 // export { default as AddPurchase } from './Purchases/AddPurchase';
 export { default as PurchaseDetails } from './Purchases/PurchaseDetails';
 export { default as Branches } from './Branches/Branches';
+export { default as AddBranches } from './Branches/AddBranches'
 export { default as Help } from './Help/Help';
 export { default as NotFound } from './NotFound';
