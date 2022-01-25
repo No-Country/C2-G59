@@ -3,17 +3,17 @@ import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Breadcrumbs from '../../components/common/Breadcrumbs';
-import { BasicTable } from './BasicTable';
+import { CategoryTable } from './CategoryTable';
 import { useEffect } from 'react';
 import { getProducts } from '../../store/actions/productsActions';
 
-const Products = () => {
+const Category = () => {
   const { items, loading, error } = useSelector(state => state.products);
   const dispatch = useDispatch();
 
   const breadcrumbItems = [
     { title: 'Fintech', link: '/' },
-    { title: 'Products', link: '#d' },
+    { title: 'Categories', link: '#d' },
   ];
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Products = () => {
   return (
     <div className="page-content">
       <Container fluid>
-        <Breadcrumbs title="List Products" breadcrumbItems={breadcrumbItems} />
+        <Breadcrumbs title="Categories" breadcrumbItems={breadcrumbItems} />
         <Row>
           <Col>
             <Card>
@@ -54,7 +54,7 @@ const Products = () => {
                   </>
                 ) : (
                   <>
-                    <BasicTable data={items} />
+                    <CategoryTable data={items} />
                   </>
                 )}
               </CardBody>
@@ -66,4 +66,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Category;
