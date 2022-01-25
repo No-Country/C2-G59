@@ -3,6 +3,7 @@ import {
   AddProduct,
   AddUser,
   Analytics,
+  ChangePass,
   Dashboard,
   Login,
   Products,
@@ -25,6 +26,7 @@ const privateRoutesList = [
   { path: '/purchases/:id', element: <PurchaseDetails /> },
   { path: '/sales', element: <Sales /> },
   { path: '/account', element: <Account /> },
+  { path: '/account/change-pass', element: <ChangePass /> },
 ];
 
 const publicRoutesList = [{ path: '/login', element: <Login /> }];

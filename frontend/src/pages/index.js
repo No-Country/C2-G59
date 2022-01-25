@@ -7,7 +7,7 @@ export { default as AddProduct } from './Products/AddProduct';
 export { default as Users } from './Users/Users';
 export { default as AddUser } from './Users/AddUser';
 export { default as Account } from './Account/Account';
-// export { default as ChangePass } from './Account/ChangePass';
+export { default as ChangePass } from './Account/ChangePass';
 export { default as Sales } from './Sales/Sales';
 // export { default as AddSale } from './Sales/AddSale';
 export { default as Purchases } from './Purchases/Purchases';
