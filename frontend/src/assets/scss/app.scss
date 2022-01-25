@@ -76,3 +76,29 @@
 // @import 'custom/pages/coming-soon';
 // @import 'custom/pages/timeline';
 // @import 'custom/pages/extras-pages';
+
+.text-error {
+  font-size: 120px;
+  @media (max-width: 575.98px) {
+    font-size: 86px;
+  }
+}
+
+.error-text {
+  color: $danger;
+  position: relative;
+
+  .error-img {
+    position: absolute;
+    width: 120px;
+    left: -15px;
+    right: 0;
+    bottom: 47px;
+
+    @media (max-width: 575.98px) {
+      width: 86px;
+      left: -12px;
+      bottom: 38px;
+    }
+  }
+}
