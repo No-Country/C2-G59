@@ -1,5 +1,5 @@
 import { axiosWithOutToken, axiosWithToken } from '../../services/axios';
-import { types } from '../types/types';
+import { types } from '../types';
 
 const adminAuthSet = () => {
   return dispatch => {
