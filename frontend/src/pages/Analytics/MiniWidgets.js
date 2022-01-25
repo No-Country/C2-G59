@@ -23,7 +23,7 @@ const MiniWidgets = ({ reports }) => {
             <CardBody className="border-top py-3">
               <div className="text-truncate">
                 <span className="badge badge-soft-success font-size-11 me-1">
-                  <i className="mdi mdi-menu-up"> </i> {report.rate}
+                  <i className="ri-arrow-up-s-line"> </i> {report.rate}
                 </span>
                 <span className="text-muted ms-2">{report.desc}</span>
               </div>

@@ -24,13 +24,8 @@ class MegaMenu extends Component {
             this.setState({ megaMenu: !this.state.megaMenu });
           }}
         >
-          <DropdownToggle
-            tag="button"
-            type="button"
-            caret
-            className="btn header-item waves-effect"
-          >
-            {this.props.t('Mega Menu')} <i className="mdi mdi-chevron-down"></i>
+          <DropdownToggle tag="button" type="button" caret className="btn header-item waves-effect">
+            {this.props.t('Mega Menu')} <i className="ri-arrow-down-s-line"></i>
           </DropdownToggle>
           <DropdownMenu className="dropdown-megamenu">
             <Row>
@@ -146,11 +141,7 @@ class MegaMenu extends Component {
 
                   <Col sm={5}>
                     <div>
-                      <img
-                        src={megamenuImg}
-                        alt=""
-                        className="img-fluid mx-auto d-block"
-                      />
+                      <img src={megamenuImg} alt="" className="img-fluid mx-auto d-block" />
                     </div>
                   </Col>
                 </Row>

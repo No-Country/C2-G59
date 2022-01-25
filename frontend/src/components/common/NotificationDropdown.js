@@ -75,7 +75,7 @@ const NotificationDropdown = ({ t }) => {
           </SimpleBar>
           <div className="p-2 border-top">
             <Link to="#" className="btn btn-sm btn-link font-size-14 d-block text-center">
-              <i className="mdi mdi-arrow-right-circle mr-1"></i>
+              <i className="ri-arrow-right-circle-line mr-1"></i>
               {t(' View More')}
             </Link>
           </div>
@@ -105,7 +105,7 @@ function ItemNotification({ path = '#s', icon, backgroundIcon, avatar, author, m
           <div className="font-size-12 text-muted">
             <p className="mb-1">{message}</p>
             <p className="mb-0">
-              <i className="mdi mdi-clock-outline"></i> {time}
+              <i className="ri-time-line"></i> {time}
             </p>
           </div>
         </div>

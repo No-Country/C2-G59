@@ -84,12 +84,12 @@ class EarningReports extends Component {
         <Card>
           <CardBody>
             <Dropdown
-              className="float-end"
+              className="float-end mt-1"
               isOpen={this.state.menu}
               toggle={() => this.setState({ menu: !this.state.menu })}
             >
               <DropdownToggle tag="i" className="arrow-none card-drop">
-                <i className="mdi mdi-dots-vertical"></i>
+                <i className="ri-more-2-fill"></i>
               </DropdownToggle>
               <DropdownMenu end>
                 <DropdownItem href="">Sales Report</DropdownItem>

@@ -9,7 +9,7 @@ const Footer = () => {
             <Col sm={6}>{new Date().getFullYear()} © No-Country.</Col>
             <Col sm={6}>
               <div className="text-sm-end d-none d-sm-block">
-                Created with <i className="mdi mdi-heart text-danger"></i> by Team G-59
+                Created with <i className="ri-heart-fill text-danger"></i> by Team G-59
               </div>
             </Col>
           </Row>

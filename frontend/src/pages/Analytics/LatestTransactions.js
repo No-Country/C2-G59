@@ -19,10 +19,10 @@ const expandRow = {
     <>
       Action :
       <Link to="#" className="mr-3 text-primary">
-        <i className="mdi mdi-pencil font-size-18"></i>
+        <i className="ri-edit-2-fill font-size-18"></i>
       </Link>
       <Link to="#" className="text-danger">
-        <i className="mdi mdi-trash-can font-size-18"></i>
+        <i className="ri-delete-bin-fill font-size-18"></i>
       </Link>
     </>
   ),
@@ -230,9 +230,9 @@ const LatestTransactions = () => {
       <Col lg={8}>
         <Card>
           <CardBody>
-            <Dropdown isOpen={menu} toggle={toggleMenu} className="float-end">
+            <Dropdown isOpen={menu} toggle={toggleMenu} className="float-end mt-1">
               <DropdownToggle tag="i" className="arrow-none card-drop">
-                <i className="mdi mdi-dots-vertical"></i>
+                <i className="ri-more-2-fill"></i>
               </DropdownToggle>
               <DropdownMenu end>
                 <DropdownItem>Sales Report</DropdownItem>

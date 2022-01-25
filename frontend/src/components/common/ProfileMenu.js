@@ -30,7 +30,7 @@ const ProfileMenu = ({ t, name, handleLogout }) => {
         >
           <AvatarLetter name={nameUser} />
           <span className="d-none d-xl-inline-block ms-2 text-transform">{nameUser}</span>
-          <i className="mdi mdi-chevron-down d-none ms-1 d-xl-inline-block"></i>
+          <i className="ri-arrow-down-s-line d-none ms-1 d-xl-inline-block"></i>
         </DropdownToggle>
         <DropdownMenu end>
           <Link to="/account">
