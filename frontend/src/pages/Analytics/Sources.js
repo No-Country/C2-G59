@@ -28,9 +28,9 @@ const Sources = props => {
       <Col lg={4}>
         <Card>
           <CardBody>
-            <Dropdown className="float-end" isOpen={menu} toggle={toggleMenu}>
-              <DropdownToggle tag="i" className="arrow-none card-drop">
-                <i className="mdi mdi-dots-vertical"></i>
+            <Dropdown className="float-end mt-1" isOpen={menu} toggle={toggleMenu}>
+              <DropdownToggle tag="i" className="arrow-none card-drop d-inline-block">
+                <i className="ri-more-2-fill"></i>
               </DropdownToggle>
               <DropdownMenu end>
                 <DropdownItem href="">Sales Report</DropdownItem>
@@ -50,7 +50,7 @@ const Sources = props => {
                 <p className="mb-2">Total sources</p>
                 <h4>$ 7652</h4>
                 <div className="text-success">
-                  <i className="mdi mdi-menu-up font-size-14"> </i>2.2 %
+                  <i className="ri-arrow-up-s-line font-size-14"> </i>2.2 %
                 </div>
               </div>
 
