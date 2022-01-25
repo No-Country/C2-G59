@@ -1,4 +1,4 @@
-import { Col, Container, Row } from 'reactstrap';
+import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -26,35 +26,39 @@ const Products = () => {
         <Breadcrumbs title="Products" breadcrumbItems={breadcrumbItems} />
         <Row>
           <Col>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt, quos excepturi.
-              Expedita dolor non, saepe tempora soluta
-            </p>
-            <div className="d-flex justify-content-end">
-              <ReactHTMLTableToExcel
-                className="btn btn-primary mb-3 "
-                table="data table"
-                filename="Product - Table"
-                sheet="tablexls"
-                buttonText="Export to Excel"
-              />
-            </div>
+            <Card>
+              <CardBody>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt, quos
+                  excepturi. Expedita dolor non, saepe tempora soluta
+                </p>
+                <div className="d-flex justify-content-end">
+                  <ReactHTMLTableToExcel
+                    className="btn btn-primary mb-3 "
+                    table="data table"
+                    filename="Product - Table"
+                    sheet="tablexls"
+                    buttonText="Export to Excel"
+                  />
+                </div>
 
-            {error && (
-              <>
-                <h3>Errors: {JSON.stringify(error, null, ' ')}</h3>
-              </>
-            )}
+                {error && (
+                  <>
+                    <h3>Errors: {JSON.stringify(error, null, ' ')}</h3>
+                  </>
+                )}
 
-            {loading ? (
-              <>
-                <h3>Cargando...</h3>
-              </>
-            ) : (
-              <>
-                <BasicTable data={items} />
-              </>
-            )}
+                {loading ? (
+                  <>
+                    <h3>Cargando...</h3>
+                  </>
+                ) : (
+                  <>
+                    <BasicTable data={items} />
+                  </>
+                )}
+              </CardBody>
+            </Card>
           </Col>
         </Row>
       </Container>
