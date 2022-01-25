@@ -85,7 +85,7 @@ const SidebarContent = props => {
                 <Link to="/products/add">{t('Add Product')}</Link>
               </li>
               <li>
-                <Link to="/categories">{t('Categories')}</Link>
+                <Link to="/products/categories">{t('Categories')}</Link>
               </li>
             </ul>
           </li>
