@@ -11,7 +11,7 @@ const {
     getPurchaseOrderBetweenDates,
     getRetailSalesBetweenDates
 } = require("../helpers/sql-query");
-const { toDecimal } = require("../helpers/calculate");
+const { toDecimal, getPercent } = require("../helpers/calculate");
 
 const dateFormat = 'YYYY-MM-DD';
 
@@ -283,7 +283,20 @@ const getBranchesProfitTotal = async(req = request, res = response) => {
                     branchData.push({
                         profit: toDecimal(amountRetailSale - amountPurchaseOrder),
                         amountSales: toDecimal(amountRetailSale),
-                        amountPurchase: toDecimal(amountPurchaseOrder)
+                        amountPurchase: toDecimal(amountPurchaseOrder),
+                        profit_percent: getPercent(
+                            toDecimal(amountRetailSale - amountPurchaseOrder),
+                            totalProfit
+                        ),
+                        amountSales_percent: getPercent(
+                            toDecimal(amountRetailSale),
+                            totalAmountSales
+                        ),
+                        amountPurchase_percent: getPercent(
+                            toDecimal(amountPurchaseOrder),
+                            totalAmountPurchase
+                        ),
+                        
                     });
                 } else {
                     branchData.push(toDecimal(amountRetailSale - amountPurchaseOrder));
@@ -326,7 +339,19 @@ const getBranchesProfitTotal = async(req = request, res = response) => {
                 branchData.push({
                     profit: toDecimal(amountRetailSale - amountPurchaseOrder),
                     amountSales: toDecimal(amountRetailSale),
-                    amountPurchase: toDecimal(amountPurchaseOrder)
+                    amountPurchase: toDecimal(amountPurchaseOrder),
+                    profit_percent: getPercent(
+                        toDecimal(amountRetailSale - amountPurchaseOrder),
+                        totalProfit
+                    ),
+                    amountSales_percent: getPercent(
+                        toDecimal(amountRetailSale),
+                        totalAmountSales
+                    ),
+                    amountPurchase_percent: getPercent(
+                        toDecimal(amountPurchaseOrder),
+                        totalAmountPurchase
+                    ),      
                 });
             } else {
                 branchData.push(toDecimal(amountRetailSale - amountPurchaseOrder));
