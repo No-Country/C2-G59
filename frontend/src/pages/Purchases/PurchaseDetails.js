@@ -1,5 +1,5 @@
 // import { useEffect } from 'react';
-import { Alert, Container, Button } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getProductById } from '../../utils/dataProducts';
 import { getPurchaseById } from '../../utils/dataPurchase';
@@ -14,8 +14,7 @@ const PurchaseDetails = () => {
   });
 
   return (
-    <Container>
-      <div>
+      <div className='m-5 wrapperBranches'>
         <div className="d-flex justify-content-between align-items-start">
           <h1>Purchase Details: {params.id}</h1>
           <Button variant="warning" onClick={() => navigate(-1)}>
@@ -23,35 +22,45 @@ const PurchaseDetails = () => {
           </Button>
         </div>
         <hr />
-        <h2>Client: {data.name}</h2>
+        <h2>CLIENT: {data.name}</h2>
+        <h2>List of products:</h2>
+
+        <Table striped bordered hover size="sm">
+          <thead>
+            <tr className="thead-dark">
+              <th>Product</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          {products.map(item => {
+            return (
+              <tbody className="table light" key={item.ProductId}>
+                <tr>
+                  <td>{item.info.title}</td>
+                  <td>${item.info.price} </td>
+                  <td>{item.amount}</td>
+                  <td>{item.subTotal}</td>
+                </tr>
+              </tbody>
+            );
+          })}
+        </Table>
+
         <h2>
-          Total:{' '}
+          TOTAL:{' '}
           {new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(
             data.total,
           )}
         </h2>
-        <h2>List Products:</h2>
 
-        <Alert variant="primary">
-          <ul style={{ margin: 0 }}>
-            {products.map(item => {
-              return (
-                <li key={item.ProductId}>
-                  {' '}
-                  {item.info.title} - ${item.info.price} - cant: {item.amount} - subtotal: $
-                  {item.subTotal}
-                </li>
-              );
-            })}
-          </ul>
-        </Alert>
-
-        <h2>Details:</h2>
+        {/* <h2>Details:</h2>
         <Alert variant="success">
           <pre>{JSON.stringify(data, null, ' ')}</pre>
-        </Alert>
+        </Alert> */}
       </div>
-    </Container>
+    
   );
 };
 

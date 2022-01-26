@@ -12,7 +12,7 @@ const ChangePass = () => {
 
   return (
     <div className="page-content">
-      <Container>
+      <Container fluid>
         <Breadcrumbs title="Change Password" breadcrumbItems={breadcrumbItems} />
         <Row>
           <Col>
