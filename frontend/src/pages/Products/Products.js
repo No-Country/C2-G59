@@ -6,6 +6,7 @@ import Breadcrumbs from '../../components/common/Breadcrumbs';
 import { BasicTable } from './BasicTable';
 import { useEffect } from 'react';
 import { getProducts } from '../../store/actions/productsActions';
+import convertJsonToExcel from '../Products/excel';
 
 const Products = () => {
   const { items, loading, error } = useSelector(state => state.products);
@@ -20,10 +21,15 @@ const Products = () => {
     dispatch(getProducts());
   }, [dispatch]);
 
+  const handleOnChange = () => {
+    const data = convertJsonToExcel(items);
+    return data
+  };
+
   return (
-    <div className="page-content">
+    <div className='page-content'>
       <Container fluid>
-        <Breadcrumbs title="List Products" breadcrumbItems={breadcrumbItems} />
+        <Breadcrumbs title='Products' breadcrumbItems={breadcrumbItems} />
         <Row>
           <Col>
             <Card>
@@ -32,14 +38,17 @@ const Products = () => {
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt, quos
                   excepturi. Expedita dolor non, saepe tempora soluta
                 </p>
-                <div className="d-flex justify-content-end">
-                  <ReactHTMLTableToExcel
-                    className="btn btn-primary mb-3 "
-                    table="data table"
-                    filename="Product - Table"
-                    sheet="tablexls"
-                    buttonText="Export to Excel"
-                  />
+                <div className='d-flex justify-content-end'>
+                  {/* <ReactHTMLTableToExcel
+                    className='btn btn-primary mb-3 '
+                    table='data table'
+                    filename='excel'
+                    sheet='excel.xlsx'
+                    onChange={handleOnChange}
+                    buttonText='Export to Excel'
+                  /> */}
+                  {/* <a href="./excel.xlsx">Export to Excel</a> */}
+                  <button onClick={handleOnChange} className='btn btn-primary mb-3'>Export to Excel</button>
                 </div>
 
                 {error && (

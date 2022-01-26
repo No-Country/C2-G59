@@ -29,6 +29,7 @@
     "redux-thunk": "2.4.1",
     "sass": "1.49.0",
     "simplebar-react": "2.3.6",
+    "xlsx": "^0.17.5",
     "yup": "0.32.11"
   },
   "scripts": {
