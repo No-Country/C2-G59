@@ -66,7 +66,7 @@ function Dashboard() {
           </Col>
         </Row>
 
-        <Row>
+        {/* <Row>
           <Col lg={4} md={6}>
             <Graph data={data} type="line2" title="Titulo 3" description="Ejemplo 1" />{' '}
           </Col>
@@ -76,8 +76,8 @@ function Dashboard() {
           <Col lg={4} md={2}>
             <Graph data={data} type="bar" title="New Projects" description="Ejemplo 1" />
           </Col>
-        </Row>
-
+        </Row> */}
+        {/* 
         <Row>
           <Col lg={4} md={8}>
             <Card>
@@ -111,7 +111,7 @@ function Dashboard() {
           <Col>
             <TableInfo type="table" title="Titulo" description="Ejemplo 1" />
           </Col>
-        </Row>
+        </Row> */}
       </Container>
     </div>
   );
