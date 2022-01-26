@@ -46,21 +46,20 @@ function Dashboard() {
         <FourMiniChart />
 
         <Row>
-          <Col lg={9} md={6}>
+          <Col lg={8} md={6}>
             <Graph data={data} type="line" title="Sales / Earnings" description="Ejemplo 1" />
           </Col>
-
-          <Col lg={3} md={6}>
+          <Col lg={4} md={6}>
             <Graph data={data} type="doughnut" title="Earnings of Month" description="Ejemplo 1" />
           </Col>
         </Row>
 
         <Row>
           <Col lg={4} md={6}>
-            <Graph data={data} type="line" title="Titulo" description="Ejemplo 1" />{' '}
+            <Graph data={data} type="line" title="Titulo 3" description="Ejemplo 1" />{' '}
           </Col>
           <Col lg={4} md={6}>
-            <Graph data={data} type="bar" title="Titulo" description="Ejemplo 1" />{' '}
+            <Graph data={data} type="bar" title="Titulo 2" description="Ejemplo 1" />{' '}
           </Col>
           <Col lg={4} md={2}>
             <Graph data={data} type="bar" title="New Projects" description="Ejemplo 1" />
