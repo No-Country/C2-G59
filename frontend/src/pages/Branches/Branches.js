@@ -16,7 +16,7 @@ const Category = () => {
     <div className="page-content">
       <Container fluid>
         <Breadcrumbs title="List Branches" breadcrumbItems={breadcrumbItems} />
-        <Row xl={3} sm={6}>
+        <Row xl={3} sm={3}>
           {Branch.map((item, key) =>
             <Col key={key}>
               <Card>

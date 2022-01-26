@@ -15,7 +15,7 @@ const SuppliersPage = () => {
     <div className="page-content">
       <Container fluid>
         <Breadcrumbs title="List Suppliers" breadcrumbItems={breadcrumbItems} />
-        <Row xl={3} sm={6}>
+        <Row xl={3} sm={1}>
           {SuppliersData.map((item, key) =>
             <Col key={key}>
               <Card>
