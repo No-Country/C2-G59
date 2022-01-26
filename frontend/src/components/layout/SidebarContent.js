@@ -150,12 +150,12 @@ const SidebarContent = props => {
               </li>
             </ul>
           </li> */}
-          <li>
+          {/* <li>
             <Link to="/help" className="waves-effect">
               <i className="ri-question-line"></i>
               <span className="ms-1">{t('Help')}</span>
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </>
