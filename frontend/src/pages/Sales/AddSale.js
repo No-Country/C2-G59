@@ -2,20 +2,20 @@ import { Container } from 'reactstrap';
 
 import Breadcrumbs from '../../components/common/Breadcrumbs';
 
-const Help = () => {
+const AddSale = () => {
   const breadcrumbItems = [
     { title: 'Fintech', link: '/' },
-    { title: 'Help', link: '#d' },
+    { title: 'Add Sale', link: '#d' },
   ];
 
   return (
     <div className="page-content">
       <Container fluid>
-        <Breadcrumbs title="Help" breadcrumbItems={breadcrumbItems} />
+        <Breadcrumbs title="Add Sale" breadcrumbItems={breadcrumbItems} />
         {/** Contenido Row -> Col -> etc */}
       </Container>
     </div>
   );
 };
 
-export default Help;
+export default AddSale;
