@@ -1,50 +1,28 @@
-import React from 'react';
+import 'chart.js/auto';
 import { Bar, Line, Doughnut, Pie } from 'react-chartjs-2';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-import { Table, Button, Image } from 'react-bootstrap';
-import { dataTable } from '../../services/dataTable';
+import { Button, Image } from 'react-bootstrap';
+// import { useAxios } from '../../hooks/useAxios';
 
 function Graph({ data, type, title, description }) {
-  const dataTables = dataTable.map(item => {
-    return (
-      <tbody className="table-light" key={item.id}>
-        <tr>
-          <td>{item.id}</td>
-          <td>{item.product}</td>
-          <td>${item.price} </td>
-          <td>{item.stock}</td>
-          <td>{item.sales}</td>
-        </tr>
-      </tbody>
-    );
-  });
-
   let GraphDiv;
+
+  // const [response, error, loading] = useAxios(
+  //   '/charts/branches-profit?branch_id=2&months=3&cashflow=true',
+  // );
+
+  // console.log(response);
 
   if (type === 'line') {
     GraphDiv = <Line data={data} />;
+    // GraphDiv = <Line data={database} />;
   } else if (type === 'bar') {
     GraphDiv = <Bar data={data} />;
   } else if (type === 'pie') {
     GraphDiv = <Pie data={data} />;
   } else if (type === 'doughnut') {
     GraphDiv = <Doughnut data={data} />;
-  } else if (type === 'table') {
-    GraphDiv = (
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr className="table-light">
-            <th>#</th>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Sales</th>
-          </tr>
-        </thead>
-        {dataTables}
-      </Table>
-    );
   }
 
   return (
@@ -53,6 +31,7 @@ function Graph({ data, type, title, description }) {
         <div className="card-body">
           <h5 className="card-title">
             {title}
+
             <OverlayTrigger
               placement="bottom"
               overlay={<Tooltip id="button-tooltip-2">{description}</Tooltip>}
