@@ -4,6 +4,7 @@ import { Button, Row, Col, Form, Table, Modal, Container } from 'react-bootstrap
 
 // data example
 import { getAllProducts, getProductById } from '../../utils/dataProducts';
+import Bill from '../Bill/Bill';
 
 const listProductsInit = [
   {
@@ -82,12 +83,12 @@ const Sales = () => {
       <Form>
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
-            <Form.Label>N°. Factura</Form.Label>
+            <Form.Label>Invoice Number</Form.Label>
             <Form.Control type="number" placeholder="Ingrese numero de factura" />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridState">
-            <Form.Label>Sucursal</Form.Label>
+            <Form.Label>Branch</Form.Label>
             <Form.Select defaultValue="Choose...">
               <option>Choose...</option>
               <option>Buenos Aires</option>
@@ -99,17 +100,17 @@ const Sales = () => {
 
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridCity">
-            <Form.Label>Metodo de compra</Form.Label>
+            <Form.Label>Purchase Method</Form.Label>
             <Form.Check type="checkbox" label="Credito" />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridState">
-            <Form.Label>Fecha de compra</Form.Label>
+            <Form.Label>Purchase Date</Form.Label>
             <Form.Control type="date" />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridZip">
-            <Form.Label>Fecha de pago</Form.Label>
+            <Form.Label>Payment Date</Form.Label>
             <Form.Control type="date" />
           </Form.Group>
         </Row>
@@ -138,6 +139,8 @@ const Sales = () => {
             eaque possimus sequi porro, necessitatibus esse dolorem enim aperiam dolore dolorum non
             doloremque! Dolore error officia nostrum autem corrupti?
           </p>
+
+          <Bill/>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

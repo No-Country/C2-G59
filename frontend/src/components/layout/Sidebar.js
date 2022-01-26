@@ -1,90 +1,26 @@
-import { Nav } from 'react-bootstrap';
-import { Link, NavLink } from 'react-router-dom';
-import logo from '../../logo.svg';
+// import { useSelector } from 'react-redux';
+import SimpleBar from 'simplebar-react';
 
-const Sidebar = () => {
+import SidebarContent from './SidebarContent';
+
+const Sidebar = ({ type, isMobile }) => {
+  // const layout = useSelector(state => state.layout);
+  // console.log(layout);
+
   return (
-    <aside className="sidebar">
-      <div className="logo bg-primary">
-        <Link to="/" className="d-flex align-items-center">
-          <img src={logo} alt="" className="w-75" />
-        </Link>
+    <>
+      <div className="vertical-menu">
+        <div data-simplebar className="h-100">
+          {type !== 'condensed' ? (
+            <SimpleBar style={{ maxHeight: '100%' }}>
+              <SidebarContent />
+            </SimpleBar>
+          ) : (
+            <SidebarContent />
+          )}
+        </div>
       </div>
-      <div className="d-flex flex-column flex-shrink-0 p-3" style={{ minHeight: '100%' }}>
-        <Nav defaultActiveKey="/" variant="pills" className="flex-column mb-auto">
-          {/* <Link to="/">
-            <Nav.Link href="/home">Active</Nav.Link>
-          </Link> */}
-          <li className="nav-item">
-            <NavLink to="/" className="nav-link link-dark">
-              <i className="bi bi-kanban m-3"></i>
-              Dashboard
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/products" className="nav-link link-dark">
-              <i className="bi bi-bag-check-fill m-3"></i>
-              Products
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/suppliers" className="nav-link link-dark disabled">
-              <i className="bi bi-bag-check-fill m-3"></i>
-              Suppliers
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/transactions" className="nav-link link-dark disabled">
-              <i className="bi bi-cash-stack m-3"></i>
-              Transactions
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/sales" className="nav-link link-dark">
-              <i className="bi bi-bag-check-fill m-3"></i>
-              Sales
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/purchases" className="nav-link link-dark">
-              <i className="bi bi-bag-check-fill m-3"></i>
-              Purchases
-            </NavLink>
-          </li>
-          <hr />
-          <li className="nav-item">
-            <NavLink to="/new-user" className="nav-link link-dark">
-              <i className="bi bi-person-circle m-3"></i>
-              New User
-            </NavLink>
-          </li>
-        </Nav>
-        {/* <hr />
-        <Dropdown>
-          <Dropdown.Toggle
-            variant="primary"
-            id="dropdown-basic2"
-            className="d-flex align-items-center text-white link-dark text-decoration-none w-100"
-          >
-            <img
-              src="https://github.com/mdo.png"
-              alt=""
-              width="32"
-              height="32"
-              className="rounded-circle me-2"
-            />
-            <strong>Usuario</strong>
-          </Dropdown.Toggle>
-          <Dropdown.Menu className="text-small shadow">
-            <Dropdown.Item href="#/action-1">New product...</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Profile</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown> */}
-      </div>
-    </aside>
+    </>
   );
 };
 
