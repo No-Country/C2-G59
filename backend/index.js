@@ -3,7 +3,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const { config } = require('./config/config')
-const dbConnection = require('./libs/sequelize')
+const { dbConnection } = require('./libs/sequelize')
 
 const routerApi = require('./routes')
 const {
