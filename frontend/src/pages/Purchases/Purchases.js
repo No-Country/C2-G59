@@ -106,38 +106,7 @@ const Purchases = () => {
         </tbody>
       </Table>
 
-      <h2>Add Purchase</h2>
-      <hr className="mt-4" />
-
-      <Form>
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridState">
-            <Form.Label>Sale Date</Form.Label>
-            <Form.Control type="date" />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId="formGridState">
-            <Form.Label>Name Client</Form.Label>
-            <Form.Control type="text" />
-          </Form.Group>
-        </Row>
-        {listProducts.map(item => (
-          <ItemProduct key={item.id} values={item} />
-        ))}
-
-        <Button variant="primary" className="mb-3" onClick={handleAddProduct}>
-          Add
-        </Button>
-        <hr />
-        <Row>
-          <Form.Group controlId="formGridZip">
-            <h3>Total: {formatMoney(total)}</h3>
-          </Form.Group>
-        </Row>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
+      
     </Container>
   );
 };
