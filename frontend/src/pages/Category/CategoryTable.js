@@ -3,7 +3,7 @@ import { useTable, useSortBy, usePagination } from 'react-table';
 import { COLUMNS } from './Columns';
 import { Button, Table } from 'react-bootstrap';
 
-export const BasicTable = ({data:dataProducts}) => {
+export const CategoryTable = ({data:dataProducts}) => {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => dataProducts, [dataProducts]);
 

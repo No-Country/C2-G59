@@ -88,16 +88,16 @@ function Dashboard() {
         </div>
 
         <div className="row">
-          <div className="col-lg-4 col-md-6">
+          <div className="col-lg-4 col-md-4">
             <Graph data={data} type="line" title="New Clients" description="Ejemplo 1" />
           </div>
-          <div className="col-lg-4 col-md-6">
+          <div className="col-lg-4 col-md-4">
             <Graph data={data} type="bar" title="Earnings of Month" description="Ejemplo 1" />
           </div>
-          <div className="col-lg-4 col-md-6">
+          <div className="col-lg-4 col-md-4">
             <Graph data={data} type="bar" title="New Projects" description="Ejemplo 1" />
           </div>
-
+</div>
           <div className="row">
             <div className="col-lg-6 col-md-6">
               <Graph data={data} type="line" title="Titulo" description="Ejemplo 1" />
@@ -121,7 +121,6 @@ function Dashboard() {
               <Graph type="table" title="Titulo" description="Ejemplo 1" />
             </div>
           </div>
-        </div>
       </Container>
     </div>
   );
