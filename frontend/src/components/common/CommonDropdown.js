@@ -40,7 +40,7 @@ const CommonDropdown = ({ t }) => {
 
           <Row className="g-0">
             <Col>
-              <Link className="dropdown-icon-item" to="/analitycs">
+              <Link className="dropdown-icon-item" to="/analytics">
                 <span className="ri-line-chart-line fs-3"></span>
                 <span>{t('Get Balance')}</span>
               </Link>
