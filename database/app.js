@@ -4,6 +4,7 @@ const axios = require("axios");
 const { getAmountTotal } = require("./helpers/calculate");
 const {
 	getRandomInt,
+	getRandomIntBetween,
 	randomProductId,
 	randomDozen,
 	getCostOfProduct,
@@ -102,15 +103,19 @@ const fillRetailSaleTable = async (salesToAdd) => {
 				.get(`${api}/products/${randomProductId()}`)
 				.catch((error) => console.warn(error));
 
-			const { id, price } = data.product;
+			const { id, price, stock } = data.product;
 			const isProductInList = products.some(
 				(product) => product.id === id,
 			);
+			console.log({ id, price, stock });
+			// const productCountToSell = getRandomInt(3); // Para ventas pequeñas
+			const productCountToSell = getRandomIntBetween(12,1); // Para ventas grandes
+			console.log({productCountToSell});
 
-			if (id !== null && price !== null && !isProductInList) {
+			if (id !== null && price !== null && !isProductInList && productCountToSell <= stock) {
 				products.push({
 					product_id: id,
-					count: getRandomInt(3),
+					count: productCountToSell,
 					price,
 				});
 			}
@@ -120,14 +125,18 @@ const fillRetailSaleTable = async (salesToAdd) => {
 			sale_date,
 			pay_date,
 			payment_status: "complete",
-			branch_id: randomBranchId(),
+			// branch_id: randomBranchId(),
+			branch_id: 2,
 			amount: getAmountTotal(products),
 			products,
 		};
 
-		console.log("Saving sale...");
-		const resp = await axios.post(`${api}/sales`, retail_sale);
-		console.log(resp.data.retailSale);
+		// Verificar que por lo menos haya un producto en el array
+		if (products.length > 0) {
+			console.log("Saving sale...");
+			const resp = await axios.post(`${api}/sales`, retail_sale);
+			console.log(resp.data.retailSale);
+		}
 
 		// Lo siguiente se hizo antes de actualizar el controlador de ProductOrder
 		// para que actualizara el stock automaticamente
@@ -143,4 +152,4 @@ const fillRetailSaleTable = async (salesToAdd) => {
 
 // fillProductsTable();
 // fillPurchasOrderTable(1);
-// fillRetailSaleTable(92);
+fillRetailSaleTable(30);

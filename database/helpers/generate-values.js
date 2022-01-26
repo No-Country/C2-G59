@@ -4,10 +4,21 @@ const { randomIn } = require("./calculate");
  * @param {number} max 
  * @returns random number from 1 and max
  */
- const getRandomInt = (max) => {
+const getRandomInt = (max) => {
     const randomNumber = Math.floor(Math.random() * (max + 1) );
     return randomNumber !== 0 ? randomNumber : getRandomInt(max);
 };
+
+/**
+ * @param {number} max 
+ * @returns random number from 1 and max
+ */
+ const getRandomIntBetween = (max, min) => {
+    const randomNumber = Math.floor(Math.random() * (max + 1) );
+    return randomNumber !== 0 && randomNumber >= min && randomNumber <= max
+        ? randomNumber : getRandomIntBetween(max, min);
+};
+
 
 // Random number from 1 to 3
 const randomBranchId = () => {
@@ -63,6 +74,7 @@ const randomTransactionDate = () => {
 
 module.exports = {
     getRandomInt,
+    getRandomIntBetween,
     randomBranchId,
     randomBranchSupplierId,
     randomProductId,
