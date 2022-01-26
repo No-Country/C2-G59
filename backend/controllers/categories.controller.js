@@ -10,8 +10,8 @@ const getCategories = async(req = request, res = response) => {
     res.status(200).json({ categories });
 };
 
-const getCategoryById = async(req = request, res = response) => {
 
+const getCategoryById = async (req = request, res = response) => {
 	const { id } = req.params;
 
 	try {
@@ -44,10 +44,10 @@ const deleteCategory = async(req = request, res = response) => {
 	});
 };
 
-
 module.exports = {
 	getCategories,
 	getCategoryById,
 	createCategory,
 	deleteCategory,
 };
+
