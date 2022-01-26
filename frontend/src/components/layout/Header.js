@@ -57,7 +57,7 @@ const Header = ({ toggleMenuCallback }) => {
         <div className="d-flex">
           {/* <LanguageDropdown /> */}
 
-          <CommonDropdown />
+          {/* <CommonDropdown /> */}
 
           <div className="dropdown d-none d-lg-inline-block ms-1">
             <Button
