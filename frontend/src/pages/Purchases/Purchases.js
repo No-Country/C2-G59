@@ -9,7 +9,7 @@ import { getAllPurchases } from '../../utils/dataPurchase';
 import { getAllProductsBack, getProductBackById } from '../../utils/dataProductsBack';
 
 const dataPurchases = getAllPurchases();
-const dataProducts = getAllProductsBack();
+// const dataProducts = getAllProductsBack();
 
 const initialList = [
   // {
@@ -34,31 +34,31 @@ const Purchases = () => {
   dayjs.extend(localizedFormat);
 
   const [listProducts, setListProducts] = useState(initialList);
-  const [total, setTotal] = useState(0.0);
+  // const [total, setTotal] = useState(0.0);
 
-  useEffect(() => {
-    let sum = 0;
+  // useEffect(() => {
+  //   let sum = 0;
 
-    for (let i = 0; i < listProducts.length; i++) {
-      sum += listProducts[i].subTotal;
-    }
-    setTotal(sum);
-    console.log(listProducts);
-  }, [listProducts]);
+  //   for (let i = 0; i < listProducts.length; i++) {
+  //     sum += listProducts[i].subTotal;
+  //   }
+  //   setTotal(sum);
+  //   console.log(listProducts);
+  // }, [listProducts]);
 
-  const handleAddProduct = () => {
-    setListProducts([
-      ...listProducts,
-      {
-        id: Math.random(),
-        name: '',
-        ProductId: 0,
-        amount: 1,
-        price: 0,
-        subTotal: 0,
-      },
-    ]);
-  };
+  // const handleAddProduct = () => {
+  //   setListProducts([
+  //     ...listProducts,
+  //     {
+  //       id: Math.random(),
+  //       name: '',
+  //       ProductId: 0,
+  //       amount: 1,
+  //       price: 0,
+  //       subTotal: 0,
+  //     },
+  //   ]);
+  // };
 
   return (
     <Container>
@@ -105,89 +105,87 @@ const Purchases = () => {
           ))}
         </tbody>
       </Table>
-
-      
     </Container>
   );
 };
 
-const formatMoney = num => {
-  return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(num);
-};
+// const formatMoney = num => {
+//   return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(num);
+// };
 
-const ItemProduct = ({ values: data }) => {
-  const [form, setForm] = useState({ ProductId: 2, amount: 1, price: 0, subTotal: 0 });
-  const [subTotal, setSubtotal] = useState('0');
-  const [priceUnit, setPriceUnit] = useState('0');
+// const ItemProduct = ({ values: data }) => {
+//   const [form, setForm] = useState({ ProductId: 2, amount: 1, price: 0, subTotal: 0 });
+//   const [subTotal, setSubtotal] = useState('0');
+//   const [priceUnit, setPriceUnit] = useState('0');
 
-  useEffect(() => {
-    // Update Price Product
-    const searchPriceUnit = getProductBackById(Number(form.ProductId)).price;
-    // const priceUnitUpdated = ;
-    setPriceUnit(searchPriceUnit);
-    // setForm({
-    //   ...form,
-    //   price: searchPriceUnit
-    // })
-    // Calc Subtotal
-    const newSubTotal = Number(form.amount) * Number(searchPriceUnit);
-    const final = formatMoney(newSubTotal);
-    setSubtotal(final);
-  }, [form, priceUnit]);
+//   useEffect(() => {
+//     // Update Price Product
+//     const searchPriceUnit = getProductBackById(Number(form.ProductId)).price;
+//     // const priceUnitUpdated = ;
+//     setPriceUnit(searchPriceUnit);
+//     // setForm({
+//     //   ...form,
+//     //   price: searchPriceUnit
+//     // })
+//     // Calc Subtotal
+//     const newSubTotal = Number(form.amount) * Number(searchPriceUnit);
+//     const final = formatMoney(newSubTotal);
+//     setSubtotal(final);
+//   }, [form, priceUnit]);
 
-  const handleForm = e => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
-  console.log(form);
-  return (
-    <>
-      <Row className="mb-3">
-        <Form.Group as={Col} controlId="formGridZip">
-          <Form.Label>Name</Form.Label>
+//   const handleForm = e => {
+//     setForm({
+//       ...form,
+//       [e.target.name]: e.target.value,
+//     });
+//   };
+//   console.log(form);
+//   return (
+//     <>
+//       <Row className="mb-3">
+//         <Form.Group as={Col} controlId="formGridZip">
+//           <Form.Label>Name</Form.Label>
 
-          <Form.Select value={form.ProductId} onChange={handleForm} name="ProductId">
-            {/* <option>Choose...</option> */}
-            {dataProducts.map(item => (
-              <option key={item.id} value={item.id}>
-                {item.name}
-              </option>
-            ))}
-          </Form.Select>
-        </Form.Group>
+//           <Form.Select value={form.ProductId} onChange={handleForm} name="ProductId">
+//             {/* <option>Choose...</option> */}
+//             {dataProducts.map(item => (
+//               <option key={item.id} value={item.id}>
+//                 {item.name}
+//               </option>
+//             ))}
+//           </Form.Select>
+//         </Form.Group>
 
-        <Form.Group as={Col} controlId="formGridZip">
-          <Form.Label>Amount</Form.Label>
-          <Form.Control
-            name="amount"
-            type="number"
-            value={form.amount}
-            onChange={handleForm}
-            min="1"
-          />
-        </Form.Group>
+//         <Form.Group as={Col} controlId="formGridZip">
+//           <Form.Label>Amount</Form.Label>
+//           <Form.Control
+//             name="amount"
+//             type="number"
+//             value={form.amount}
+//             onChange={handleForm}
+//             min="1"
+//           />
+//         </Form.Group>
 
-        <Form.Group as={Col} controlId="formGridZip">
-          <Form.Label>Price</Form.Label>
-          <Form.Control
-            name="price"
-            type="text"
-            value={formatMoney(priceUnit)}
-            onChange={handleForm}
-            min="0"
-            disabled
-          />
-        </Form.Group>
+//         <Form.Group as={Col} controlId="formGridZip">
+//           <Form.Label>Price</Form.Label>
+//           <Form.Control
+//             name="price"
+//             type="text"
+//             value={formatMoney(priceUnit)}
+//             onChange={handleForm}
+//             min="0"
+//             disabled
+//           />
+//         </Form.Group>
 
-        <Form.Group as={Col} controlId="formGridZip">
-          <Form.Label>SubTotal</Form.Label>
-          <Form.Control name="subTotal" type="text" value={subTotal} disabled />
-        </Form.Group>
-      </Row>
-    </>
-  );
-};
+//         <Form.Group as={Col} controlId="formGridZip">
+//           <Form.Label>SubTotal</Form.Label>
+//           <Form.Control name="subTotal" type="text" value={subTotal} disabled />
+//         </Form.Group>
+//       </Row>
+//     </>
+//   );
+// };
 
 export default Purchases;
