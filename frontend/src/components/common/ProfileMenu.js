@@ -38,11 +38,11 @@ const ProfileMenu = ({ t, name, handleLogout }) => {
               <i className="ri-user-line align-middle mr-1"></i> {t('Account')}
             </DropdownItem>
           </Link>
-          <Link to="/account/change-pass">
+          {/* <Link to="/account/change-pass">
             <DropdownItem>
               <i className="ri-lock-unlock-line align-middle mr-1"></i> {t('Change Password')}
             </DropdownItem>
-          </Link>
+          </Link> */}
           <DropdownItem divider />
           <DropdownItem className="text-danger" onClick={handleLogout}>
             <i className="ri-shut-down-line align-middle mr-1 text-danger"></i> {t('Logout')}
