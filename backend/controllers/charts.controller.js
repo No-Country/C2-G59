@@ -20,11 +20,13 @@ const getBranchesProfit = async(req = request, res = response) => {
     // Query data
     let {
         months = 3, // months > 1
-        branch_id = 0 // 0 para todas las Branch
+        branch_id = 0, // 0 para todas las Branch
+        cashflow = false,
     } = req.query;
 
     months = Number(months);
     branch_id = Number(branch_id);
+    cashflow = JSON.parse(cashflow); // Transforma en bool el string
     let labels = [];
     let data = [];
 
@@ -100,7 +102,16 @@ const getBranchesProfit = async(req = request, res = response) => {
                         }
                     });
 
-                    branchData.push(toDecimal(amountPurchaseOrder - amountRetailSale));
+                    if (cashflow) {
+                        branchData.push({
+                            month: monthToEvaluate.format('MMMM'),
+                            profit: toDecimal(amountRetailSale - amountPurchaseOrder),
+                            amountSales: toDecimal(amountRetailSale),
+                            amountPurchase: toDecimal(amountPurchaseOrder)
+                        });
+                    } else {
+                        branchData.push(toDecimal(amountRetailSale - amountPurchaseOrder));
+                    }
                 }
 
                 data.push({
@@ -143,7 +154,16 @@ const getBranchesProfit = async(req = request, res = response) => {
                     }
                 });
 
-                branchData.push(toDecimal(amountPurchaseOrder - amountRetailSale));
+                if (cashflow) {
+                    branchData.push({
+                        month: monthToEvaluate.format('MMMM'),
+                        profit: toDecimal(amountRetailSale - amountPurchaseOrder),
+                        amountSales: toDecimal(amountRetailSale),
+                        amountPurchase: toDecimal(amountPurchaseOrder)
+                    });
+                } else {
+                    branchData.push(toDecimal(amountRetailSale - amountPurchaseOrder));
+                }
             }
 
             data.push({
