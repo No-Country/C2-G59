@@ -42,12 +42,12 @@ const SidebarContent = props => {
             </Link>
           </li>
 
-          <li>
+          {/* <li>
             <Link to="/analytics" className="waves-effect">
               <i className="ri-bar-chart-line"></i>
               <span className="ms-1">{t('Analytics')}</span>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/#" className="has-arrow waves-effect">
               <i className="ri-exchange-dollar-line"></i>
@@ -81,9 +81,9 @@ const SidebarContent = props => {
               <li>
                 <Link to="/products">{t('List Products')}</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/products/add">{t('Add Product')}</Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/products/categories">{t('Categories')}</Link>
               </li>
@@ -136,8 +136,7 @@ const SidebarContent = props => {
               </li>
             </ul>
           </li>
-
-          <li>
+          {/* <li>
             <Link to="/#" className="has-arrow waves-effect">
               <i className="ri-settings-2-line"></i>
               <span className="ms-1">{t('Settings')}</span>
@@ -150,7 +149,7 @@ const SidebarContent = props => {
                 <Link to="/account/change-pass">{t('Change Password')}</Link>
               </li>
             </ul>
-          </li>
+          </li> */}
           <li>
             <Link to="/help" className="waves-effect">
               <i className="ri-question-line"></i>
