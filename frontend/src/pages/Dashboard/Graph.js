@@ -8,7 +8,7 @@ import { dataTable } from '../../services/dataTable';
 function Graph({ data, type, title, description }) {
   const dataTables = dataTable.map(item => {
     return (
-      <tbody className="table light" key={item.id}>
+      <tbody className="table-light" key={item.id}>
         <tr>
           <td>{item.id}</td>
           <td>{item.product}</td>
@@ -34,7 +34,7 @@ function Graph({ data, type, title, description }) {
     GraphDiv = (
       <Table striped bordered hover size="sm">
         <thead>
-          <tr className="table-dark">
+          <tr className="table-light">
             <th>#</th>
             <th>Product</th>
             <th>Price</th>
