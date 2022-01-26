@@ -1,10 +1,9 @@
-// import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import Chart from 'chart.js/auto'; // eslint-disable-line no-unused-vars
-import { Container } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
-import Graph from './Graph';
-import CardGroup from './CardGroup';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
+import FourMiniChart from './components/FourMiniChart';
+import TableInfo from './components/TableInfo';
+import Graph from './Graph';
 
 function Dashboard() {
   const data = {
@@ -33,6 +32,7 @@ function Dashboard() {
       },
     ],
   };
+
   const breadcrumbItems = [
     { title: 'Fintech', link: '/' },
     { title: 'Dashboard', link: '#d' },
@@ -43,84 +43,43 @@ function Dashboard() {
       <Container fluid>
         <Breadcrumbs title="Dashboard" breadcrumbItems={breadcrumbItems} />
 
-        {/* <div className="d-flex justify-content-between m-4">
-          <h3> Analytics </h3>
-          <Breadcrumb>
-            <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="#">Dashboard</Breadcrumb.Item>
-            <Breadcrumb.Item active>Data</Breadcrumb.Item>
-          </Breadcrumb>
-        </div> */}
+        <FourMiniChart />
 
-        <div className="card-group mb-3 gap-3">
-          <div className="card border-right">
-            <CardGroup
-              title="New Clients"
-              numberTitle="241"
-              porcentText="234"
-              iconImg={<i className="bi bi-person-plus-fill"></i>}
-            />
-          </div>
-          <div className="card border-right">
-            <CardGroup
-              title="Earnings of Month"
-              numberTitle="145"
-              porcentText="64"
-              iconImg={<i className="bi bi-coin"></i>}
-            />
-          </div>
-          <div className="card border-right">
-            <CardGroup
-              title="New Projects"
-              numberTitle="565"
-              porcentText="34"
-              iconImg={<i className="bi bi-apple"></i>}
-            />
-          </div>
-          <div className="card border-right">
-            <CardGroup
-              title="Projects"
-              numberTitle="61"
-              porcentText="54"
-              iconImg={<i className="bi bi-person-plus-fill"></i>}
-            />
-          </div>
-        </div>
+        <Row>
+          <Col lg={8} md={6}>
+            <Graph data={data} type="line" title="Sales / Earnings" description="Ejemplo 1" />
+          </Col>
+          <Col lg={4} md={6}>
+            <Graph data={data} type="doughnut" title="Earnings of Month" description="Ejemplo 1" />
+          </Col>
+        </Row>
 
-        <div className="row">
-          <div className="col-lg-4 col-md-4">
-            <Graph data={data} type="line" title="New Clients" description="Ejemplo 1" />
-          </div>
-          <div className="col-lg-4 col-md-4">
-            <Graph data={data} type="bar" title="Earnings of Month" description="Ejemplo 1" />
-          </div>
-          <div className="col-lg-4 col-md-4">
+        <Row>
+          <Col lg={4} md={6}>
+            <Graph data={data} type="line" title="Titulo 3" description="Ejemplo 1" />{' '}
+          </Col>
+          <Col lg={4} md={6}>
+            <Graph data={data} type="bar" title="Titulo 2" description="Ejemplo 1" />{' '}
+          </Col>
+          <Col lg={4} md={2}>
             <Graph data={data} type="bar" title="New Projects" description="Ejemplo 1" />
-          </div>
-</div>
-          <div className="row">
-            <div className="col-lg-6 col-md-6">
-              <Graph data={data} type="line" title="Titulo" description="Ejemplo 1" />
-            </div>
-            <div className="col-lg-6 col-md-6">
-              <Graph data={data} type="bar" title="Titulo" description="Ejemplo 1" />
-            </div>
-          </div>
+          </Col>
+        </Row>
 
-          <div className="row">
-            <div className="col-lg-4 col-md-8">
-              <Graph data={data} type="bar" title="Titulo" description="Ejemplo 1" />
-            </div>
-            <div className="col-lg-8 col-md-4">
-              <Graph type="table" title="Titulo" description="Ejemplo 1" />
-            </div>
-          </div>
+        <Row>
+          <Col lg={4} md={8}>
+            <Graph data={data} type="bar" title="Titulo" description="Ejemplo 1" />
+          </Col>
+          <Col lg={8} md={4}>
+            <TableInfo type="table" title="Titulo" description="Ejemplo 1" />
+          </Col>
+        </Row>
 
-          <div className="row">
-            <div className="col-12">
-              <Graph type="table" title="Titulo" description="Ejemplo 1" />
-            </div>
-          </div>
+        <Row>
+          <Col>
+            <TableInfo type="table" title="Titulo" description="Ejemplo 1" />
+          </Col>
+        </Row>
       </Container>
     </div>
   );

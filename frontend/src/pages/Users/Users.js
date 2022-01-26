@@ -179,13 +179,13 @@ const Users = () => {
             <Col lg={12}>
               <Card>
                 <CardBody>
-                  <div>
+                  <div className="d-flex justify-content-end">
                     <Link
                       to="#"
                       onClick={() => setState({ ...state, modal_static: true, isAlertOpen: false })}
                       className="btn btn-success mb-2"
                     >
-                      <i className="ri-add-line mr-2"></i> Add Customer
+                      <i className="ri-add-line mr-2"></i> Add New User
                     </Link>
                   </div>
                   {loading ? (
@@ -200,23 +200,12 @@ const Users = () => {
                       >
                         <thead className="thead-light">
                           <tr>
-                            <th style={{ width: '20px' }}>
-                              <div className="custom-control custom-checkbox">
-                                <Input
-                                  type="checkbox"
-                                  className="custom-control-input"
-                                  id="customercheck"
-                                />
-                                <Label className="custom-control-label" htmlFor="customercheck">
-                                  &nbsp;
-                                </Label>
-                              </div>
-                            </th>
+                            <th style={{ width: '20px' }}></th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
                             <th>Status</th>
-                            <th>Branches</th>
+                            <th>Branch</th>
                             <th style={{ width: '120px' }}>Action</th>
                           </tr>
                         </thead>
@@ -224,21 +213,7 @@ const Users = () => {
                         <tbody>
                           {items.map((customerData, key) => (
                             <tr key={key}>
-                              <td>
-                                <div className="custom-control custom-checkbox">
-                                  <Input
-                                    type="checkbox"
-                                    className="custom-control-input"
-                                    id={'customercheck' + key}
-                                  />
-                                  <Label
-                                    className="custom-control-label"
-                                    htmlFor={'customercheck' + key}
-                                  >
-                                    &nbsp;
-                                  </Label>
-                                </div>
-                              </td>
+                              <td>{key}</td>
                               <td>{customerData.name}</td>
                               <td>{customerData.email}</td>
                               <td>{customerData.role}</td>
@@ -277,7 +252,7 @@ const Users = () => {
             size="lg"
           >
             <ModalHeader toggle={() => setState({ ...state, modal_static: false })}>
-              Add Customer Details
+              Add User Details
             </ModalHeader>
             <ModalBody>
               <Form onValidSubmit={addCustomer}>
@@ -291,13 +266,13 @@ const Users = () => {
                       Data Added Successfully...!
                     </Alert>
                     <FormGroup>
-                      <Label htmlFor="name">Customer Name</Label>
+                      <Label htmlFor="name">Name</Label>
                       <Input
                         name="custname"
                         type="text"
                         className="form-control"
                         id="custname"
-                        placeholder="Enter Customer Name"
+                        placeholder="Enter Name"
                         required
                       />
                     </FormGroup>
@@ -305,7 +280,7 @@ const Users = () => {
                 </Row>
 
                 <Row>
-                  <Col lg={4}>
+                  <Col lg={6}>
                     <FormGroup>
                       <Label htmlFor="email">Email</Label>
                       <Input
@@ -319,31 +294,40 @@ const Users = () => {
                     </FormGroup>
                   </Col>
 
-                  <Col lg={4}>
+                  <Col lg={6}>
                     <FormGroup>
-                      <Label htmlFor="email">Phone Number</Label>
+                      <Label htmlFor="password">Password</Label>
                       <Input
-                        name="phonenumber"
-                        type="number"
+                        name="password"
+                        type="password"
                         className="form-control"
-                        id="phonenumber"
-                        placeholder="Enter Phone Number"
+                        id="password"
+                        placeholder="Enter Password"
                         required
                       />
                     </FormGroup>
                   </Col>
 
-                  <Col lg={4}>
+                  <Col lg={6}>
                     <FormGroup>
-                      <Label htmlFor="email">Wallet Balance</Label>
-                      <Input
-                        name="wBalance"
-                        type="number"
-                        className="form-control"
-                        id="wBalance"
-                        placeholder="Wallet Balance"
-                        required
-                      />
+                      <Label htmlFor="role">Role</Label>
+                      <select class="form-select" aria-label="Default select example">
+                        <option selected>User</option>
+                        <option value="1">Manager</option>
+                        <option value="2">Ceo</option>
+                        <option value="3">Branch</option>
+                      </select>
+                    </FormGroup>
+                  </Col>
+
+                  <Col lg={6}>
+                    <FormGroup>
+                      <Label htmlFor="branch">Branch</Label>
+                      <select class="form-select" aria-label="Default select example">
+                        <option selected>Buenos Aires</option>
+                        <option value="1">Cordoba</option>
+                        <option value="2">Mendoza</option>
+                      </select>
                     </FormGroup>
                   </Col>
                 </Row>
@@ -353,7 +337,7 @@ const Users = () => {
                     color="light"
                     onClick={() => setState({ ...state, modal_static: false })}
                   >
-                    Calcel
+                    Cancel
                   </Button>
                   <Button type="submit" color="primary">
                     Add
