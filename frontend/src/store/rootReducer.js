@@ -5,6 +5,7 @@ import { authReducer } from './reducers/authReducer';
 import { productsReducer } from './reducers/productsReducer';
 import { userReducer } from './reducers/userReducer';
 import { purchaseReducer } from './reducers/purchaseReducer';
+import { saleReducer } from './reducers/saleReducer';
 
 export const rootReducer = combineReducers({
   // public
@@ -14,5 +15,6 @@ export const rootReducer = combineReducers({
   products: productsReducer,
   user: userReducer,
   purchase: purchaseReducer,
+  sale: saleReducer,
   // TODO: branchesReducer
 });

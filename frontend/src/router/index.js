@@ -40,28 +40,28 @@ import {
  */
 const privateRoutesList = [
   { path: '/', element: <Dashboard /> },
-  { path: '/analytics', element: <Analytics /> },
+  { path: '/analytics', element: <Analytics />, permission: ['USER_ROLE'] },
   { path: '/products', element: <Products /> },
-  { path: '/products/add', element: <AddProduct /> },
-  { path: '/products/categories', element: <Category /> },
+  { path: '/products/add', element: <AddProduct />, permission: ['CEO_ROLE', 'MANAGER_ROLE','USER_ROLE'] },
+  { path: '/products/categories', element: <Category />, permission: ['CEO_ROLE', 'MANAGER_ROLE','USER_ROLE'] },
   // { path: '/products/:id', element: <EditProduct /> },
   { path: '/users', element: <Users />, permission: ['CEO_ROLE'] },
-  { path: '/users/add', element: <AddUser /> },
+  { path: '/users/add', element: <AddUser />, permission: ['CEO_ROLE', 'MANAGER_ROLE','USER_ROLE'] },
   // { path: '/users/:id', element: <EditUser /> },
   { path: '/sales', element: <Sales /> },
-  { path: '/sales/add', element: <AddSale /> },
+  { path: '/sales/add', element: <AddSale /> }, //, permission: ['CEO_ROLE']
   { path: '/purchases', element: <Purchases /> },
-  { path: '/purchases/add', element: <AddPurchases /> },
-  { path: '/branches', element: <Branches /> },
-  { path: '/branches/add', element: <AddBranches /> },
+  { path: '/purchases/add', element: <AddPurchases /> }, //, permission: ['CEO_ROLE']
+  { path: '/branches', element: <Branches />, permission: ['USER_ROLE']},
+  { path: '/branches/add', element: <AddBranches />, permission: ['CEO_ROLE', 'MANAGER_ROLE','USER_ROLE'] },
   { path: '/suppliers', element: <Suppliers />, permission: ['CEO_ROLE'] },
   { path: '/purchases/:id', element: <PurchaseDetails /> },
-  { path: '/purchases/add', element: <AddPurchases /> },
+  // { path: '/purchases/add', element: <AddPurchases /> }, //se repite
   { path: '/sales', element: <Sales /> },
   { path: '/sales/:id', element: <SaleDetails /> },
-  { path: '/sales/add', element: <AddSale /> },
-  { path: '/suppliers', element: <Suppliers /> },
-  { path: '/suppliers/add', element: <AddSupplier /> },
+  // { path: '/sales/add', element: <AddSale /> }, // se repite
+  // { path: '/suppliers', element: <Suppliers />}, //se repite
+  { path: '/suppliers/add', element: <AddSupplier />, permission: ['CEO_ROLE', 'MANAGER_ROLE','USER_ROLE'] },
   { path: '/account', element: <Account /> },
   { path: '/account/change-pass', element: <ChangePass /> },
   { path: '/help', element: <Help /> },
