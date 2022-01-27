@@ -1,4 +1,4 @@
-import { Container, Row, Col, Card, CardBody } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 import Breadcrumbs from '../../components/common/Breadcrumbs';
 import FourMiniChart from './components/FourMiniChart';
@@ -55,17 +55,12 @@ function Dashboard() {
             />
           </Col>
           <Col lg={4} md={6}>
-            <Card style={{ height: 'calc(100% - 25px)' }}>
-              <CardBody>
-                <h4 className="card-title mb-4">Earnings of Month</h4>
-                <Graph
-                  data={data}
-                  type="doughnut"
-                  title="Newsstt Projects"
-                  description="Ejemplo 1"
-                />
-              </CardBody>
-            </Card>
+            <Graph
+              data={data}
+              type="doughnut"
+              title="Earnings of Month"
+              description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+            />
           </Col>
         </Row>
 
@@ -88,7 +83,7 @@ function Dashboard() {
 
         <Row>
           <Col lg={4} md={12}>
-            <Card>
+            {/* <Card>
               <CardBody>
                 <h4 className="card-title mb-4">Bar Chart</h4>
                 <Row className="text-center">
@@ -104,10 +99,10 @@ function Dashboard() {
                     <h5 className="mb-0">12001</h5>
                     <p className="text-muted text-truncate">Deactivated</p>
                   </Col>
-                </Row>
-                <Graph data={data} type="pie" title="Titulo 3" description="Ejemplo 1" />{' '}
-              </CardBody>
-            </Card>
+                </Row> */}
+            <Graph data={data} type="pie" title="Titulo 3" description="Ejemplo 1" />
+            {/* </CardBody>
+            </Card> */}
           </Col>
           <Col lg={8} md={12}>
             <TableInfo type="table" title="Titulo" description="Ejemplo 1" />
