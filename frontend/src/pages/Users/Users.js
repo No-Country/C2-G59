@@ -217,7 +217,11 @@ const Users = () => {
                               <td>{customerData.status}</td>
                               <td>{customerData.branch?.branch_name}</td>
                               <td>
-                                <Link to="#" className="mr-3 text-primary" id={'edit' + key}>
+                                <Link
+                                  to={`/users/` + customerData.id}
+                                  className="mr-3 text-primary"
+                                  id={'edit' + key}
+                                >
                                   <i className="ri-edit-box-fill font-size-18"></i>
                                 </Link>
                                 <UncontrolledTooltip target={'edit' + key} placement="top">
