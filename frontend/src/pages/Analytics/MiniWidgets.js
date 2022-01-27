@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react';
 import { Col, Card, CardBody, Spinner } from 'reactstrap';
 import { useAxios } from '../../hooks/useAxios';
 
 const MiniWidgets = ({ reports }) => {
+  const [loading, setLoading] = useState(true);
   // const [response, error, loading] = useAxios(
   //   '/charts/branches-compare-data?show_by=weeks&cashflow=true&periods=4',
   // );
@@ -34,6 +36,10 @@ const MiniWidgets = ({ reports }) => {
   //     desc: 'From previous period',
   //   },
   // ];
+
+  setTimeout(() => {
+    setLoading(false);
+  }, 1800);
 
   return (
     <>
