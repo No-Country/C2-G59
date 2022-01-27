@@ -9,7 +9,7 @@ export { default as AddProduct } from './Products/AddProduct';
 export { default as Category } from './Category/Category';
 export { default as Users } from './Users/Users';
 export { default as AddUser } from './Users/AddUser';
-// export { default as EditUser } from './Users/EditUser';
+export { default as EditUser } from './Users/EditUser';
 export { default as Account } from './Account/Account';
 export { default as ChangePass } from './Account/ChangePass';
 export { default as Sales } from './Sales/Sales';
