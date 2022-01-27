@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container } from 'reactstrap';
+import { useSelector, useDispatch} from 'react-redux';
 import { Button, Row, Col, Form } from 'react-bootstrap';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
-import { getAllProducts } from '../../utils/dataProducts';
+import { getSales } from '../../store/actions/saleActions';
 
 const listProductsInit = [
   {
@@ -12,11 +13,20 @@ const listProductsInit = [
   },
 ];
 
-const listProducts = getAllProducts();
-
 const AddSale = () => {
+  const dispatch = useDispatch();
 
   const [listItems, setListItems] = useState(listProductsInit);
+
+  const saleData = useSelector(state=>state.sale);
+
+useEffect(
+  () => {
+    dispatch(getSales());
+  },
+  []);
+
+console.log(saleData);
 
   const breadcrumbItems = [
     { title: 'Fintech', link: '/' },
@@ -119,12 +129,12 @@ const AddProduct = data => {
         <Form.Label>Product</Form.Label>
         <Form.Select value={data.productId} name="productId" onChange={handleForm}>
           <option>Choose...</option>
-          {listProducts &&
+          {/* {listProducts &&
             listProducts.map(item => (
               <option key={item.id} value={item.id}>
                 {item.title} - {item.price}
               </option>
-            ))}
+            ))} */}
         </Form.Select>
       </Form.Group>
 
