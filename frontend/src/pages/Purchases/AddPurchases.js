@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Button, Row, Col, Form } from 'react-bootstrap';
+import { Button, Row, Col, Form, Container } from 'react-bootstrap';
 import { getAllProductsBack, getProductBackById } from '../../utils/dataProductsBack';
+import Breadcrumbs from '../../components/common/Breadcrumbs';
 
 const initialList = [
   // {
@@ -27,6 +28,11 @@ export default function AddPurchases() {
   const [listProducts, setListProducts] = useState(initialList);
   const [total, setTotal] = useState(0.0);
 
+  const breadcrumbItems = [
+    { title: 'Fintech', link: '/' },
+    { title: 'Add Purchase', link: '#d' },
+  ];
+
 
   useEffect(() => {
     let sum = 0;
@@ -52,7 +58,9 @@ export default function AddPurchases() {
     ]);
   };
 
-  return <div className='m-5 wrapperBranches'>
+  return <div className="page-content">
+    <Container fluid>
+    <Breadcrumbs title="Add Purchase" breadcrumbItems={breadcrumbItems} />
       <h2>Add Purchase</h2>
       <hr className="mt-4" />
 
@@ -86,6 +94,7 @@ export default function AddPurchases() {
           Submit
         </Button>
       </Form>
+      </Container>
   </div>;
 }
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button, Table, Modal, Container } from 'react-bootstrap';
 import Bill from '../Bill/Bill';
+import Breadcrumbs from '../../components/common/Breadcrumbs';
 
 const Sales = () => {
 
@@ -8,8 +9,15 @@ const Sales = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const breadcrumbItems = [
+    { title: 'Fintech', link: '/' },
+    { title: 'All Sale', link: '#d' },
+  ];
+
   return (
-    <Container>
+    <div className="page-content">
+    <Container fluid>
+    <Breadcrumbs title="All Sale" breadcrumbItems={breadcrumbItems} />
       <div>
         <h1>Sales</h1>
         <p>
@@ -71,6 +79,7 @@ const Sales = () => {
         </Modal.Footer>
       </Modal>
     </Container>
+    </div>
   );
 };
 

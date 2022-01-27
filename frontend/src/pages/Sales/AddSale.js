@@ -39,7 +39,6 @@ const AddSale = () => {
       <Container fluid>
         <Breadcrumbs title="Add Sale" breadcrumbItems={breadcrumbItems} />
         {/** Contenido Row -> Col -> etc */}
-        <div className="m-5 wrapperBranches">
           <h2>Add Sales</h2>
           <hr className="mt-4" />
 
@@ -87,7 +86,6 @@ const AddSale = () => {
               Submit
             </Button>
           </Form>
-        </div>
       </Container>
     </div>
   );
