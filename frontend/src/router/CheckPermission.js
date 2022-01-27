@@ -7,22 +7,13 @@ const CheckPermission = ({ permission = null, children }) => {
   } = useSelector(state => state.auth);
 
   // sino requiere permiso dejar pasar 😅
-  if (!permission) return children;
+  if (permission === null) return children;
 
   // comprobamos permiso
-  let hasPermission = false;
+  let hasNotPermission = permission.find(item => role === item);
 
-  permission.forEach(item => {
-    if (role !== item) {
-      console.log('AUTORIZADO -> tiene permiso para entrar aca');
-      return <Navigate to="/" />;
-    } else {
-      console.log('NO -> No tiene permiso para entrar aca');
-      return children;
-    }
-  });
-
-  return hasPermission ? children : <Navigate to="/" />;
+  // console.log(hasNotPermission);
+  return hasNotPermission ? <Navigate to="/" /> : children;
 };
 
 export default CheckPermission;
