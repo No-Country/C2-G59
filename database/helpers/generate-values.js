@@ -60,9 +60,9 @@ const getCostOfProduct = (price) => {
     return (price * randomPercent).toFixed(2);
 };
 
-const randomTransactionDate = () => {
-    const start = new Date('2019-06-01');
-    const end = new Date();
+const randomTransactionDate = ( startDate = '2019-06-01', endDate = new Date()) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
     const random = Math.random();
 
     const trx_date = new Date(start.getTime() + random * (end.getTime() - start.getTime()));

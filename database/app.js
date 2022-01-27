@@ -17,6 +17,7 @@ const {
 const urlMockApi =
 	"https://61d4b63a8df81200178a8e10.mockapi.io/api/v1/AllProducts";
 const api = "http://localhost:4000/api";
+// const api = "https://no-country-c2g59.herokuapp.com/";
 
 const fillProductsTable = async () => {
 	const { data: products } = await axios
@@ -94,7 +95,7 @@ const fillRetailSaleTable = async (salesToAdd) => {
 	for (let i = 0; i < salesToAdd; i++) {
 		console.log(`Generating ${i+1} of ${salesToAdd}`);
 		let products = [];
-		const { trx_date:sale_date, pay_date } = randomTransactionDate();
+		const { trx_date:sale_date, pay_date } = randomTransactionDate('2022-01-11', '2022-01-28');
 
 		// Generate random list of products
 		console.log('Generating random list of products...');
@@ -126,7 +127,7 @@ const fillRetailSaleTable = async (salesToAdd) => {
 			pay_date,
 			payment_status: "complete",
 			// branch_id: randomBranchId(),
-			branch_id: 2,
+			branch_id: 3,
 			amount: getAmountTotal(products),
 			products,
 		};
@@ -136,6 +137,8 @@ const fillRetailSaleTable = async (salesToAdd) => {
 			console.log("Saving sale...");
 			const resp = await axios.post(`${api}/sales`, retail_sale);
 			console.log(resp.data.retailSale);
+		} else {
+			console.log("No product in list... Next!");
 		}
 
 		// Lo siguiente se hizo antes de actualizar el controlador de ProductOrder
@@ -150,6 +153,20 @@ const fillRetailSaleTable = async (salesToAdd) => {
 	}
 };
 
+
+const deletePurchaseOrder = async(purchaseToDelete) => {
+
+};
+
+const deleteRetailSales = async(salesToDelete) => {
+	// const allRetailSales = await axios/api/sales
+	for (let i = 0; i < salesToDelete; i++) {
+
+
+
+	}
+};
+
 // fillProductsTable();
 // fillPurchasOrderTable(1);
-fillRetailSaleTable(30);
+fillRetailSaleTable(20);

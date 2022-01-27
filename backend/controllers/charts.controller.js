@@ -17,11 +17,16 @@ const {
   getPercentDif,
 } = require('../helpers/calculate');
 
+// Configuraciones de moment para Lunes primer dia de la semana
+moment.updateLocale('en', {
+  week : {
+      dow : 1, // First Day Of Week (1 = Lunes)
+   }
+});
+
 const dateFormat = 'YYYY-MM-DD';
 // const now = '2021-12-31';
 const now = moment();
-
-//show_by = 'month', // 'month', 'quarter', 'halfyear', 'year'
 
 // Get branches total profit, income and outcome
 const getBranchesProfit = async (req = request, res = response) => {
@@ -600,7 +605,7 @@ const getBranchesCompareData = async (req = request, res = response) => {
     periods = 4,
   } = req.query;
 
-  validShowBy = ['quarter', 'months'];
+  validShowBy = ['quarter', 'months', 'weeks'];
   periods = Number(periods);
   branch_id = Number(branch_id);
   branch_id = Number(branch_id);
@@ -617,7 +622,7 @@ const getBranchesCompareData = async (req = request, res = response) => {
 
   if (!validShowBy.includes(show_by)) {
     return res.status(400).json({
-      msg: `Query show_by must be 'week', 'months', 'quarter', 'halfyear', 'years'`,
+      msg: `Query show_by must be 'weeks', 'months', 'quarter'`,
     });
   }
 
@@ -639,14 +644,14 @@ const getBranchesCompareData = async (req = request, res = response) => {
     let starLastPeriod = moment(now).subtract(1, show_by).startOf(show_by);
     let endLastPeriod = moment(now).subtract(1, show_by).endOf(show_by);
 
-    // Establecer mes de inicio y fin. Establecer labels
-    let startDate;
-    let endDate;
+    // Establecer mes de inicio y fin
+    let startDate = moment(now).subtract(periods - 1, show_by).startOf(show_by);
+    let endDate = moment(now).endOf(show_by);
+    console.log({startDate, endDate});
+
+    // Establecer labels
     switch (show_by) {
       case 'quarter':
-        startDate = moment(now).subtract(periods - 1, show_by).startOf(show_by);
-        endDate = moment(now).endOf(show_by);
-		
         for (let i = 0; i < periods; i++) {
           let quarter = moment(now).subtract(i, show_by).quarter();
           let year = moment(now).subtract(i, show_by).year();
@@ -655,15 +660,22 @@ const getBranchesCompareData = async (req = request, res = response) => {
         break;
 
 			case 'months':
-				startDate = moment(now).subtract(periods - 1, show_by).startOf(show_by);
-        endDate = moment(now).endOf(show_by);
-
 				for (let i = 0; i < periods; i++) {
           let month = moment(now).subtract(i, show_by).format('MMMM');
           let year = moment(now).subtract(i, show_by).year();
           labels.unshift(`${month} ${year}`);
         }
+        break;
 
+      case 'weeks':
+        for (let i = 0; i < periods; i++) {
+          let monthStart = moment(now).subtract(i, show_by).startOf('week').format('MMM');
+          let dayStart = moment(now).subtract(i, show_by).startOf('week').format('DD');
+          let monthEnd = moment(now).subtract(i, show_by).endOf('week').format('MMM');
+          let dayEnd = moment(now).subtract(i, show_by).endOf('week').format('DD');
+          labels.unshift(`${monthStart}-${dayStart} to ${monthEnd}-${dayEnd}`);
+        }
+        break;
     }
 
     // Obtener todas las PurchaseOrder
@@ -690,8 +702,8 @@ const getBranchesCompareData = async (req = request, res = response) => {
 		// Obtener la informacion de todas las Branch
 		const branches = await Branch.findAll();
 
+    // Se evaluan tolas las branch
 		for (let branch of branches) {
-			// Se evaluan tolas las branch
 			let branchData = [];
 			const branchId = branch.dataValues.id;
 			let purchase_amount_current_period = 0;
@@ -704,7 +716,7 @@ const getBranchesCompareData = async (req = request, res = response) => {
 			let sales_count_last_period = 0;
 
 			for (let i = 0; i < periods; i++) {
-				// Se evalua todos los meses para una branch
+				// Se evalua todos los periodos para una branch
 				const periodToEvaluate = startDate.clone().add(i, show_by);
 				let amountPurchaseOrder = 0; // in month
 				let amountRetailSale = 0; // in month
@@ -783,7 +795,43 @@ const getBranchesCompareData = async (req = request, res = response) => {
 									}
 								}
 								break;
+
+              case 'weeks':
+                if (
+                  purchaseDate.weeks() === periodToEvaluate.weeks() &&
+                  purchaseDate.year() === periodToEvaluate.year()
+                ) {
+                  amountPurchaseOrder += Number(purchaseOrder.amount);
+
+                  // Current period condition
+                  if (i === periods - 1) {
+                    // Current period
+                    purchase_amount_current_period += Number(
+                      purchaseOrder.amount
+                    );
+                    purchase_amount_current_period_total += Number(
+                      purchaseOrder.amount
+                    );
+                    purchase_count_current_period++;
+                    purchase_count_current_period_total++;
+                  }
+
+                  // Last period condition
+                  if (i === periods - 2) {
+                    // last period
+                    purchase_amount_last_period += Number(
+                      purchaseOrder.amount
+                    );
+                    purchase_amount_last_period_total += Number(
+                      purchaseOrder.amount
+                    );
+                    purchase_count_last_period++;
+                    purchase_count_last_period_total++;
+                  }
+                }
+                break;
 						}
+
 					}
 				});
 
@@ -854,6 +902,36 @@ const getBranchesCompareData = async (req = request, res = response) => {
 									}
 								}
 								break;
+              case 'weeks':
+                if (
+                  saleDate.weeks() === periodToEvaluate.weeks() &&
+                  saleDate.year() === periodToEvaluate.year()
+                ) {
+                  amountRetailSale += Number(retailSale.amount);
+
+                  // Current period condition
+                  if (i === periods - 1) {
+                    // Current period
+                    sales_amount_current_period += Number(retailSale.amount);
+                    sales_amount_current_period_total += Number(
+                      retailSale.amount
+                    );
+                    sales_count_current_period++;
+                    sales_count_current_period_total++;
+                  }
+
+                  // Last period condition
+                  if (i === periods - 2) {
+                    // last period
+                    sales_amount_last_period += Number(retailSale.amount);
+                    sales_amount_last_period_total += Number(
+                      retailSale.amount
+                    );
+                    sales_count_last_period++;
+                    sales_count_last_period_total++;
+                  }
+                }
+                break;
 						}
 					}
 				});
