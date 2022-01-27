@@ -20,6 +20,7 @@ import {
   AddUser,
   Help,
   Login,
+  EditUser,
 } from '../pages';
 
 /**
@@ -41,27 +42,57 @@ import {
 const privateRoutesList = [
   { path: '/', element: <Dashboard /> },
   { path: '/analytics', element: <Analytics />, permission: ['USER_ROLE'] },
+
+  // products
   { path: '/products', element: <Products /> },
-  { path: '/products/add', element: <AddProduct />, permission: ['CEO_ROLE', 'MANAGER_ROLE','USER_ROLE'] },
-  { path: '/products/categories', element: <Category />, permission: ['CEO_ROLE', 'MANAGER_ROLE','USER_ROLE'] },
+  {
+    path: '/products/add',
+    element: <AddProduct />,
+    permission: ['CEO_ROLE', 'MANAGER_ROLE', 'USER_ROLE'],
+  },
+  {
+    path: '/products/categories',
+    element: <Category />,
+    permission: ['CEO_ROLE', 'MANAGER_ROLE', 'USER_ROLE'],
+  },
   // { path: '/products/:id', element: <EditProduct /> },
+
+  // users
   { path: '/users', element: <Users />, permission: ['CEO_ROLE'] },
-  { path: '/users/add', element: <AddUser />, permission: ['CEO_ROLE', 'MANAGER_ROLE','USER_ROLE'] },
-  // { path: '/users/:id', element: <EditUser /> },
+  {
+    path: '/users/add',
+    element: <AddUser />,
+    permission: ['CEO_ROLE', 'MANAGER_ROLE', 'USER_ROLE'],
+  },
+  { path: '/users/:id', element: <EditUser /> },
+
+  // sales
   { path: '/sales', element: <Sales /> },
   { path: '/sales/add', element: <AddSale /> }, //, permission: ['CEO_ROLE']
+
+  // purchases
   { path: '/purchases', element: <Purchases /> },
   { path: '/purchases/add', element: <AddPurchases /> }, //, permission: ['CEO_ROLE']
-  { path: '/branches', element: <Branches />, permission: ['USER_ROLE']},
-  { path: '/branches/add', element: <AddBranches />, permission: ['CEO_ROLE', 'MANAGER_ROLE','USER_ROLE'] },
-  { path: '/suppliers', element: <Suppliers />, permission: ['CEO_ROLE'] },
   { path: '/purchases/:id', element: <PurchaseDetails /> },
-  // { path: '/purchases/add', element: <AddPurchases /> }, //se repite
-  { path: '/sales', element: <Sales /> },
+
+  // r. branches
+  { path: '/branches', element: <Branches />, permission: ['USER_ROLE'] },
+  {
+    path: '/branches/add',
+    element: <AddBranches />,
+    permission: ['CEO_ROLE', 'MANAGER_ROLE', 'USER_ROLE'],
+  },
+
+  // r. suppliers
+  { path: '/suppliers', element: <Suppliers />, permission: ['CEO_ROLE'] },
   { path: '/sales/:id', element: <SaleDetails /> },
-  // { path: '/sales/add', element: <AddSale /> }, // se repite
-  // { path: '/suppliers', element: <Suppliers />}, //se repite
-  { path: '/suppliers/add', element: <AddSupplier />, permission: ['CEO_ROLE', 'MANAGER_ROLE','USER_ROLE'] },
+  {
+    path: '/suppliers/add',
+    element: <AddSupplier />,
+    permission: ['CEO_ROLE', 'MANAGER_ROLE', 'USER_ROLE'],
+  },
+
+  // r. options
   { path: '/account', element: <Account /> },
   { path: '/account/change-pass', element: <ChangePass /> },
   { path: '/help', element: <Help /> },
