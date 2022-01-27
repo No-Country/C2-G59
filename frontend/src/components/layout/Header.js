@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
 // import menuDropdown
-// import LanguageDropdown from '../common/LanguageDropdown';
+import LanguageDropdown from '../common/LanguageDropdown';
 import ProfileMenu from '../common/ProfileMenu';
-import CommonDropdown from '../common/CommonDropdown';
+// import CommonDropdown from '../common/CommonDropdown';
 // import NotificationDropdown from '../common/NotificationDropdown';
 
 // actions
@@ -55,7 +55,7 @@ const Header = ({ toggleMenuCallback }) => {
         </div>
 
         <div className="d-flex">
-          {/* <LanguageDropdown /> */}
+          <LanguageDropdown />
 
           {/* <CommonDropdown /> */}
 
