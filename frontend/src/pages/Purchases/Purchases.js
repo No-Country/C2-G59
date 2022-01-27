@@ -1,39 +1,43 @@
-import { useEffect, useState } from 'react';
-import { Row, Col, Form, Table, Container } from 'react-bootstrap';
+// import { useState } from 'react';
+import { Table, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+import Breadcrumbs from '../../components/common/Breadcrumbs';
 
 // data example
 import { getAllPurchases } from '../../utils/dataPurchase';
-import { getAllProductsBack, getProductBackById } from '../../utils/dataProductsBack';
 
 const dataPurchases = getAllPurchases();
-// const dataProducts = getAllProductsBack();
 
-const initialList = [
-  // {
-  //   id: '1',
-  //   name: 'Product 2',
-  //   ProductId: 3,
-  //   amount: 44,
-  //   price: 133,
-  //   subTotal: 43553,
-  // },
-  // {
-  //   id: '2',
-  //   name: 'Product 4',
-  //   ProductId: 5,
-  //   amount: 3,
-  //   price: 33444,
-  //   subTotal: 103422,
-  // },
-];
+// const initialList = [
+//   // {
+//   //   id: '1',
+//   //   name: 'Product 2',
+//   //   ProductId: 3,
+//   //   amount: 44,
+//   //   price: 133,
+//   //   subTotal: 43553,
+//   // },
+//   // {
+//   //   id: '2',
+//   //   name: 'Product 4',
+//   //   ProductId: 5,
+//   //   amount: 3,
+//   //   price: 33444,
+//   //   subTotal: 103422,
+//   // },
+// ];
 
 const Purchases = () => {
   dayjs.extend(localizedFormat);
 
-  const [listProducts, setListProducts] = useState(initialList);
+  const breadcrumbItems = [
+    { title: 'Fintech', link: '/' },
+    { title: 'All Purchase', link: '#d' },
+  ];
+
+  // const [listProducts, setListProducts] = useState(initialList);
   // const [total, setTotal] = useState(0.0);
 
   // useEffect(() => {
@@ -61,7 +65,9 @@ const Purchases = () => {
   // };
 
   return (
-    <Container>
+    <div className="page-content">
+    <Container fluid>
+    <Breadcrumbs title="All Purchase" breadcrumbItems={breadcrumbItems} />
       <div>
         <div className="d-flex justify-content-between align-items-start">
           <h1>Purchases</h1>
@@ -106,86 +112,8 @@ const Purchases = () => {
         </tbody>
       </Table>
     </Container>
+    </div>
   );
 };
-
-// const formatMoney = num => {
-//   return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(num);
-// };
-
-// const ItemProduct = ({ values: data }) => {
-//   const [form, setForm] = useState({ ProductId: 2, amount: 1, price: 0, subTotal: 0 });
-//   const [subTotal, setSubtotal] = useState('0');
-//   const [priceUnit, setPriceUnit] = useState('0');
-
-//   useEffect(() => {
-//     // Update Price Product
-//     const searchPriceUnit = getProductBackById(Number(form.ProductId)).price;
-//     // const priceUnitUpdated = ;
-//     setPriceUnit(searchPriceUnit);
-//     // setForm({
-//     //   ...form,
-//     //   price: searchPriceUnit
-//     // })
-//     // Calc Subtotal
-//     const newSubTotal = Number(form.amount) * Number(searchPriceUnit);
-//     const final = formatMoney(newSubTotal);
-//     setSubtotal(final);
-//   }, [form, priceUnit]);
-
-//   const handleForm = e => {
-//     setForm({
-//       ...form,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-//   console.log(form);
-//   return (
-//     <>
-//       <Row className="mb-3">
-//         <Form.Group as={Col} controlId="formGridZip">
-//           <Form.Label>Name</Form.Label>
-
-//           <Form.Select value={form.ProductId} onChange={handleForm} name="ProductId">
-//             {/* <option>Choose...</option> */}
-//             {dataProducts.map(item => (
-//               <option key={item.id} value={item.id}>
-//                 {item.name}
-//               </option>
-//             ))}
-//           </Form.Select>
-//         </Form.Group>
-
-//         <Form.Group as={Col} controlId="formGridZip">
-//           <Form.Label>Amount</Form.Label>
-//           <Form.Control
-//             name="amount"
-//             type="number"
-//             value={form.amount}
-//             onChange={handleForm}
-//             min="1"
-//           />
-//         </Form.Group>
-
-//         <Form.Group as={Col} controlId="formGridZip">
-//           <Form.Label>Price</Form.Label>
-//           <Form.Control
-//             name="price"
-//             type="text"
-//             value={formatMoney(priceUnit)}
-//             onChange={handleForm}
-//             min="0"
-//             disabled
-//           />
-//         </Form.Group>
-
-//         <Form.Group as={Col} controlId="formGridZip">
-//           <Form.Label>SubTotal</Form.Label>
-//           <Form.Control name="subTotal" type="text" value={subTotal} disabled />
-//         </Form.Group>
-//       </Row>
-//     </>
-//   );
-// };
 
 export default Purchases;
