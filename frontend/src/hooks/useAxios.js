@@ -15,7 +15,9 @@ export const useAxios = axiosParams => {
     } catch (err) {
       setError(err);
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2500);
     }
   };
 

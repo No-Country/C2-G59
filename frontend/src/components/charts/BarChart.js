@@ -29,7 +29,7 @@ const BarChart = () => {
 
   return (
     <>
-      <Bar width={474} height={300} data={data} options={option} />
+      <Bar width={474} height={300} data={data} />
     </>
   );
 };

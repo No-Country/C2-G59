@@ -1,19 +1,25 @@
 import 'chart.js/auto';
-import { Bar, Line, Doughnut, Pie } from 'react-chartjs-2';
+// import { Bar, Line, Doughnut, Pie } from 'react-chartjs-2';
 import { Card, CardBody, Tooltip } from 'reactstrap';
 import { useState } from 'react';
 // import { useAxios } from '../../hooks/useAxios';
 
+// components Charts
+import LineChart from '../../components/charts/LineChart';
+import BarChart from '../../components/charts/BarChart';
+import DouChart from '../../components/charts/DouChart';
+import PieChart from '../../components/charts/PieChart';
+import RadarChart from '../../components/charts/RadarChart';
+
 function Graph({ data, type, title, description }) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
-  let GraphDiv;
 
   // const [response, error, loading] = useAxios(
   //   '/charts/branches-profit?branch_id=2&months=3&cashflow=true',
   // );
 
   // console.log(response);
-
+  /*
   if (type === 'line') {
     const dataLine = {
       labels: [
@@ -98,15 +104,35 @@ function Graph({ data, type, title, description }) {
     };
     GraphDiv = <Line data={dataLine} />;
   } else if (type === 'line2') {
-    GraphDiv = <Line data={data} />;
+    GraphDiv = <LineChart data={data} />;
   } else if (type === 'bar') {
-    GraphDiv = <Bar data={data} />;
+    GraphDiv = <BarChart data={data} />;
   } else if (type === 'pie') {
-    GraphDiv = <Pie data={data} />;
+    GraphDiv = <PieChart data={data} />;
   } else if (type === 'doughnut') {
-    GraphDiv = <Doughnut data={data} />;
+    GraphDiv = <DouChart data={data} />;
+  }else if (type === 'doughnut') {
+    GraphDiv = <DouChart data={data} />;
+  } else {
+    GraphDiv = <LineChart data={data} />;
   }
+  */
+
+  // defino todos los tipos 'type' posibles
+  const allTypes = {
+    line: <LineChart data={data} />,
+    bar: <BarChart data={data} />,
+    doughnut: <DouChart data={data} />,
+    pie: <PieChart data={data} />,
+    radar: <RadarChart data={data} />,
+  };
+  // busco en el objeto anterior el type recibido como props
+  // sino se recibe muestro uno como default
+  const GraphDiv = allTypes[type] || <LineChart data={data} />;
+
+  // coloco como id del tooltip la primera palabra del titulo
   const idRandTooltip = title.split(' ')[0];
+
   return (
     <Card style={{ height: 'calc(100% - 25px)' }}>
       <CardBody>
