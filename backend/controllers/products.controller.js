@@ -1,10 +1,107 @@
 const { request, response } = require('express');
+const { Branch } = require('../db/models/branch.model');
 const { Product } = require('../db/models/product.model');
+const { PurchaseOrder } = require('../db/models/purchase-order.model');
+const { PurchaseTransaction } = require('../db/models/purchase-trx.model');
+const { SaleTransaction } = require('../db/models/sales-trx.model');
+const { RetailSale } = require('../db/models/sales.model');
+const { toDecimal } = require('../helpers/calculate');
 
 const getProducts = async (req = request, res = response) => {
+
+  let { cashflow = false } = req.query;
+
+  cashflow = JSON.parse(cashflow);
+
   try {
     const products = await Product.findAll();
-    res.status(200).json({ products });
+    console.log(cashflow);
+    if (!cashflow) {
+      return res.status(200).json({ products });
+    }
+
+    // Se define el nuevo array de productos donde se guardaran los valores
+    // adicionales
+    let newProducts = [];
+
+    // Se obtienen todas las ordenes de compra y ventas
+    const allBranches = await Branch.findAll();
+    const allPurchaseOrder = await PurchaseOrder.findAll();
+    const allPurchaseTrx = await PurchaseTransaction.findAll();
+    const allRetailSales = await RetailSale.findAll();
+    const allSalesTrx = await SaleTransaction.findAll();
+
+
+    // Se analiza cada producto
+    products.forEach( product => {
+      let totalAmountInPurchase = 0;
+      let totalPurchasedProducts = 0;
+      let totalAmountInSales = 0;
+      let totalSoldProducts = 0;
+      let dataByBranch = [];
+
+      // Para cada producto se analiza cada branch y las ventas de la misma
+      allBranches.forEach( branch => {
+        let amountInPurchaseByBranch = 0;
+        let purchaseProductsByBranch = 0;
+        let amountInSalesByBranch = 0;
+        let soldProductsByBranch = 0;
+
+        allPurchaseOrder.forEach( purchaseOrder => {
+          if ( branch.id === purchaseOrder.branch_id ) {
+            allPurchaseTrx.forEach( purchaseTrx => {
+              if (purchaseTrx.purchase_order_id === purchaseOrder.id && 
+                  purchaseTrx.product_id === product.id
+              ) {
+                const { cost, count } = purchaseTrx;
+                amountInPurchaseByBranch += (cost * count);
+                totalAmountInPurchase += (cost * count);
+                purchaseProductsByBranch += count;
+                totalPurchasedProducts += count;
+              }
+            });
+          }
+        });
+
+        allRetailSales.forEach( retailSale => {
+          if ( branch.id === retailSale.branch_id ) {
+            allSalesTrx.forEach( salesTrx => {
+              if (salesTrx.retail_sale_id === retailSale.id && 
+                salesTrx.product_id === product.id
+              ) {
+                const { price, count } = salesTrx;
+                amountInSalesByBranch += (price * count);
+                totalAmountInSales += (price * count);
+                soldProductsByBranch += count;
+                totalSoldProducts += count;
+              }
+            });
+          }
+        });
+
+        dataByBranch.push({
+          branch_id: branch.id,
+          purchases_amount: toDecimal(amountInPurchaseByBranch),
+          purchases: purchaseProductsByBranch,
+          sales_amount: toDecimal(amountInSalesByBranch),
+          sales: soldProductsByBranch,
+        });
+  
+      });
+
+      newProducts.push({
+        ...product.dataValues,
+        total_purchases_amount: toDecimal(totalAmountInPurchase),
+        total_purchases: totalPurchasedProducts,
+        total_sales_amount: toDecimal(totalAmountInSales),
+        total_sales: totalSoldProducts,
+        branches: dataByBranch
+      });
+
+    });
+
+    return res.status(200).json({ products: newProducts });
+
   } catch (error) {
     console.log(error);
     res.status(500).json({
