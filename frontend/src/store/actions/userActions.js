@@ -1,4 +1,4 @@
-import { axiosWithOutToken } from '../../services/axios';
+import { axiosWithOutToken, axiosWithToken } from '../../services/axios';
 import { types } from '../types';
 
 /** Type Actions */
@@ -7,7 +7,6 @@ const getUsersStart = () => {
     type: types.USER_START,
   };
 };
-
 const getUsersSuccess = users => {
   return {
     type: types.USER_SUCCESS,
@@ -37,8 +36,23 @@ function getUsers() {
   };
 }
 
-function saveUser(data) {
-  // aqui la funcion
+function saveUser(data, id) {
+  return dispatch => {
+    // 1 - indicamos que estamos procesando la solicitud
+    dispatch(getUsersStart());
+    // 2 - procesamos la solicitud PUT porque es actualizacion
+    return axiosWithToken('/users/' + id, data, 'PUT')
+      .then(resp => {
+        // 3 - si todo sale bien indicamos la action para actualizar el estado
+        dispatch(getUsersSuccess(resp.data));
+        return resp.data;
+      })
+      .catch(err => {
+        console.log(err.response);
+        // 4 - si hay algun error actualizamos el estado para mostrarlo en pantalla
+        dispatch(getUsersFail(err.response?.data));
+      });
+  };
 }
 
 export { getUsers, saveUser };
