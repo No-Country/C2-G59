@@ -30,6 +30,7 @@ const Users = () => {
   useEffect(() => {
     dispatch(getUsers());
   }, []);
+  console.log(items);
 
   const breadcrumbItems = [
     { title: 'Tables', link: '#' },
@@ -37,10 +38,6 @@ const Users = () => {
   ];
 
   const [state, setState] = useState({
-    breadcrumbItems: [
-      { title: 'Ecommerce', link: '#' },
-      { title: 'Customers', link: '#' },
-    ],
     isAlertOpen: false,
     modal_static: false,
     data: [
@@ -165,9 +162,9 @@ const Users = () => {
     }, 2000);
   };
 
-  if (error) {
-    return <>Error: {JSON.stringify(error, null, ' ')}</>;
-  }
+  // if (error) {
+  //   return <>Error: {JSON.stringify(error, null, ' ')}</>;
+  // }
 
   return (
     <>
@@ -218,7 +215,7 @@ const Users = () => {
                               <td>{customerData.email}</td>
                               <td>{customerData.role}</td>
                               <td>{customerData.status}</td>
-                              <td>{customerData.branch}</td>
+                              <td>{customerData.branch?.branch_name}</td>
                               <td>
                                 <Link to="#" className="mr-3 text-primary" id={'edit' + key}>
                                   <i className="ri-edit-box-fill font-size-18"></i>
