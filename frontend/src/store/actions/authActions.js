@@ -23,9 +23,15 @@ const adminLogin = (credentials, callback) => {
             uid: res.data.user.id,
             name: res.data.user.name,
             role: res.data.user.role,
-            branch_id: res.data.user.branch_id,
+            branch_id: res.data.user.branch_id
           }),
         );
+        console.log({
+          uid: res.data.user.id,
+          name: res.data.user.name,
+          role: res.data.user.role,
+          branch: res.data.user.branch || null,
+        });
         //return callback(false, null);
         return Promise.resolve();
       }
