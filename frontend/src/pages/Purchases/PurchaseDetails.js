@@ -21,13 +21,12 @@ const PurchaseDetails = () => {
     });
   }, []);
 
-  console.log(purchase);
 
-  // let acumulador = 0;
-  // purchase.products.forEach(item => {
-  //   const multipl = item.cost * item.count;
-  //   acumulador += multipl;
-  // });
+  let acumulador = 0;
+  purchase.products && purchase.products.forEach(item => {
+    const multipl = item.cost * item.count;
+    acumulador += multipl;
+  });
 
   return (
     <div className="m-5 wrapperBranches">
@@ -50,13 +49,13 @@ const PurchaseDetails = () => {
             <th>Subtotal</th>
           </tr>
         </thead>
-        {purchase.products.map(item => {
+        {purchase.products && purchase.products.map((item, index) => {
           return (
             <tbody className="table light" key={item.ProductId}>
-              <tr>
+              <tr key={index}>
                 <td>{item.product_name}</td>
                 <td>${item.cost} </td>
-                <td>{item.count}</td>
+                <td>{item.count}</td> 
                 <td>$ {Math.round(item.cost * item.count)}</td>
               </tr>
             </tbody>
@@ -64,10 +63,8 @@ const PurchaseDetails = () => {
         })}
       </Table>
 
-      <h2>
-        {
-          // acumulador
-        }
+      <h2>Total $ {' '}
+        {Math.round(acumulador) }
         
       </h2>
     </div>
