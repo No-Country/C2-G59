@@ -15,12 +15,12 @@ const PurchaseDetails = () => {
 
   const navigate = useNavigate();
   const params = useParams();
-  // const data = getPurchaseById(Number(params.id));
-  const [purchase, sePurchase] = useState({});
+  const [purchase, setPurchase] = useState({});
+  console.log(params)
   // para obtener los datos del form
   useEffect(() => {
     axiosWithOutToken('/purchase/' + params.id).then(({ data }) => {
-      sePurchase(data);
+      setPurchase(data);
       console.log(data);
     }).catch((err) => {
       console.log(err)

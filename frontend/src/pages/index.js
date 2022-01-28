@@ -14,6 +14,7 @@ export { default as Account } from './Account/Account';
 export { default as ChangePass } from './Account/ChangePass';
 export { default as Sales } from './Sales/Sales';
 export { default as AddSale } from './Sales/AddSale';
+export { default as Bill } from '../pages/Bill/Bill';
 export { default as SaleDetails } from './Sales/SaleDetails';
 export { default as Purchases } from './Purchases/Purchases';
 export { default as AddPurchases } from './Purchases/AddPurchases';
