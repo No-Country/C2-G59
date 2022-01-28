@@ -26,9 +26,9 @@ function Graph({ data, type, title, description }) {
 
   // coloco como id del tooltip la primera palabra del titulo
   const idRandTooltip = title.split(' ')[0];
-
+  //<Card style={{ height: 'calc(100% - 25px)' }}>
   return (
-    <Card style={{ height: 'calc(100% - 25px)' }}>
+    <Card>
       <CardBody>
         <h4 className="card-title d-flex align-items-center">
           {title}

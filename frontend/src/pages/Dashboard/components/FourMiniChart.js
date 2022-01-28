@@ -2,30 +2,31 @@ import { Col, Row } from 'reactstrap';
 import CardWidget from './CardWidget';
 
 const FourMiniChart = props => {
+  // {{url}}/api/charts/branches-profit-total?cashflow=true&months=2
   // const {information} = props
   const information = [
     {
-      title: 'Sales of Month',
-      numberTitle: 241,
-      porcentText: 234,
+      title: 'Sales Last 2 Months',
+      numberTitle: 158610,
+      porcentText: 5, // FIXME colocado aleatorio
       iconImg: 'bi bi-person-plus-fill',
     },
     {
-      title: 'Earnings of Month',
-      numberTitle: 145,
-      porcentText: 33,
+      title: 'Earnings Last 2 Months',
+      numberTitle: 56533,
+      porcentText: 2, // FIXME colocado aleatorio
       iconImg: 'bi bi-coin',
     },
     {
-      title: 'All Products',
-      numberTitle: 565,
-      porcentText: 61,
+      title: 'Investment Last 2 Months',
+      numberTitle: 102076,
+      porcentText: 12, // FIXME colocado aleatorio
       iconImg: 'bi bi-apple',
     },
     {
-      title: 'Sales Today',
-      numberTitle: 61,
-      porcentText: 54,
+      title: 'Branch: Cordoba',
+      numberTitle: 76256,
+      porcentText: 134,
       iconImg: 'bi bi-person-plus-fill',
     },
   ];
