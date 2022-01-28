@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Button, ButtonGroup, Card, CardBody, Spinner } from 'reactstrap';
 
-// import { useAxios } from '../../hooks/useAxios';
 import { axiosWithOutToken } from '../../services/axios';
 
 const initialState = {
@@ -27,9 +26,6 @@ const LineChart = () => {
   const [dataChart, setDataChart] = useState(initialState);
   const [branch, setBranch] = useState({ id: 1, name: 'Buenos Aires', month: 10 });
   const [loading, setLoading] = useState(true);
-  // const [response, error, loading] = useAxios(
-  //   '/charts/branches-profit?branch_id=2&months=8&cashflow=true',
-  // );
 
   const dataFinal = {
     labels: dataChart?.labels,
@@ -149,18 +145,13 @@ const LineChart = () => {
     <>
       <Card style={{ height: 'calc(100% - 25px)' }}>
         <CardBody>
-          {/*           {loading ? (
-            <div
-              className="d-flex align-items-center justify-content-center h-100"
-              style={{ maxHeight: '300px' }}
-            >
-              <Spinner color="primary" type="grow" />
-            </div>
-          ) : ( */}
-          <>
-            <div className="float-end d-none d-md-inline-block">
+          <div className="d-flex justify-content-between flex-wrap">
+            <h4 className="card-title mb-4 d-flex align-items-center">
+              Sales / Earnings in Branch: {branch.name}
+            </h4>
+            <div className="d-none d-lg-block">
               <select
-                className="form-select form-select-sm d-inline-flex w-auto"
+                className="form-select form-select-sm d-inline w-auto"
                 value={branch.month}
                 onChange={handleMonth}
                 style={{ verticalAlign: 'top' }}
@@ -199,14 +190,22 @@ const LineChart = () => {
                 </Button>
               </ButtonGroup>
             </div>
-            <h4 className="card-title mb-4 d-flex align-items-center">
-              Sales / Earnings in Branch: {branch.name}
-            </h4>
-            <div>
-              <Line width={474} height={300} data={dataFinal} />
+          </div>
+
+          {loading ? (
+            <div
+              className="d-flex align-items-center justify-content-center h-100"
+              style={{ maxHeight: '300px' }}
+            >
+              <Spinner color="primary" type="grow" />
             </div>
-          </>
-          {/* )} */}
+          ) : (
+            <>
+              <div>
+                <Line width={474} height={300} data={dataFinal} />
+              </div>
+            </>
+          )}
         </CardBody>
       </Card>
     </>
