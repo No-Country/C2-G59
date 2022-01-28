@@ -2,6 +2,7 @@ const { request, response } = require('express');
 const { Product } = require('../db/models/product.model');
 const { PurchaseOrder } = require('../db/models/purchase-order.model');
 const { PurchaseTransaction } = require('../db/models/purchase-trx.model');
+const { setIdInInvoiceFormat } = require('../helpers/set-format');
 
 const getPurchaseOrder = async (req = request, res = response) => {
   
@@ -11,12 +12,24 @@ const getPurchaseOrder = async (req = request, res = response) => {
     const purchaseOrders = await PurchaseOrder.findAll();
     const newPurchaseOrders = [];
 
+    // sort purchase by date
+    purchaseOrders.sort( function (a,b) {
+      return new Date(b.purchase_date).getTime() - new Date(a.purchase_date).getTime();
+    });
+
+    // Set Invoice format
+    for (const purchase of purchaseOrders) {
+      newPurchaseOrders.push({ ...purchase.dataValues, control_number: setIdInInvoiceFormat(purchase.dataValues.id)})
+    }
+
     if (!JSON.parse(show_products)) {
-      return res.status(200).json({ purchase_order: purchaseOrders });
+      return res.status(200).json({ purchase_order: newPurchaseOrders });
     }
 
     // Code to include list of products
-    for (const purchaseOrder of purchaseOrders) {
+    const purchaseOrderWithProducts = [];
+
+    for (const purchaseOrder of newPurchaseOrders) {
       const products = [];
       const purchaseTrxs = await PurchaseTransaction.findAll({
         where: { purchase_order_id: purchaseOrder.id },
@@ -34,10 +47,10 @@ const getPurchaseOrder = async (req = request, res = response) => {
           cost: trx.cost,
         });
       }
-      newPurchaseOrders.push({ ...purchaseOrder.dataValues, products });
+      purchaseOrderWithProducts.push({ ...purchaseOrder.dataValues, products });
     }
 
-    res.status(200).json({ purchase_order: newPurchaseOrders });
+    res.status(200).json({ purchase_order: purchaseOrderWithProducts });
   } catch (error) {
     return res
       .status(500)
@@ -63,7 +76,11 @@ const getPurchaseOrderById = async (req = request, res = response) => {
       products.push({ ...product.dataValues, count: trx.count, cost: trx.cost });
     }
     
-    res.status(200).json({...purchaseOrder.dataValues, products });
+    res.status(200).json({
+      ...purchaseOrder.dataValues,
+      control_number: setIdInInvoiceFormat(purchaseOrder.dataValues.id),
+      products 
+    });
   } catch(error) {
     return res.status(500).json({ ok: false, msg: 'Talk with de admin', error });
   }
@@ -119,12 +136,14 @@ const createPurchaseOrder = async (req = request, res = response) => {
   }
 
   // Agregar datos a la tabla de products
-  res.status(200).json({ ok: true, purchaseOrder });
+  res.status(200).json({ 
+    ...purchaseOrder.dataValues,
+    control_number: setIdInInvoiceFormat(purchaseOrder.dataValues.id),
+  });
 };
 
 const deletePurchaseOrder = async (req = request, res = response) => {
   const { id } = req.params;
-  const products = [];
 
   try {
     const purchaseTrxs = await PurchaseTransaction.findAll({
