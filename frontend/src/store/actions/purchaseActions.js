@@ -16,7 +16,7 @@ const getPurchasesSuccess = purchases => {
 };
 const getPurchasesFail = error => {
   return {
-    type: types.PURCHASE_START,
+    type: types.PURCHASE_FAIL,
     payload: { error },
   };
 };
@@ -25,10 +25,10 @@ const getPurchasesFail = error => {
 function getPurchases() {
   return dispatch => {
     dispatch(getPurchasesStart());
-    return axiosWithOutToken('/purchases')
+    return axiosWithOutToken('/purchase')
       .then(resp => {
-        dispatch(getPurchasesSuccess(resp.data.products));
-        return resp.data.products;
+        dispatch(getPurchasesSuccess(resp.data.purchase_order));
+        return resp.data.purchase_order;
       })
       .catch(err => {
         console.log(err.response);

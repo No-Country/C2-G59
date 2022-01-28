@@ -1,14 +1,16 @@
-// import { useState } from 'react';
+import { useEffect } from 'react';
 import { Table, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPurchases} from '../../store/actions/purchaseActions';
 
 // data example
-import { getAllPurchases } from '../../utils/dataPurchase';
+// import { getAllPurchases } from '../../utils/dataPurchase';
 
-const dataPurchases = getAllPurchases();
+// const dataPurchases = getAllPurchases();
 
 // const initialList = [
 //   // {
@@ -36,6 +38,15 @@ const Purchases = () => {
     { title: 'Fintech', link: '/' },
     { title: 'All Purchase', link: '#d' },
   ];
+
+  const dispatch = useDispatch();
+  const purchaseData = useSelector(state => state.purchase);
+
+  useEffect(() => {
+    dispatch(getPurchases());
+  }, []);
+
+  // console.log(purchaseData);
 
   // const [listProducts, setListProducts] = useState(initialList);
   // const [total, setTotal] = useState(0.0);
@@ -82,23 +93,26 @@ const Purchases = () => {
         <thead>
           <tr>
             <th>#</th>
-            <th>Client</th>
+            <th>Supplier</th>
+            <th>Invoice</th>
             <th>Total</th>
             <th>Date</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          {dataPurchases.map(item => (
+          {purchaseData.items.map((item, index) => (
             <tr key={item.id}>
-              <td>1</td>
-              <td>{item.name}</td>
-              <td>
+              <td>{index}</td>
+              <td>supplier</td>
+              {/* <td>
                 {new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(
                   item.price,
                 )}
-              </td>
-              <td>{dayjs(item.date).format('LLL')}</td>
+              </td> */}
+              <td>{item.invoice}</td>
+              <td>$ {item.amount}</td>
+              <td>{dayjs(item.pay_date).format('LLL')}</td>
               <td>
                 <Link className="btn btn-primary btn-sm" to={`/purchases/${item.id}`}>
                   View
