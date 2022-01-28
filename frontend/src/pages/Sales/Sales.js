@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getSales } from '../../store/actions/saleActions';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+import { Link } from 'react-router-dom';
 
 const Sales = () => {
   dayjs.extend(localizedFormat);
@@ -16,6 +17,7 @@ const Sales = () => {
 
   const dispatch = useDispatch();
   const saleData = useSelector(state => state.sale);
+
 
   useEffect(() => {
     dispatch(getSales());
@@ -54,9 +56,12 @@ const Sales = () => {
                 <td>$ {item.amount}</td>
                 <td>{dayjs(item.sale_date).format('LLL')}</td>
                 <td>
-                  <Button variant="primary" size="sm" onClick={handleShow}>
+                  {/* <Button variant="primary" size="sm" > 
                     View
-                  </Button>{' '}
+                  </Button>*/}
+                  <Link className="btn btn-primary btn-sm" to={`/sales/${item.id}`}>
+                  View
+                </Link>
                   <Button variant="danger" size="sm">
                     Delete
                   </Button>
@@ -66,7 +71,7 @@ const Sales = () => {
           </tbody>
         </Table>
 
-        <Modal show={show} onHide={handleClose} size="lg">
+        {/* <Modal show={show} onHide={handleClose} size="lg">
           <Modal.Header closeButton>
             <Modal.Title>Sale Detail</Modal.Title>
           </Modal.Header>
@@ -85,7 +90,7 @@ const Sales = () => {
               Close
             </Button>
           </Modal.Footer>
-        </Modal>
+        </Modal> */}
       </Container>
     </div>
   );

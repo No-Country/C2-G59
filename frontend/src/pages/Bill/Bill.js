@@ -1,22 +1,39 @@
-import React from 'react';
-import { Table } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Table, Button } from 'react-bootstrap';
 import logoBlack from '../../assets/images/logoBlack.svg';
-
 // data example
 import { getAllPurchases } from '../../utils/dataPurchase';
-// import { getAllProductsBack, getProductBackById } from '../../utils/dataProductsBack';
+import { useParams, useNavigate } from 'react-router-dom';
+import { axiosWithOutToken } from '../../services/axios';
 
 const dataPurchases = getAllPurchases();
 // const dataProducts = getAllProductsBack();
 
 function Bill() {
   const getCurrentDay = () => {
-    return new Date().toLocaleDateString("en-US");
+    return new Date().toLocaleDateString('en-US');
   };
 
-  //   const generateRandomString = (num) => {
-  //     return Math.random().toString(36).substring(0,num);
-  // }
+  const params = useParams();
+  const [sale, setSale] = useState({});
+
+  const navigate = useNavigate();
+  
+  // console.log(params)
+  // para obtener los datos del form
+  useEffect(() => {
+    axiosWithOutToken('/sales/' + params.id) 
+      .then(({ data }) => {
+        setSale(data);
+        console.log(data)
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
+
+  console.log(sale);
 
   return (
     <div className="row m-3 shadow">
@@ -39,7 +56,9 @@ function Bill() {
               </tbody>
             </Table>
           </div>
-
+          <Button variant="warning" onClick={() => navigate(-1)}>
+          Back
+        </Button>
           <Table bordered size="sm" className="text-left bordeless">
             <tbody>
               <tr>
@@ -91,9 +110,10 @@ function Bill() {
                   <td>{item.name}</td>
                   <td>3</td>
                   <td>96</td>
-                  <td>{new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(
-                    item.price,
-                  )}
+                  <td>
+                    {new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(
+                      item.price,
+                    )}
                   </td>
                 </tr>
               ))}
@@ -133,11 +153,10 @@ function Bill() {
               </tr>
             </tbody>
           </Table>
-
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Bill;
