@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { Table, Container } from 'react-bootstrap';
+import { Card, CardBody, Col, Container, Row, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
 import { useSelector, useDispatch } from 'react-redux';
-import { getPurchases} from '../../store/actions/purchaseActions';
+import { getPurchases } from '../../store/actions/purchaseActions';
 
 // data example
 // import { getAllPurchases } from '../../utils/dataPurchase';
@@ -77,55 +77,64 @@ const Purchases = () => {
 
   return (
     <div className="page-content">
-    <Container fluid>
-    <Breadcrumbs title="All Purchase" breadcrumbItems={breadcrumbItems} />
-      <div>
-        <div className="d-flex justify-content-between align-items-start">
-          <h1>Purchases</h1>
-        </div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde quo quasi pariatur alias
-          iusto laudantium vel suscipit quibusdam sint nulla? Quae eos nulla enim vitae, qui
-          veritatis nam corrupti architecto?
-        </p>
-      </div>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Supplier</th>
-            <th>Invoice</th>
-            <th>Total</th>
-            <th>Date</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {purchaseData.items.map((item, index) => (
-            <tr key={item.id}>
-              <td>{index}</td>
-              <td>supplier</td>
-              {/* <td>
+      <Container fluid>
+        <Breadcrumbs title="All Purchase" breadcrumbItems={breadcrumbItems} />
+        <Row>
+          <Col>
+            <Card>
+              <CardBody>
+                <div>
+                  <div className="d-flex justify-content-between align-items-start">
+                    <h1>Purchases</h1>
+                  </div>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde quo quasi pariatur alias
+                    iusto laudantium vel suscipit quibusdam sint nulla? Quae eos nulla enim vitae, qui
+                    veritatis nam corrupti architecto?
+                  </p>
+                </div>
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Supplier</th>
+                      <th>Invoice</th>
+                      <th>Total</th>
+                      <th>Date</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {purchaseData.items.map((item, index) => (
+                      <tr key={item.id}>
+                        <td>{index}</td>
+                        <td>supplier</td>
+                        {/* <td>
                 {new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(
                   item.price,
                 )}
               </td> */}
-              <td>{item.invoice}</td>
-              <td>$ {item.amount}</td>
-              <td>{dayjs(item.pay_date).format('LLL')}</td>
-              <td>
-                <Link className="btn btn-primary btn-sm" to={`/purchases/${item.id}`}>
-                  View
-                </Link>{' '}
-                <a className="btn btn-danger btn-sm" href="#2">
-                  Delete
-                </a>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </Container>
+                        <td>{item.invoice}</td>
+                        <td>$ {item.amount}</td>
+                        <td>{dayjs(item.pay_date).format('LLL')}</td>
+                        <td>
+                          <Link className="btn btn-primary btn-sm" to={`/purchases/${item.id}`}>
+                            View
+                          </Link>{' '}
+                          <a className="btn btn-danger btn-sm" href="#2">
+                            Delete
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+
+      </Container>
     </div>
   );
 };
