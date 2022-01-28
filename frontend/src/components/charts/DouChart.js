@@ -17,7 +17,7 @@ const DouChart = () => {
     labels: ['Buenos Aires', 'Cordoba', 'Mendoza'],
     datasets: [
       {
-        data: [89091, 226619, 347716],
+        data: [37.94, 48.08, 13.98],
         backgroundColor: ['#556ee6', '#1cbb8c', '#fcb92c'],
         hoverBackgroundColor: ['#556ee6', '#1cbb8c', '#fcb92c'],
         hoverBorderColor: '#fff',
@@ -61,27 +61,27 @@ const DouChart = () => {
         <CardBody>
           <div className="d-flex justify-content-between flex-wrap">
             <h4 className="card-title mb-4 d-flex align-items-center">
-              Percentage of sales: {branch.name}
+              Percentage of sales: Nov-Dec
             </h4>
-            <div className="float-end">
+            {/* <div className="float-end">
               <select name="" id="" onChange={handleMonth}>
                 <option value="">Last Month</option>
                 <option value="">Last Month</option>
                 <option value="">Last Month</option>
               </select>
-            </div>
+            </div> */}
           </div>
           <Row className="text-center">
             <Col xs={4}>
-              <h5 className="mb-0">$ 2541</h5>
+              <h5 className="mb-0">$ 56533</h5>
               <p className="text-muted text-truncate">Profits</p>
             </Col>
             <Col xs={4}>
-              <h5 className="mb-0">$ 84845</h5>
+              <h5 className="mb-0">$ 158610</h5>
               <p className="text-muted text-truncate">Sales</p>
             </Col>
             <Col xs={4}>
-              <h5 className="mb-0">$ 12001</h5>
+              <h5 className="mb-0">$ 102076</h5>
               <p className="text-muted text-truncate">Purchases</p>
             </Col>
           </Row>
