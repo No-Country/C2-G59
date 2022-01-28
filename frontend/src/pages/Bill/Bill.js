@@ -1,143 +1,130 @@
-import React from 'react';
-import { Table } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Table, Button } from 'react-bootstrap';
 import logoBlack from '../../assets/images/logoBlack.svg';
-
-// data example
-import { getAllPurchases } from '../../utils/dataPurchase';
-// import { getAllProductsBack, getProductBackById } from '../../utils/dataProductsBack';
-
-const dataPurchases = getAllPurchases();
-// const dataProducts = getAllProductsBack();
+// data example;
+import { useParams, useNavigate } from 'react-router-dom';
+import { axiosWithOutToken } from '../../services/axios';
+import { Card, CardBody, Col, Container, Row } from 'reactstrap';
+import Breadcrumbs from '../../components/common/Breadcrumbs';
+import dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 
 function Bill() {
-  const getCurrentDay = () => {
-    return new Date().toLocaleDateString("en-US");
-  };
+  const params = useParams();
+  const [sale, setSale] = useState({});
+  const navigate = useNavigate();
+  const breadcrumbItems = [
+    { title: 'Fintech', link: '/' },
+    { title: 'Bill', link: '#d' },
+  ];
 
-  //   const generateRandomString = (num) => {
-  //     return Math.random().toString(36).substring(0,num);
-  // }
+  dayjs.extend(localizedFormat);
+
+  // para obtener los datos del form
+  useEffect(() => {
+    axiosWithOutToken('/sales/' + params.id)
+      .then(({ data }) => {
+        setSale(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  let acumulador = 0;
+  sale.products &&
+    sale.products.forEach(item => {
+      const multipl = item.price * item.count;
+      acumulador += multipl;
+    });
 
   return (
-    <div className="row m-3 shadow">
-      <div className="row p-3 bg-white">
-        <div className="col-12">
-          <div className="d-flex justify-content-between ">
-            <img src={logoBlack} alt="" className="w-25" />
+    <div className="page-content">
+      <Container fluid>
+        <Breadcrumbs title="Bill" breadcrumbItems={breadcrumbItems} />
+        <Row>
+          <Col>
+            <Card>
+              <CardBody>
+                <div className="row m-3 shadow">
+                  <div className="row p-3 bg-white">
+                    <div className="col-12">
+                      <div className="d-flex justify-content-end">
+                        <Button variant="warning" onClick={() => navigate(-1)}>
+                          Back
+                        </Button>
+                      </div>
+                      <div className="d-flex justify-content-between ">
+                        <img src={logoBlack} alt="" className="w-25" />
 
-            <Table bordered size="sm" className="text-center m-7 w-25">
-              <tbody>
-                <tr>
-                  <th>FACTURA</th>
-                </tr>
-                <tr>
-                  <th>{getCurrentDay()}</th>
-                </tr>
-                <tr>
-                  <th>A1B3345</th>
-                </tr>
-              </tbody>
-            </Table>
-          </div>
-
-          <Table bordered size="sm" className="text-left bordeless">
-            <tbody>
-              <tr>
-                <th className="w-25">Delivery Address:</th>
-                <td>texto</td>
-              </tr>
-              <tr>
-                <th>Billing Address:</th>
-                <td>texto</td>
-              </tr>
-            </tbody>
-          </Table>
-
-          <Table bordered size="sm" className="text-center">
-            <thead>
-              <tr>
-                <th>Invoice number</th>
-                <th>Date Invoice</th>
-                <th>Order Reference</th>
-                <th>Order Date</th>
-                <th>Order Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>A1B3345</td>
-                <td>AD3SD2</td>
-                <td>GDWRHGB</td>
-                <td>{getCurrentDay()}</td>
-                <td>4365747</td>
-              </tr>
-            </tbody>
-          </Table>
-
-          <Table bordered size="sm" className="text-center">
-            <thead>
-              <tr>
-                <th>Reference</th>
-                <th>Product</th>
-                <th>Unit Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {dataPurchases.map(item => (
-                <tr key={item.id}>
-                  <td>1</td>
-                  <td>{item.name}</td>
-                  <td>3</td>
-                  <td>96</td>
-                  <td>{new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(
-                    item.price,
-                  )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-
-          <Table bordered size="sm" className="text-center w-50">
-            <tbody>
-              <tr>
-                <th striped>Payment method</th>
-                <td>Credit</td>
-              </tr>
-            </tbody>
-          </Table>
-
-          <Table bordered size="sm" className="text-center ms-auto w-50">
-            <tbody>
-              <tr>
-                <th>Products Total</th>
-                <td>A1B3345</td>
-              </tr>
-              <tr>
-                <th>Shipping Cost</th>
-                <td>GDWRHGB</td>
-              </tr>
-              <tr>
-                <th>Total (IVA excl.)</th>
-                <td>AD3SD2</td>
-              </tr>
-              <tr>
-                <th>Total Taxes</th>
-                <td>784856</td>
-              </tr>
-              <tr>
-                <th>Total</th>
-                <td>4365747</td>
-              </tr>
-            </tbody>
-          </Table>
-
-        </div>
-      </div>
+                        <Table bordered size="sm" className="text-center m-7 w-25">
+                          <tbody>
+                            <tr>
+                              <th>INVOICE</th>
+                            </tr>
+                            <tr>
+                              <th>{dayjs(sale.pay_date).format('LL')}</th>
+                            </tr>
+                            <tr>
+                              <th>{sale.invoice}</th>
+                            </tr>
+                          </tbody>
+                        </Table>
+                      </div>
+                      <Table bordered size="sm" className="text-center">
+                        <thead>
+                          <tr>
+                            <th>Reference</th>
+                            <th>Product</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {sale.products &&
+                            sale.products.map(item => (
+                              <tr key={item.id}>
+                                <td>{item.id}</td>
+                                <td>{item.product_name}</td>
+                                <td>{item.price}</td>
+                                <td>{item.count}</td>
+                                <td>$ {Math.round(item.price * item.count)}</td>
+                              </tr>
+                            ))}
+                        </tbody>
+                      </Table>
+                      <Table bordered size="sm" className="text-center ms-auto w-50">
+                        <tbody>
+                          <tr>
+                            <th>Products Total</th>
+                            <td>$ {acumulador}</td>
+                          </tr>
+                          <tr>
+                            <th>Shipping Cost</th>
+                            <td>Free delivery</td>
+                          </tr>
+                          <tr>
+                            <th>Total (IVA excl.)</th>
+                            <td>{acumulador * 0.1}</td>
+                          </tr>
+                          <tr>
+                            <th>Total</th>
+                            <td>{acumulador - acumulador * 0.1}</td>
+                          </tr>
+                        </tbody>
+                      </Table>
+                    </div>
+                  </div>
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </div>
-  )
+  );
 }
 
 export default Bill;

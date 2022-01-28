@@ -14,6 +14,7 @@ import {
   Sales,
   AddSale,
   SaleDetails,
+  Bill,
   Suppliers,
   AddSupplier,
   Users,
@@ -68,6 +69,7 @@ const privateRoutesList = [
 
   // sales
   { path: '/sales', element: <Sales /> },
+  { path: '/sales/:id', element: <Bill /> },
   { path: '/sales/add', element: <AddSale />, permission: ['CEO_ROLE'] }, //, permission: ['CEO_ROLE']
 
   // purchases

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Button, Row, Col, Form, Container } from 'react-bootstrap';
+import { Card, CardBody, Col, Container, Row } from 'reactstrap';
+import { Button, Form } from 'react-bootstrap';
 import { getAllProductsBack, getProductBackById } from '../../utils/dataProductsBack';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
 
@@ -60,41 +61,49 @@ export default function AddPurchases() {
 
   return <div className="page-content">
     <Container fluid>
-    <Breadcrumbs title="Add Purchase" breadcrumbItems={breadcrumbItems} />
-      <h2>Add Purchase</h2>
-      <hr className="mt-4" />
+      <Breadcrumbs title="Add Purchase" breadcrumbItems={breadcrumbItems} />
+      <Row>
+        <Col>
+          <Card>
+            <CardBody>
+              <h2>Add Purchase</h2>
+              <hr className="mt-4" />
 
-      <Form>
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridState">
-            <Form.Label>Sale Date</Form.Label>
-            <Form.Control type="date" />
-          </Form.Group>
+              <Form>
+                <Row className="mb-3">
+                  <Form.Group as={Col} controlId="formGridState">
+                    <Form.Label>Sale Date</Form.Label>
+                    <Form.Control type="date" />
+                  </Form.Group>
 
-          <Form.Group as={Col} controlId="formGridState">
-            <Form.Label>Name Client</Form.Label>
-            <Form.Control type="text" />
-          </Form.Group>
-        </Row>
+                  <Form.Group as={Col} controlId="formGridState">
+                    <Form.Label>Name Client</Form.Label>
+                    <Form.Control type="text" />
+                  </Form.Group>
+                </Row>
 
-        {listProducts.map(item => (
-          <ItemProduct key={item.id} values={item} />
-        ))}
+                {listProducts.map(item => (
+                  <ItemProduct key={item.id} values={item} />
+                ))}
 
-        <Button variant="primary" className="mb-3" onClick={handleAddProduct}>
-          Add
-        </Button>
-        <hr />
-        <Row>
-          <Form.Group controlId="formGridZip">
-            <h3>Total: </h3>
-          </Form.Group>
-        </Row>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-      </Container>
+                <Button variant="primary" className="mb-3" onClick={handleAddProduct}>
+                  Add
+                </Button>
+                <hr />
+                <Row>
+                  <Form.Group controlId="formGridZip">
+                    <h3>Total: </h3>
+                  </Form.Group>
+                </Row>
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   </div>;
 }
 

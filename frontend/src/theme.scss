@@ -166,3 +166,37 @@ form {
 .sidebar-enable.vertical-collpsed .page-content {
   margin-left: 70px;
 }
+
+.title__analytics {
+  // font-size: ;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.button-group__analytics {
+  width: 200px;
+  margin-right: 50px;
+}
+
+.row-flex {
+  width: 100%;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.mt-3 {
+  margin-top: 24px;
+}
+
+.mt-4 {
+  margin-top: 32px;
+}
+
+.p-2 {
+  padding: 20px;
+}
+

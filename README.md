@@ -27,7 +27,14 @@ Visualize business data through a dynamic dashboard
 
 ## Images
 
-![](./frontend/src/assets/images/pageDashboard.png)
+### Login
+![](./frontend/src/assets/images/PageLogin.png)
+### Admin Rol
+![](./frontend/src/assets/images/PageAdmin.png)
+### Ceo Rol
+![](./frontend/src/assets/images/PageCeo.png)
+### User Rol
+![](./frontend/src/assets/images/PageUser.png)
 
 ## Technologies used
 

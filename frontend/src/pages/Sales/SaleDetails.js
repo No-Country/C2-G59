@@ -12,7 +12,6 @@ const SaleDetails = () => {
     <div className="page-content">
       <Container fluid>
         <Breadcrumbs title="Sale Detail" breadcrumbItems={breadcrumbItems} />
-        {/** Contenido Row -> Col -> etc */}
       </Container>
     </div>
   );

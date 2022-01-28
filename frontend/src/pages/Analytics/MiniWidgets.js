@@ -74,8 +74,8 @@ const MiniWidgets = ({ reports }) => {
 
                 <CardBody className="border-top py-3">
                   <div className="text-truncate">
-                    <span className="badge badge-soft-success font-size-11 me-1">
-                      <i className="ri-arrow-up-s-line"> </i> {report.rate}
+                    <span className={`badge ${(report.rate > 0) ? 'badge-soft-danger': 'badge-soft-danger'} font-size-11 me-1`}>
+                      <i className={`${(report.rate > 0) ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'}`}> </i> {report.rate}
                     </span>
                     <span className="text-muted ms-2">{report.desc}</span>
                   </div>
