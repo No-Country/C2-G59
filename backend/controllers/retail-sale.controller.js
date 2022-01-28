@@ -1,8 +1,8 @@
 const { request, response } = require('express');
 const { Product } = require('../db/models/product.model');
 const { RetailSale } = require('../db/models/sales.model');
-const { PurchaseTransaction } = require('../db/models/purchase-trx.model');
 const { SaleTransaction } = require('../db/models/sales-trx.model');
+const { setIdInInvoiceFormat } = require('../helpers/set-format');
 
 const getRetailSale = async (req = request, res = response) => {
 
@@ -11,13 +11,25 @@ const getRetailSale = async (req = request, res = response) => {
   try {
     const retailSales = await RetailSale.findAll();
     const newRetailSales = [];
+    
+    // sort retail sales by date
+    retailSales.sort( function (a,b) {
+      return new Date(b.sale_date).getTime() - new Date(a.sale_date).getTime();
+    });
+
+    // Set Invoice format
+    for (const sale of retailSales) {
+      newRetailSales.push({ ...sale.dataValues, invoice: setIdInInvoiceFormat(sale.dataValues.id)})
+    }
 
     if (!JSON.parse(show_products)) {
-      return res.status(200).json({ retail_sales: retailSales });
+      return res.status(200).json({ retail_sales: newRetailSales });
     }
-    
+
     // Code to include list of products
-    for(const sale of retailSales) {
+    let retailSalesWithProducts = [];
+    
+    for(const sale of newRetailSales) {
       const products = [];
       const saleTrxs = await SaleTransaction.findAll({ 
         where: { retail_sale_id: sale.id }
@@ -29,9 +41,9 @@ const getRetailSale = async (req = request, res = response) => {
         products.push({ ...product.dataValues, count: trx.count });
       }
       
-      newRetailSales.push({...sale.dataValues, products});
+      retailSalesWithProducts.push({...sale.dataValues, products});
     }
-    res.status(200).json({ retail_sales: newRetailSales });
+    res.status(200).json({ retail_sales: retailSalesWithProducts });
 
   } catch (error) {
     return res.status(500).json({ ok: false, msg: 'Talk with de admin', error });
@@ -56,7 +68,11 @@ const getRetailSaleById = async (req = request, res = response) => {
       products.push({ ...product.dataValues, count: trx.count });
     }
     
-    res.status(200).json({...retailSale.dataValues, products });
+    res.status(200).json({
+      ...retailSale.dataValues,
+      invoice: setIdInInvoiceFormat(retailSale.dataValues.id),
+      products 
+    });
   } catch(error) {
     return res.status(500).json({ ok: false, msg: 'Talk with de admin', error });
   }
@@ -105,12 +121,14 @@ const createRetailSale = async (req = request, res = response) => {
   }
 
   // Agregar datos a la tabla de products
-  res.status(200).json({ ok: true, retailSale });
+  res.status(200).json({
+    ...retailSale.dataValues,
+    invoice: setIdInInvoiceFormat(retailSale.dataValues.id)
+  });
 };
 
 const deleteRetailSale = async (req = request, res = response) => {
   const { id } = req.params;
-  const products = [];
 
   try {
     const saleTrxs = await SaleTransaction.findAll({
