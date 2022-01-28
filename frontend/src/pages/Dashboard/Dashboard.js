@@ -1,10 +1,13 @@
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, CardBody, Card } from 'reactstrap';
+import DouChart from '../../components/charts/DouChart';
 import LineChart from '../../components/charts/LineChart';
 
 import Breadcrumbs from '../../components/common/Breadcrumbs';
+import { BarChartSales } from './BarChartSales';
 import FourMiniChart from './components/FourMiniChart';
 import TableInfo from './components/TableInfo';
 import Graph from './Graph';
+import { LineChartAmount } from './LineChartAmount';
 
 function Dashboard() {
   const data = {
@@ -47,75 +50,32 @@ function Dashboard() {
         <FourMiniChart />
 
         <Row>
-          <Col lg={8} md={6}>
-            {/* <Graph
-              data={data}
-              type="line"
-              title="Sales / Earnings in Branch: Cordoba"
-              description="Example 1"
-            /> */}
+          <Col xl={8}>
             <LineChart />
           </Col>
-          <Col lg={4} md={6}>
-            <Graph
-              data={data}
-              type="doughnut"
-              title="Earnings of Month"
-              description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-            />
+
+          <Col xl={4}>
+            <DouChart />
           </Col>
         </Row>
 
         <Row>
-          <Col lg={4} md={6}>
-            {/* <Graph title="Graph por Default Line Grap" /> */}
+          <Col md={6}>
+            <LineChartAmount />
           </Col>
-          <Col lg={4} md={6}>
-            <Graph data={data} type="bar" title="Titulo  Bar GRaph" description="Ejemplo 1" />{' '}
-          </Col>
-          <Col lg={4} md={12}>
-            <Graph
-              data={data}
-              type="radar"
-              title="New Projects GRaph Radar"
-              description="Ejemplo 1"
-            />
+          <Col md={6}>
+            <BarChartSales />
           </Col>
         </Row>
 
-        <Row>
+        {/* <Row>
           <Col lg={4} md={12}>
-            {/* <Card>
-              <CardBody>
-                <h4 className="card-title mb-4">Bar Chart</h4>
-                <Row className="text-center">
-                  <Col xs={4}>
-                    <h5 className="mb-0">2541</h5>
-                    <p className="text-muted text-truncate">Activated</p>
-                  </Col>
-                  <Col xs={4}>
-                    <h5 className="mb-0">84845</h5>
-                    <p className="text-muted text-truncate">Pending</p>
-                  </Col>
-                  <Col xs={4}>
-                    <h5 className="mb-0">12001</h5>
-                    <p className="text-muted text-truncate">Deactivated</p>
-                  </Col>
-                </Row> */}
-            <Graph data={data} type="pie" title="Titulo 3" description="Ejemplo 1" />
-            {/* </CardBody>
-            </Card> */}
+            <Graph data={data} type="pie" title="Titulo  Bar GRaph" description="Ejemplo 1" />
           </Col>
           <Col lg={8} md={12}>
             <TableInfo type="table" title="Titulo" description="Ejemplo 1" />
           </Col>
-        </Row>
-
-        <Row>
-          <Col>
-            <TableInfo type="table" title="Titulo" description="Ejemplo 1" />
-          </Col>
-        </Row>
+        </Row> */}
       </Container>
     </div>
   );

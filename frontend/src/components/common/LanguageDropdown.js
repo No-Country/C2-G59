@@ -28,9 +28,9 @@ const LanguageDropdown = ({ t }) => {
     i18n.changeLanguage(lng);
 
     if (lng === 'sp') setState({ ...state, lng: 'Spanish', flag: spain });
-    else if (lng === 'gr') setState({ ...state, lng: 'German', flag: germany });
-    else if (lng === 'rs') setState({ ...state, lng: 'Russian', flag: russia });
-    else if (lng === 'it') setState({ ...state, lng: 'Italian', flag: italy });
+    // else if (lng === 'gr') setState({ ...state, lng: 'German', flag: germany });
+    // else if (lng === 'rs') setState({ ...state, lng: 'Russian', flag: russia });
+    // else if (lng === 'it') setState({ ...state, lng: 'Italian', flag: italy });
     else if (lng === 'eng') setState({ ...state, lng: 'English', flag: usFlag });
   };
 
@@ -63,7 +63,7 @@ const LanguageDropdown = ({ t }) => {
             <img src={spain} alt="user" className="mr-1" height="12" />{' '}
             <span className="align-middle">Spanish</span>
           </DropdownItem>
-
+          {/* 
           <DropdownItem
             href=""
             active={state.lng === 'German' ? true : false}
@@ -92,7 +92,7 @@ const LanguageDropdown = ({ t }) => {
           >
             <img src={russia} alt="user" className="mr-1" height="12" />{' '}
             <span className="align-middle">Russian</span>
-          </DropdownItem>
+          </DropdownItem> */}
         </DropdownMenu>
       </Dropdown>
     </>
