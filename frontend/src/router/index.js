@@ -68,11 +68,11 @@ const privateRoutesList = [
 
   // sales
   { path: '/sales', element: <Sales /> },
-  { path: '/sales/add', element: <AddSale /> }, //, permission: ['CEO_ROLE']
+  { path: '/sales/add', element: <AddSale />, permission: ['CEO_ROLE'] }, //, permission: ['CEO_ROLE']
 
   // purchases
   { path: '/purchases', element: <Purchases /> },
-  { path: '/purchases/add', element: <AddPurchases /> }, //, permission: ['CEO_ROLE']
+  { path: '/purchases/add', element: <AddPurchases />, permission: ['CEO_ROLE'] }, //, permission: ['CEO_ROLE']
   { path: '/purchases/:id', element: <PurchaseDetails /> },
 
   // r. branches

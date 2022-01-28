@@ -17,7 +17,7 @@ export const purchaseReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        items: action.payload.users,
+        items: action.payload.purchases,
       };
     case types.PURCHASE_FAIL:
       return {
