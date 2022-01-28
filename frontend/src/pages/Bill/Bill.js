@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
-import logoBlack from '../../components/assets/logoBlack.svg';
+import logoBlack from '../../assets/images/logoBlack.svg';
 
 // data example
 import { getAllPurchases } from '../../utils/dataPurchase';

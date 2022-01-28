@@ -1,18 +1,22 @@
-import React from 'react'
+import { Row, Col, Container } from 'reactstrap';
 
-function Footer() {
-
-  const getCurrentYear = () => {
-    return new Date().getFullYear();
-  };
-
+const Footer = () => {
   return (
-    <footer className='text-center p-3'>
-      <div className='text-center'>
-        <p>Copyright {getCurrentYear()} &#169; – All Rights Reserved.</p>
-      </div>
-    </footer>
-  )
-}
+    <>
+      <footer className="footer">
+        <Container fluid>
+          <Row>
+            <Col sm={6}>{new Date().getFullYear()} © No-Country.</Col>
+            <Col sm={6}>
+              <div className="text-sm-end d-none d-sm-block">
+                Created with <i className="ri-heart-fill text-danger"></i> by Team G-59
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </footer>
+    </>
+  );
+};
 
-export default Footer
+export default Footer;

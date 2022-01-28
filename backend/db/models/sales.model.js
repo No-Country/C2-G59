@@ -9,6 +9,10 @@ const RetailSaleSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
+  amount: {
+    allowNull: false,
+    type: DataTypes.DECIMAL(13,2),
+  },
   sale_date: {
     allowNull: false,
     type: DataTypes.DATE,

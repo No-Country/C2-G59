@@ -8,6 +8,7 @@ import {
   Products,
   Sales,
   Purchases,
+  Branches,
   Transactions,
   PurchaseDetails,
 } from '../pages';
@@ -22,6 +23,7 @@ const DashboardRoutes = () => {
         <Route path="customers" element={<Customers />} />
         <Route path="new-user" element={<NewUser />} />
         <Route path="transactions" element={<Transactions />} />
+        <Route path="branches" element={<Branches />} />
         <Route path="sales" element={<Sales />} />
         <Route path="purchases" element={<Purchases />} />
         <Route path="purchases/:id" element={<PurchaseDetails />} />

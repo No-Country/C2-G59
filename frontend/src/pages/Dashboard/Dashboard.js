@@ -1,7 +1,8 @@
-import React from 'react';
-import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import Chart from 'chart.js/auto';
-import CardGroup from './CardGroup';
+import { Container, Row, Col } from 'reactstrap';
+
+import Breadcrumbs from '../../components/common/Breadcrumbs';
+import FourMiniChart from './components/FourMiniChart';
+import TableInfo from './components/TableInfo';
 import Graph from './Graph';
 
 function Dashboard() {
@@ -32,73 +33,90 @@ function Dashboard() {
     ],
   };
 
+  const breadcrumbItems = [
+    { title: 'Fintech', link: '/' },
+    { title: 'Dashboard', link: '#d' },
+  ];
+
   return (
-    <>
+    <div className="page-content">
+      <Container fluid>
+        <Breadcrumbs title="Dashboard" breadcrumbItems={breadcrumbItems} />
 
-      <div className="d-flex justify-content-between m-4">
-        <h3> Analytics </h3>
-        <Breadcrumb>
-          <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-          <Breadcrumb.Item href="#">
-            Dashboard
-          </Breadcrumb.Item>
-          <Breadcrumb.Item active>Data</Breadcrumb.Item>
-        </Breadcrumb>
-      </div>
+        <FourMiniChart />
 
-      <div className="card-group mb-3">
-        <div className="card border-right">
-          <CardGroup title="New Clients" numberTitle="241" porcentText="234" iconImg={<i className="bi bi-person-plus-fill"></i>} />
-        </div>
-        <div className="card border-right">
-          <CardGroup title="Earnings of Month" numberTitle="145" porcentText="64" iconImg={<i className="bi bi-coin"></i>} />
-        </div>
-        <div className="card border-right">
-          <CardGroup title="New Projects" numberTitle="565" porcentText="34" iconImg={<i className="bi bi-apple"></i>} />
-        </div>
-        <div className="card border-right">
-          <CardGroup title="Projects" numberTitle="61" porcentText="54" iconImg={<i className="bi bi-person-plus-fill"></i>} />
-        </div>
-      </div>
+        <Row>
+          <Col lg={8} md={6}>
+            <Graph
+              data={data}
+              type="line"
+              title="Sales / Earnings in Branch: Cordoba"
+              description="Example 1"
+            />
+          </Col>
+          <Col lg={4} md={6}>
+            <Graph
+              data={data}
+              type="doughnut"
+              title="Earnings of Month"
+              description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
+            />
+          </Col>
+        </Row>
 
-      <div className="row">
-        <div className="col-lg-4 col-md-6">
-          <Graph data={data} type="line" title="New Clients" description="Ejemplo 1" />
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <Graph data={data} type="bar" title="Earnings of Month" description="Ejemplo 1" />
-        </div>
-        <div className="col-lg-4 col-md-6" >
-          <Graph data={data} type="bar" title="New Projects" description="Ejemplo 1" />
-        </div>
+        <Row>
+          <Col lg={4} md={6}>
+            <Graph title="Graph por Default Line Grap" />
+          </Col>
+          <Col lg={4} md={6}>
+            <Graph data={data} type="bar" title="Titulo  Bar GRaph" description="Ejemplo 1" />{' '}
+          </Col>
+          <Col lg={4} md={12}>
+            <Graph
+              data={data}
+              type="radar"
+              title="New Projects GRaph Radar"
+              description="Ejemplo 1"
+            />
+          </Col>
+        </Row>
 
-        <div className="row">
-          <div className="col-lg-6 col-md-6">
-            <Graph data={data} type="line" title="Titulo" description="Ejemplo 1" />
-          </div>
-          <div className="col-lg-6 col-md-6" >
-            <Graph data={data} type="bar" title="Titulo" description="Ejemplo 1" />
-          </div>
-        </div>
+        <Row>
+          <Col lg={4} md={12}>
+            {/* <Card>
+              <CardBody>
+                <h4 className="card-title mb-4">Bar Chart</h4>
+                <Row className="text-center">
+                  <Col xs={4}>
+                    <h5 className="mb-0">2541</h5>
+                    <p className="text-muted text-truncate">Activated</p>
+                  </Col>
+                  <Col xs={4}>
+                    <h5 className="mb-0">84845</h5>
+                    <p className="text-muted text-truncate">Pending</p>
+                  </Col>
+                  <Col xs={4}>
+                    <h5 className="mb-0">12001</h5>
+                    <p className="text-muted text-truncate">Deactivated</p>
+                  </Col>
+                </Row> */}
+            <Graph data={data} type="pie" title="Titulo 3" description="Ejemplo 1" />
+            {/* </CardBody>
+            </Card> */}
+          </Col>
+          <Col lg={8} md={12}>
+            <TableInfo type="table" title="Titulo" description="Ejemplo 1" />
+          </Col>
+        </Row>
 
-        <div className="row">
-          <div className="col-lg-4 col-md-8">
-            <Graph data={data} type="bar" title="Titulo" description="Ejemplo 1" />
-          </div>
-          <div className="col-lg-8 col-md-4">
-            <Graph type="table" title="Titulo" description="Ejemplo 1" />
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-12">
-            <Graph type="table" title="Titulo" description="Ejemplo 1" />
-          </div>
-        </div>
-      </div>
-
-    </>
-  )
+        <Row>
+          <Col>
+            <TableInfo type="table" title="Titulo" description="Ejemplo 1" />
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
 }
 
 export default Dashboard;

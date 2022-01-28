@@ -1,4 +1,4 @@
-import { types } from '../types/types';
+import { types } from '../types';
 
 // TODO: try save data user in localStorage and add default state
 const user = JSON.parse(localStorage.getItem('userFIT'));
