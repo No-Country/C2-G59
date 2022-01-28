@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Container } from 'reactstrap';
-import { useSelector, useDispatch} from 'react-redux';
+
 import { Button, Row, Col, Form } from 'react-bootstrap';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
-import { getSales } from '../../store/actions/saleActions';
+
 
 const listProductsInit = [
   {
@@ -14,19 +14,10 @@ const listProductsInit = [
 ];
 
 const AddSale = () => {
-  const dispatch = useDispatch();
 
   const [listItems, setListItems] = useState(listProductsInit);
 
-  const saleData = useSelector(state=>state.sale);
-
-useEffect(
-  () => {
-    dispatch(getSales());
-  },
-  []);
-
-console.log(saleData);
+  
 
   const breadcrumbItems = [
     { title: 'Fintech', link: '/' },

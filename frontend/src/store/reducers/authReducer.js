@@ -33,7 +33,7 @@ export const authReducer = (state = initialState, action) => {
           uid: action.payload.uid,
           name: action.payload.name,
           role: action.payload.role,
-          branch: action.payload.branch || null,
+          branch_id: action.payload.branch_id,
         }),
       );
       return {
