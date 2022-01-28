@@ -139,12 +139,12 @@ const SidebarContent = props => {
               <li>
                 <Link to="/suppliers">{t('List Suppliers')}</Link>
               </li>
-              {
+              {/* {
                 ( role === 'ADMIN_ROLE' ) &&
                 <li>
                   <Link to="/suppliers/add">{t('Add Supplier')}</Link>
                 </li>
-              }
+              } */}
             </ul>
           </li>
 

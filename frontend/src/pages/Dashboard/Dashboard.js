@@ -5,6 +5,7 @@ import LineChart from '../../components/charts/LineChart';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
 import { BarChartSales } from './BarChartSales';
 import FourMiniChart from './components/FourMiniChart';
+import MiniWidgetsContainer from './components/MiniWidgetsContainer';
 import TableInfo from './components/TableInfo';
 import Graph from './Graph';
 import { LineChartAmount } from './LineChartAmount';
@@ -47,7 +48,8 @@ function Dashboard() {
       <Container fluid>
         <Breadcrumbs title="Dashboard" breadcrumbItems={breadcrumbItems} />
 
-        <FourMiniChart />
+        {/* <FourMiniChart />*/}
+        <MiniWidgetsContainer />
 
         <Row>
           <Col xl={8}>

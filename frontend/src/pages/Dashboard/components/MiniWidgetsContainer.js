@@ -141,7 +141,7 @@ const MiniWidgetsContainer = () => {
   }, [showBy]);
 
   return (
-    <Container fluid className='w-100'>
+    // <Container fluid className='w-100'>
     <Row>
         <Row className='row-flex title__analytics p-2'>
             {/* Last period: {lastPeriod} | Current period: {currentPeriod}*/}
@@ -168,7 +168,7 @@ const MiniWidgetsContainer = () => {
         }
         </Row>
     </Row>
-    </Container>
+    // </Container>
   );
 };
 
