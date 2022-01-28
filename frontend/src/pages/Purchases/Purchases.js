@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, CardBody, Col, Container, Row, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -6,7 +6,6 @@ import localizedFormat from 'dayjs/plugin/localizedFormat';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPurchases } from '../../store/actions/purchaseActions';
-
 
 const Purchases = () => {
   dayjs.extend(localizedFormat);
@@ -23,6 +22,7 @@ const Purchases = () => {
     dispatch(getPurchases());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);  
+
 
   return (
     <div className="page-content">
@@ -56,7 +56,7 @@ const Purchases = () => {
                   <tbody>
                     {purchaseData.items.map((item, index) => (
                       <tr key={item.id}>
-                        <td>{index}</td>
+                        <td>{item.control_number}</td>
                         <td>supplier</td>
                         <td>{item.invoice}</td>
                         <td>$ {item.amount}</td>

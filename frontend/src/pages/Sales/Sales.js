@@ -51,7 +51,7 @@ const Sales = () => {
                   <tbody>
                     {saleData.items.map((item, index) => (
                       <tr key={index}>
-                        <td>{item.id}</td>
+                        <td>{item.invoice}</td>
                         <td>$ {item.amount}</td>
                         <td>{dayjs(item.sale_date).format('LLL')}</td>
                         <td>
