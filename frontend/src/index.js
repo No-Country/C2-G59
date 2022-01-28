@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import axios from 'axios';
-import { Provider } from 'react-redux';
+import './i18n';
 
-import { adminAuthSet, adminLogout } from './store/actions/authActions';
+import { Provider } from 'react-redux';
 import { store } from './store/store';
+import { adminAuthSet, adminLogout } from './store/actions/authActions';
 
 import App from './App';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import './index.css';
+
+// import scss
+import './theme.scss';
 
 // check login status
 if (localStorage.getItem('tokenFIT') && localStorage.getItem('userFIT')) {

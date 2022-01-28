@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import Logo from '../../assets/images/LoginLogo.svg'
 
 import { adminLogin } from '../../store/actions/authActions';
 
@@ -54,8 +55,9 @@ export default function Login() {
     <div className="d-flex align-items-center px-0 mt-5">
       <div className="row w-100 mx-0">
         <div className="col-lg-4 mx-auto">
-          <div className="card text-left py-5 px-4 px-sm-5">
+          <div className="card text-left py-5 px-4 px-sm-5 bg-primary bg-opacity-10">
             <h4 className="d-flex justify-content-center">Dashboard Retail</h4>
+            <img src={Logo} alt="user" className="mr-1" height="100" />
             <h6 className="font-weight-light d-flex justify-content-center">
               Enter your email and password below.
             </h6>
@@ -68,11 +70,11 @@ export default function Login() {
 
               <Form onSubmit={handleSubmit(onSubmit)} className={loading && 'loading'}>
                 <fieldset disabled={loading}>
-                  <FloatingLabel controlId="floatingEmail" label="Email address" className="mb-3">
+                  <FloatingLabel controlId="floatingEmail" label="Email address" className="mb-3 text-primary">
                     <Form.Control type="email" {...register('email')} />
                   </FloatingLabel>
 
-                  <FloatingLabel controlId="floatingPassword" label="Password">
+                  <FloatingLabel controlId="floatingPassword" label="Password" className="text-primary">
                     <Form.Control type="password" {...register('password')} />
                   </FloatingLabel>
 

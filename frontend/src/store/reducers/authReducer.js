@@ -1,4 +1,4 @@
-import { types } from '../types/types';
+import { types } from '../types';
 
 // TODO: try save data user in localStorage and add default state
 const user = JSON.parse(localStorage.getItem('userFIT'));
@@ -33,6 +33,7 @@ export const authReducer = (state = initialState, action) => {
           uid: action.payload.uid,
           name: action.payload.name,
           role: action.payload.role,
+          branch_id: action.payload.branch_id,
         }),
       );
       return {
