@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Button, Table, Modal, Container } from 'react-bootstrap';
+import { Button, Table, Modal } from 'react-bootstrap';
+import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 import Bill from '../Bill/Bill';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
 import { useSelector, useDispatch } from 'react-redux';
@@ -32,6 +33,10 @@ const Sales = () => {
     <div className="page-content">
       <Container fluid>
         <Breadcrumbs title="All Sale" breadcrumbItems={breadcrumbItems} />
+<Row>
+          <Col>
+            <Card>
+              <CardBody>
         <div>
           <h1>Sales</h1>
           <p>
@@ -70,7 +75,6 @@ const Sales = () => {
             ))}
           </tbody>
         </Table>
-
         {/* <Modal show={show} onHide={handleClose} size="lg">
           <Modal.Header closeButton>
             <Modal.Title>Sale Detail</Modal.Title>
@@ -82,7 +86,6 @@ const Sales = () => {
               eaque possimus sequi porro, necessitatibus esse dolorem enim aperiam dolore dolorum
               non doloremque! Dolore error officia nostrum autem corrupti?
             </p>
-
             <Bill />
           </Modal.Body>
           <Modal.Footer>
@@ -91,6 +94,10 @@ const Sales = () => {
             </Button>
           </Modal.Footer>
         </Modal> */}
+        </CardBody>
+            </Card>
+          </Col>
+        </Row>
       </Container>
     </div>
   );
