@@ -174,7 +174,7 @@ const LineChart = () => {
                   </Button>
                 )}
 
-                {role === 'MANAGER_ROLE' && branch_id === 2 && (
+                {(role === 'ADMIN_ROLE' || (role === 'MANAGER_ROLE' && branch_id === 2)) && (
                   <Button
                     size="sm"
                     color="secondary"
@@ -186,7 +186,7 @@ const LineChart = () => {
                   </Button>
                 )}
 
-                {role === 'MANAGER_ROLE' && branch_id === 3 && (
+                {(role === 'ADMIN_ROLE' || (role === 'MANAGER_ROLE' && branch_id === 3)) && (
                   <Button
                     size="sm"
                     color="secondary"
