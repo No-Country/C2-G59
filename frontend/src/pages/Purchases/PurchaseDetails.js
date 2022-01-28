@@ -1,12 +1,18 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Card, CardBody, Col, Container, Row, Table, Button } from 'reactstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import { axiosWithOutToken } from '../../services/axios';
+import Breadcrumbs from '../../components/common/Breadcrumbs';
 import { getProductById } from '../../utils/dataProducts';
 import { getPurchaseById } from '../../utils/dataPurchase';
 
 const PurchaseDetails = () => {
+  const breadcrumbItems = [
+    { title: 'Fintech', link: '/' },
+    { title: 'All Purchase', link: '#d' },
+  ];
+
   const navigate = useNavigate();
   const params = useParams();
   // const data = getPurchaseById(Number(params.id));
@@ -29,44 +35,57 @@ const PurchaseDetails = () => {
   });
 
   return (
-    <div className="m-5 wrapperBranches">
-      <div className="d-flex justify-content-between align-items-start">
-        <h1>Purchase Details: {params.id}</h1>
-        <Button variant="warning" onClick={() => navigate(-1)}>
-          Back
-        </Button>
-      </div>
-      <hr />
-      {/* <h2>CLIENT: {data.name}</h2> */}
-      <h2>List of products:</h2>
+    <div className="page-content">
+    <Container fluid>
+      <Breadcrumbs title="Purchase Details" breadcrumbItems={breadcrumbItems} />
+      <Row>
+        <Col>
+          <Card>
+            <CardBody>
+            <div className="m-5 wrapperBranches">
+              <div className="d-flex justify-content-between align-items-start">
+                <h1>Purchase Details: {params.id}</h1>
+                <Button variant="warning" onClick={() => navigate(-1)}>
+                  Back
+                </Button>
+              </div>
+              <hr />
+              {/* <h2>CLIENT: {data.name}</h2> */}
+              <h2>List of products:</h2>
 
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr className="thead-dark">
-            <th>Product</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Subtotal</th>
-          </tr>
-        </thead>
-        {purchase.products && purchase.products.map((item, index) => {
-          return (
-            <tbody className="table light" key={item.ProductId}>
-              <tr key={index}>
-                <td>{item.product_name}</td>
-                <td>${item.cost} </td>
-                <td>{item.count}</td> 
-                <td>$ {Math.round(item.cost * item.count)}</td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </Table>
+              <Table striped bordered hover size="sm">
+                <thead>
+                  <tr className="thead-dark">
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Subtotal</th>
+                  </tr>
+                </thead>
+                {purchase.products && purchase.products.map((item, index) => {
+                  return (
+                    <tbody className="table light" key={item.ProductId}>
+                      <tr key={index}>
+                        <td>{item.product_name}</td>
+                        <td>${item.cost} </td>
+                        <td>{item.count}</td>
+                        <td>$ {Math.round(item.cost * item.count)}</td>
+                      </tr>
+                    </tbody>
+                  );
+                })}
+              </Table>
 
-      <h2>Total $ {' '}
-        {Math.round(acumulador) }
-        
-      </h2>
+              <h2>Total $ {' '}
+                {Math.round(acumulador)}
+
+              </h2>
+            </div>
+          </CardBody>
+        </Card>
+      </Col>
+    </Row>
+    </Container>
     </div>
   );
 };
