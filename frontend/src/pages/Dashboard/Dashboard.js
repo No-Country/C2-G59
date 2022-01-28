@@ -1,4 +1,5 @@
 import { Container, Row, Col } from 'reactstrap';
+import LineChart from '../../components/charts/LineChart';
 
 import Breadcrumbs from '../../components/common/Breadcrumbs';
 import FourMiniChart from './components/FourMiniChart';
@@ -47,12 +48,13 @@ function Dashboard() {
 
         <Row>
           <Col lg={8} md={6}>
-            <Graph
+            {/* <Graph
               data={data}
               type="line"
               title="Sales / Earnings in Branch: Cordoba"
               description="Example 1"
-            />
+            /> */}
+            <LineChart />
           </Col>
           <Col lg={4} md={6}>
             <Graph
@@ -66,7 +68,7 @@ function Dashboard() {
 
         <Row>
           <Col lg={4} md={6}>
-            <Graph title="Graph por Default Line Grap" />
+            {/* <Graph title="Graph por Default Line Grap" /> */}
           </Col>
           <Col lg={4} md={6}>
             <Graph data={data} type="bar" title="Titulo  Bar GRaph" description="Ejemplo 1" />{' '}
