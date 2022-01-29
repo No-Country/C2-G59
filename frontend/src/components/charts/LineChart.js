@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Button, ButtonGroup, Card, CardBody, Spinner } from 'reactstrap';
+import { useSelector } from 'react-redux';
+import { Button, ButtonGroup, Card, CardBody } from 'reactstrap';
 
-// import { useAxios } from '../../hooks/useAxios';
 import { axiosWithOutToken } from '../../services/axios';
 
 const initialState = {
@@ -24,12 +24,12 @@ const initialState = {
 };
 
 const LineChart = () => {
+  const {
+    user: { branch_id, role },
+  } = useSelector(state => state.auth);
   const [dataChart, setDataChart] = useState(initialState);
   const [branch, setBranch] = useState({ id: 1, name: 'Buenos Aires', month: 10 });
   const [loading, setLoading] = useState(true);
-  // const [response, error, loading] = useAxios(
-  //   '/charts/branches-profit?branch_id=2&months=8&cashflow=true',
-  // );
 
   const dataFinal = {
     labels: dataChart?.labels,
@@ -106,14 +106,13 @@ const LineChart = () => {
       `/charts/branches-profit?branch_id=${branch.id}&months=${branch.month}&cashflow=true`,
     )
       .then(({ data }) => {
-        // setTimeout(() => {
         setLoading(false);
         setDataChart({
           labels: data.labels,
           datasets: [
             {
               label: 'Profit',
-              data: data.data[0].data.map(item => Math.abs(item.profit)),
+              data: data.data[0].data.map(item => item.profit),
             },
             {
               label: 'Amount Sales',
@@ -125,7 +124,6 @@ const LineChart = () => {
             },
           ],
         });
-        // }, 30000);
       })
       .catch(err => console.log(err.message));
   }, [branch]);
@@ -144,23 +142,17 @@ const LineChart = () => {
     });
   };
 
-  console.log(branch);
   return (
     <>
       <Card style={{ height: 'calc(100% - 25px)' }}>
         <CardBody>
-          {/*           {loading ? (
-            <div
-              className="d-flex align-items-center justify-content-center h-100"
-              style={{ maxHeight: '300px' }}
-            >
-              <Spinner color="primary" type="grow" />
-            </div>
-          ) : ( */}
-          <>
-            <div className="float-end d-none d-md-inline-block">
+          <div className="d-flex justify-content-between flex-wrap">
+            <h4 className="card-title mb-4 d-flex align-items-center">
+              Sales / Earnings in Branch
+            </h4>
+            <div className="d-none d-lg-block">
               <select
-                className="form-select form-select-sm d-inline-flex w-auto"
+                className="form-select form-select-sm d-inline w-auto"
                 value={branch.month}
                 onChange={handleMonth}
                 style={{ verticalAlign: 'top' }}
@@ -170,38 +162,54 @@ const LineChart = () => {
                 <option value="12">Last 12 Months</option>
               </select>
               <ButtonGroup className="mb-2">
-                <Button
-                  size="sm"
-                  color="secondary"
-                  active={branch.id === 1}
-                  type="button"
-                  onClick={() => handleBranches(1, 'Buenos Aires')}
-                >
-                  Buenos Aires
-                </Button>
-                <Button
-                  size="sm"
-                  color="secondary"
-                  active={branch.id === 2}
-                  type="button"
-                  onClick={() => handleBranches(2, 'Cordoba')}
-                >
-                  Cordoba
-                </Button>
-                <Button
-                  size="sm"
-                  color="secondary"
-                  active={branch.id === 3}
-                  type="button"
-                  onClick={() => handleBranches(3, 'Mendoza')}
-                >
-                  Mendoza
-                </Button>
+                {(role === 'ADMIN_ROLE' || (role === 'MANAGER_ROLE' && branch_id === 1)) && (
+                  <Button
+                    size="sm"
+                    color="secondary"
+                    active={branch.id === 1}
+                    type="button"
+                    onClick={() => handleBranches(1, 'Buenos Aires')}
+                  >
+                    Buenos Aires
+                  </Button>
+                )}
+
+                {(role === 'ADMIN_ROLE' || (role === 'MANAGER_ROLE' && branch_id === 2)) && (
+                  <Button
+                    size="sm"
+                    color="secondary"
+                    active={branch.id === 2}
+                    type="button"
+                    onClick={() => handleBranches(2, 'Cordoba')}
+                  >
+                    Cordoba
+                  </Button>
+                )}
+
+                {(role === 'ADMIN_ROLE' || (role === 'MANAGER_ROLE' && branch_id === 3)) && (
+                  <Button
+                    size="sm"
+                    color="secondary"
+                    active={branch.id === 3}
+                    type="button"
+                    onClick={() => handleBranches(3, 'Mendoza')}
+                  >
+                    Mendoza
+                  </Button>
+                )}
               </ButtonGroup>
             </div>
-            <h4 className="card-title mb-4 d-flex align-items-center">
-              Sales / Earnings in Branch: {branch.name}
-            </h4>
+          </div>
+
+          {/* {loading ? (
+            <div
+              className="d-flex align-items-center justify-content-center h-100"
+              style={{ maxHeight: '300px' }}
+            >
+              <Spinner color="primary" type="grow" />
+            </div>
+          ) : ( */}
+          <>
             <div>
               <Line width={474} height={300} data={dataFinal} />
             </div>

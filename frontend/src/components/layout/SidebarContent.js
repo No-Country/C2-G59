@@ -46,7 +46,7 @@ const SidebarContent = props => {
                 </Link>
               </li>
           }
-          {
+          {/* {
             ( role !== 'USER_ROLE' ) &&
             <li>
               <Link to="/analytics" className="waves-effect">
@@ -54,7 +54,7 @@ const SidebarContent = props => {
                 <span className="ms-1">{t('Analytics')}</span>
               </Link>
             </li>
-          }
+          } */}
           <li>
             <Link to="/#" className="has-arrow waves-effect">
               <i className="ri-exchange-dollar-line"></i>
@@ -139,12 +139,12 @@ const SidebarContent = props => {
               <li>
                 <Link to="/suppliers">{t('List Suppliers')}</Link>
               </li>
-              {
+              {/* {
                 ( role === 'ADMIN_ROLE' ) &&
                 <li>
                   <Link to="/suppliers/add">{t('Add Supplier')}</Link>
                 </li>
-              }
+              } */}
             </ul>
           </li>
 

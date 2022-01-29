@@ -2,71 +2,50 @@
   {
     "id": 1,
     "branch": "Buenos Aires",
-    "manager": "Adelina",
+    "manager": "Carla",
     "stock": 323,
-    "sales": 5345
+    "sales":  34345
   },
   {
     "id": 1,
     "branch": "Cordoba",
     "manager": "Carlos",
     "stock": 453,
-    "sales": 2365
+    "sales":  32365
   },
   {
     "id": 1,
     "branch": "Mendoza",
     "manager": "Roberto",
-    "stock": 124,
-    "sales": 6255
+    "stock": 100,
+    "sales":  6025
   },
   {
     "id": 1,
-    "branch": "Buenos Aires",
+    "branch": "Rosario",
     "manager": "Adelina",
     "stock": 323,
-    "sales": 5345
+    "sales":  27162
   },
   {
     "id": 1,
-    "branch": "Mendoza",
+    "branch": "Mar del Plata",
     "manager": "Roberto",
     "stock": 124,
-    "sales": 6255
+    "sales":  55163
   },
   {
     "id": 1,
-    "branch": "Cordoba",
+    "branch": "Santa Fe",
     "manager": "Carlos",
     "stock": 453,
-    "sales": 2365
+    "sales":  20225
   },
   {
     "id": 1,
-    "branch": "Mendoza",
+    "branch": "Corrientes",
     "manager": "Roberto",
     "stock": 124,
-    "sales": 6255
-  },
-  {
-    "id": 1,
-    "branch": "Buenos Aires",
-    "manager": "Adelina",
-    "stock": 323,
-    "sales": 5345
-  },
-  {
-    "id": 1,
-    "branch": "Mendoza",
-    "manager": "Roberto",
-    "stock": 124,
-    "sales": 6255
-  },
-  {
-    "id": 1,
-    "branch": "Cordoba",
-    "manager": "Carlos",
-    "stock": 453,
-    "sales": 2365
+    "sales":  15334
   }
 ]
